@@ -18,7 +18,7 @@
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="std" docName="draft-iuzh-ippm-ioam-integrity-yang-00"
+<rfc category="std" docName="draft-iuzh-ippm-ioam-integrity-yang-01"
      ipr="trust200902" submissionType="IETF" consensus="true">
   <front>
     <title abbrev="YANG Model for IOAM Integrity Options">A YANG Data Model for
@@ -51,7 +51,7 @@
       </address>
     </author>
 
-    <date day="31" month="August" year="2024"/>
+    <date day="28" month="February" year="2025"/>
 
     <area>ops</area>
     <workgroup>ippm</workgroup>
@@ -307,7 +307,7 @@ module ietf-ioam-integrity {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here. 
 
-     Copyright (c) 2024 IETF Trust and the persons identified as
+     Copyright (c) 2025 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or

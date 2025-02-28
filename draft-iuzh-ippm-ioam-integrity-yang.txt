@@ -5,13 +5,13 @@
 ippm                                                           J. Iurman
 Internet-Draft                                       University of Liege
 Intended status: Standards Track                                 T. Zhou
-Expires: 4 March 2025                                             Huawei
-                                                          31 August 2024
+Expires: 1 September 2025                                         Huawei
+                                                        28 February 2025
 
 
      A YANG Data Model for In Situ Operations, Administration, and
              Maintenance (IOAM) Integrity Protected Options
-                 draft-iuzh-ippm-ioam-integrity-yang-00
+                 draft-iuzh-ippm-ioam-integrity-yang-01
 
 Abstract
 
@@ -39,11 +39,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 March 2025.
+   This Internet-Draft will expire on 1 September 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Iurman & Zhou             Expires 4 March 2025                  [Page 1]
+Iurman & Zhou           Expires 1 September 2025                [Page 1]
 
-Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
+Internet-Draft    YANG Model for IOAM Integrity Options    February 2025
 
 
    and restrictions with respect to this document.  Code Components
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Iurman & Zhou             Expires 4 March 2025                  [Page 2]
+Iurman & Zhou           Expires 1 September 2025                [Page 2]
 
-Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
+Internet-Draft    YANG Model for IOAM Integrity Options    February 2025
 
 
    *  Integrity Protected Incremental Trace-Option
@@ -165,9 +165,9 @@ Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
 
 
 
-Iurman & Zhou             Expires 4 March 2025                  [Page 3]
+Iurman & Zhou           Expires 1 September 2025                [Page 3]
 
-Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
+Internet-Draft    YANG Model for IOAM Integrity Options    February 2025
 
 
 3.  Design of the IOAM Integrity YANG Data Model
@@ -221,9 +221,9 @@ Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
 
 
 
-Iurman & Zhou             Expires 4 March 2025                  [Page 4]
+Iurman & Zhou           Expires 1 September 2025                [Page 4]
 
-Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
+Internet-Draft    YANG Model for IOAM Integrity Options    February 2025
 
 
 3.3.  Integrity Protected Incremental Tracing Profile
@@ -277,9 +277,9 @@ Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
 
 
 
-Iurman & Zhou             Expires 4 March 2025                  [Page 5]
+Iurman & Zhou           Expires 1 September 2025                [Page 5]
 
-Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
+Internet-Draft    YANG Model for IOAM Integrity Options    February 2025
 
 
 4.  IOAM Integrity YANG Module
@@ -323,7 +323,7 @@ Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
         described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
         they appear in all capitals, as shown here.
 
-        Copyright (c) 2024 IETF Trust and the persons identified as
+        Copyright (c) 2025 IETF Trust and the persons identified as
         authors of the code.  All rights reserved.
 
         Redistribution and use in source and binary forms, with or
@@ -333,9 +333,9 @@ Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
 
 
 
-Iurman & Zhou             Expires 4 March 2025                  [Page 6]
+Iurman & Zhou           Expires 1 September 2025                [Page 6]
 
-Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
+Internet-Draft    YANG Model for IOAM Integrity Options    February 2025
 
 
         Relating to IETF Documents
@@ -389,9 +389,9 @@ Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
 
 
 
-Iurman & Zhou             Expires 4 March 2025                  [Page 7]
+Iurman & Zhou           Expires 1 September 2025                [Page 7]
 
-Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
+Internet-Draft    YANG Model for IOAM Integrity Options    February 2025
 
 
      feature int-edge-to-edge
@@ -445,9 +445,9 @@ Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
 
 
 
-Iurman & Zhou             Expires 4 March 2025                  [Page 8]
+Iurman & Zhou           Expires 1 September 2025                [Page 8]
 
-Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
+Internet-Draft    YANG Model for IOAM Integrity Options    February 2025
 
 
           Options.";
@@ -501,9 +501,9 @@ Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
 
 
 
-Iurman & Zhou             Expires 4 March 2025                  [Page 9]
+Iurman & Zhou           Expires 1 September 2025                [Page 9]
 
-Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
+Internet-Draft    YANG Model for IOAM Integrity Options    February 2025
 
 
            "Enables the Integrity Protected Proof of Transit Option.";
@@ -557,9 +557,9 @@ Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
 
 
 
-Iurman & Zhou             Expires 4 March 2025                 [Page 10]
+Iurman & Zhou           Expires 1 September 2025               [Page 10]
 
-Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
+Internet-Draft    YANG Model for IOAM Integrity Options    February 2025
 
 
          leaf int-method {
@@ -613,18 +613,19 @@ Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
 
 
 
-Iurman & Zhou             Expires 4 March 2025                 [Page 11]
+Iurman & Zhou           Expires 1 September 2025               [Page 11]
 
-Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
+Internet-Draft    YANG Model for IOAM Integrity Options    February 2025
 
 
    [I-D.ietf-ippm-ioam-data-integrity]
               Brockners, F., Bhandari, S., Mizrahi, T., and J. Iurman,
-              "Integrity Protection of In-situ OAM Data Fields", Work in
-              Progress, Internet-Draft, draft-ietf-ippm-ioam-data-
-              integrity-11, 19 August 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-ippm-
-              ioam-data-integrity-11>.
+              "Integrity Protection of In Situ Operations,
+              Administration, and Maintenance (IOAM) Data Fields", Work
+              in Progress, Internet-Draft, draft-ietf-ippm-ioam-data-
+              integrity-13, 28 February 2025,
+              <https://datatracker.ietf.org/api/v1/doc/document/draft-
+              ietf-ippm-ioam-data-integrity/>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -668,10 +669,9 @@ Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
 
 
 
-
-Iurman & Zhou             Expires 4 March 2025                 [Page 12]
+Iurman & Zhou           Expires 1 September 2025               [Page 12]
 
-Internet-Draft    YANG Model for IOAM Integrity Options      August 2024
+Internet-Draft    YANG Model for IOAM Integrity Options    February 2025
 
 
 Appendix A.  An Example of the Integrity Protected Pre-allocated Tracing
@@ -725,4 +725,4 @@ Authors' Addresses
 
 
 
-Iurman & Zhou             Expires 4 March 2025                 [Page 13]
+Iurman & Zhou           Expires 1 September 2025               [Page 13]
