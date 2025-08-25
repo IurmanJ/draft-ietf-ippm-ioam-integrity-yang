@@ -18,7 +18,7 @@
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="std" docName="draft-iuzh-ippm-ioam-integrity-yang-01"
+<rfc category="std" docName="draft-iuzh-ippm-ioam-integrity-yang-02"
      ipr="trust200902" submissionType="IETF" consensus="true">
   <front>
     <title abbrev="YANG Model for IOAM Integrity Options">A YANG Data Model for
@@ -51,7 +51,7 @@
       </address>
     </author>
 
-    <date day="28" month="February" year="2025"/>
+    <date day="25" month="August" year="2025"/>
 
     <area>ops</area>
     <workgroup>ippm</workgroup>
@@ -68,7 +68,8 @@
       example of an on-path hybrid measurement method. IOAM defines a method for
       producing operational and telemetry information that may be exported using
       the in-band or out-of-band method. I-D.ietf-ippm-ioam-data-integrity
-      defines IOAM Options with integrity protection, also called Integrity
+      (RFC Ed.: to be replaced by RFC YYYY) defines IOAM Options with integrity
+      protection, also called Integrity
       Protected Options. This document defines a YANG module for the
       configuration of these Integirty Protected Options.</t>
     </abstract>
@@ -164,7 +165,10 @@ module: ietf-ioam-integrity
         definition of a profile. The supported profiles are indicated by
         four defined features, i.e., "int-incremental-trace",
         "int-preallocated-trace", "int-proof-of-transit", and
-        "int-edge-to-edge".</t>
+        "int-edge-to-edge" (i.e., "int" prefix for "INTegrity protection").
+        Although these four new profiles resemble those defined in
+        <xref target="RFC9617"/>, they are distinct profiles since they
+        represent different IOAM Option-Type code points.</t>
 
         <t>The YANG data model in this document conforms to the Network
         Management Datastore Architecture (NMDA) defined in
@@ -270,7 +274,7 @@ module: ietf-ioam-integrity
       the "ietf-ioam" module defined in <xref target="RFC9617"/>. This document
       also references <xref target="I-D.ietf-ippm-ioam-data-integrity"/>.</t>
 
-      <sourcecode name="ietf-ioam-integrity@2024-08-31.yang"
+      <sourcecode name="ietf-ioam-integrity@2025-08-25.yang"
                   type="yang" markers="true">
 <![CDATA[
 module ietf-ioam-integrity {
@@ -320,7 +324,7 @@ module ietf-ioam-integrity {
      This version of this YANG module is part of RFC XXXX; see the
      RFC itself for full legal notices.";
 
-  revision 2024-08-31 {
+  revision 2025-08-25 {
     description
       "Initial revision.";
     reference
@@ -531,8 +535,9 @@ module ietf-ioam-integrity {
 
     <section title="IANA Considerations">
       <t>RFC Ed.: In this section and in <xref target="YANGModule"/>, please
-      replace all occurrences of 'XXXX' with the actual RFC number. Also in
-      <xref target="YANGModule"/>, please replace all occurrences of 'YYYY' with
+      replace all occurrences of 'RFC XXXX' with the actual RFC number. Also in
+      <xref target="YANGModule"/> and in the Abstract, please replace all
+      occurrences of 'RFC YYYY' with
       the actual RFC number of <xref target="I-D.ietf-ippm-ioam-data-integrity"/>
       (and remove this note).</t>
 
@@ -557,7 +562,7 @@ module ietf-ioam-integrity {
     </section>
 
     <section title="Acknowledgements">
-      <t>TBD</t>
+      <t>The authors would like to thank Alex Huang Feng for his feedback.</t>
     </section>
   </middle>
 
