@@ -26,12 +26,6 @@ module ietf-ioam-integrity {
      In Situ Operations, Administration, and Maintenance (IOAM)
      Integrity Protected Options.
 
-     The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
-     NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
-     'MAY', and 'OPTIONAL' in this document are to be interpreted as
-     described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
-     they appear in all capitals, as shown here.
-
      Copyright (c) 2025 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
@@ -45,7 +39,7 @@ module ietf-ioam-integrity {
      This version of this YANG module is part of RFC XXXX; see the
      RFC itself for full legal notices.";
 
-  revision 2025-08-25 {
+  revision 2025-11-13 {
     description
       "Initial revision.";
     reference
@@ -107,10 +101,10 @@ module ietf-ioam-integrity {
       "Base identity to represent the Integrity Protection Method.";
   }
 
-  identity method-1 {
+  identity method-0 {
     base method;
     description
-      "The Integrity Protection Method 1 uses AES-GMAC with a 12-byte
+      "The Integrity Protection Method 0 uses AES-GMAC with a 12-byte
        Nonce and a 16-byte ICV.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
@@ -152,7 +146,7 @@ module ietf-ioam-integrity {
         when "derived-from-or-self(../node-action,
            'ioam:action-encapsulate')";
         type method-type;
-        default "method-1";
+        default "method-0";
         description
           "This object indicates the Integrity Protection Method for
            this profile.";
@@ -174,7 +168,7 @@ module ietf-ioam-integrity {
         when "derived-from-or-self(../node-action,
            'ioam:action-encapsulate')";
         type method-type;
-        default "method-1";
+        default "method-0";
         description
           "This object indicates the Integrity Protection Method for
            this profile.";
@@ -216,7 +210,7 @@ module ietf-ioam-integrity {
         when "derived-from-or-self(../node-action,
            'ioam:action-encapsulate')";
         type method-type;
-        default "method-1";
+        default "method-0";
         description
           "This object indicates the Integrity Protection Method for
            this profile.";
@@ -237,7 +231,7 @@ module ietf-ioam-integrity {
         when "derived-from-or-self(../node-action,
            'ioam:action-encapsulate')";
         type method-type;
-        default "method-1";
+        default "method-0";
         description
           "This object indicates the Integrity Protection Method for
            this profile.";

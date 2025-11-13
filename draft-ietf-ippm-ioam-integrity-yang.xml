@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE rfc [
+<!ENTITY RFC3688 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3688.xml">
+<!ENTITY RFC4252 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4252.xml">
+<!ENTITY RFC6020 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6020.xml">
+<!ENTITY RFC6241 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6241.xml">
+<!ENTITY RFC7799 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7799.xml">
+<!ENTITY RFC7950 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7950.xml">
+<!ENTITY RFC8040 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8040.xml">
+<!ENTITY RFC8340 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8340.xml">
+<!ENTITY RFC8341 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8341.xml">
+<!ENTITY RFC8342 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8342.xml">
+<!ENTITY RFC8446 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml">
+<!ENTITY RFC9000 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.9000.xml">
+<!ENTITY RFC9617 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.9617.xml">
+<!ENTITY I-D.ietf-ippm-ioam-data-integrity SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-ippm-ioam-data-integrity.xml">
+<!ENTITY I-D.ietf-netmod-rfc8407bis SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-netmod-rfc8407bis.xml">
+]>
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+<?rfc strict="yes" ?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="2"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc subcompact="no" ?>
+<rfc category="std" docName="draft-ietf-ippm-ioam-integrity-yang-00"
+     ipr="trust200902" submissionType="IETF" consensus="true">
+  <front>
+    <title abbrev="YANG Model for IOAM Integrity Options">A YANG Data Model for
+    In Situ Operations, Administration, and Maintenance (IOAM) Integrity
+    Protected Options</title>
+
+    <author fullname="Justin Iurman" initials="J." surname="Iurman">
+      <organization abbrev="">University of Liege</organization>
+      <address>
+        <postal>
+          <street>10, Allee de la decouverte (B28)</street>
+          <code>4000</code>
+          <city>Sart-Tilman</city>
+          <country>Belgium</country>
+        </postal>
+        <email>justin.iurman@uliege.be</email>
+      </address>
+    </author>
+
+    <author fullname="Tianran Zhou" initials="T." surname="Zhou">
+      <organization>Huawei</organization>
+      <address>
+        <postal>
+          <street>156 Beiqing Rd.</street>
+          <city>Beijing</city>
+          <code>100095</code>
+          <country>China</country>
+        </postal>
+        <email>zhoutianran@huawei.com</email>
+      </address>
+    </author>
+
+    <date day="13" month="November" year="2025"/>
+
+    <area>ops</area>
+    <workgroup>ippm</workgroup>
+
+    <keyword>OAM</keyword>
+    <keyword>In Situ OAM</keyword>
+    <keyword>IOAM</keyword>
+    <keyword>Integrity</keyword>
+    <keyword>Configuration</keyword>
+    <keyword>YANG</keyword>
+
+    <abstract>
+      <t>In Situ Operations, Administration, and Maintenance (IOAM) is an
+      example of an on-path hybrid measurement method to collect operational and
+      telemetry information. The collected data may then be exported to systems
+      that will use it to, e.g., monitor, measure, or (re)configure the network.
+      I-D.ietf-ippm-ioam-data-integrity (RFC Ed.: to be replaced by RFC YYYY)
+      defines IOAM Options with integrity protection, also called Integrity
+      Protected Options. This document defines a YANG module for the
+      configuration of these Integrity Protected Options.</t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Introduction" toc="default">
+      <t>In Situ Operations, Administration, and Maintenance (IOAM) is an
+      example of an on-path hybrid measurement method <xref target="RFC7799"/>
+      to collect operational and telemetry information. The collected data may
+      then be exported to systems that will use it to, e.g., monitor, measure,
+      or (re)configure the network.
+      <xref target="I-D.ietf-ippm-ioam-data-integrity"/> defines IOAM Options
+      with integrity protection, also called Integrity Protected Options. This
+      document defines a data model for the configuration of these Integirty
+      Protected Options using the <xref target="RFC7950">YANG data modeling
+      language</xref>. This YANG data model supports four IOAM Integrity
+      Protected Options, which are as follows:
+        <ul spacing="compact">
+          <li><xref target="I-D.ietf-ippm-ioam-data-integrity">Integrity
+              Protected Incremental Trace-Option</xref></li>
+          <li><xref target="I-D.ietf-ippm-ioam-data-integrity">Integrity
+              Protected Pre-allocated Trace-Option</xref></li>
+          <li><xref target="I-D.ietf-ippm-ioam-data-integrity">Integrity
+              Protected Proof of Transit (POT) Option</xref></li>
+          <li><xref target="I-D.ietf-ippm-ioam-data-integrity">Integrity
+              Protected Edge-to-Edge (E2E) Option</xref></li>
+        </ul>
+      </t>
+    </section>
+
+    <section title="Conventions">
+      <section title="Abbreviations">
+        <t>Abbreviations used in this document:
+          <dl spacing="compact">
+            <dt>OAM:</dt><dd>Operations, Administration, and Maintenance</dd>
+            <dt>IOAM:</dt><dd>In Situ OAM</dd>
+            <dt>POT:</dt><dd>Proof of Transit</dd>
+            <dt>E2E:</dt><dd>Edge to Edge</dd>
+          </dl>
+        </t>
+      </section>
+
+      <section title="Terminology">
+        <t>The following terms are defined in <xref target="RFC7950"/> and are
+        used in this specification:
+          <ul spacing="compact">
+            <li>augment</li>
+            <li>data model</li>
+            <li>data node</li>
+          </ul>
+        </t>
+
+        <t>The terminology for describing YANG data models is found in
+        <xref target="RFC7950"/>.</t>
+      </section>
+
+      <section title="Tree Diagrams">
+        <t>Tree diagrams used in this document follow the notation defined in
+        <xref target="RFC8340"/>.</t>
+      </section>
+    </section>
+
+    <section title="Design of the IOAM Integrity YANG Data Model">
+      <section title="Overview">
+        <t>The IOAM Integrity model is organized as a list of profiles, as shown
+        in the following figure.</t>
+
+        <sourcecode type="yangtree">
+<![CDATA[
+module: ietf-ioam-integrity
+
+  augment /ioam:ioam/ioam:profiles/ioam:profile:
+    +--rw int-incremental-tracing-profile! {int-incremental-trace}?
+    |  ...
+    +--rw int-preallocated-tracing-profile! {int-preallocated-trace}?
+    |  ...
+    +--rw int-pot-profile! {int-proof-of-transit}?
+    |  ...
+    +--rw int-e2e-profile! {int-edge-to-edge}?
+]]>
+        </sourcecode>
+
+        <t>This document uses the
+        <xref target="RFC9617">"ietf-ioam" YANG module</xref> and augments its
+        definition of a profile. The supported profiles are indicated by
+        four defined features, i.e., "int-incremental-trace",
+        "int-preallocated-trace", "int-proof-of-transit", and
+        "int-edge-to-edge" (i.e., "int" prefix for "INTegrity protection").
+        Although these four new profiles resemble those defined in
+        <xref target="RFC9617"/>, they are distinct profiles since they
+        represent different IOAM Option-Type code points.</t>
+
+        <t>The YANG data model in this document conforms to the Network
+        Management Datastore Architecture (NMDA) defined in
+        <xref target="RFC8342"/>.</t>
+      </section>
+
+      <section title="Integrity Protected Pre-allocated Tracing Profile"
+               anchor="int-prealloc-trace-profile">
+        <t>The "int-preallocated-tracing-profile" parameter contains the
+        detailed information for the pre-allocated tracing data with integrity
+        protection. This information is the same as for the Pre-allocated
+        Tracing Profile; see <xref target="RFC9617"/>, Sec. 3.2. This
+        information also includes:
+          <dl spacing="compact">
+            <dt>int-method:</dt><dd>indicates which Integrity Protection Method
+            is used.</dd>
+          </dl>
+        </t>
+
+        <sourcecode type="yangtree">
+<![CDATA[
++--rw int-preallocated-tracing-profile! {int-preallocated-trace}?
+   +--rw node-action?   ioam-node-action
+   +--rw trace-types
+   |  +--rw use-namespace?   ioam-namespace
+   |  +--rw trace-type*      ioam-trace-type
+   +--rw max-length?    uint32
+   +--rw int-method?    method-type
+]]>
+        </sourcecode>
+      </section>
+
+      <section title="Integrity Protected Incremental Tracing Profile">
+        <t>The "int-incremental-tracing-profile" parameter contains the
+        detailed information for the incremental tracing data with integrity
+        protection. This information is the same as for the Incremental
+        Tracing Profile; see <xref target="RFC9617"/>, Sec. 3.3. This
+        information also includes:
+          <dl spacing="compact">
+            <dt>int-method:</dt><dd>indicates which Integrity Protection Method
+            is used.</dd>
+          </dl>
+        </t>
+
+        <sourcecode type="yangtree">
+<![CDATA[
++--rw int-incremental-tracing-profile! {int-incremental-trace}?
+   +--rw node-action?   ioam-node-action
+   +--rw trace-types
+   |  +--rw use-namespace?   ioam-namespace
+   |  +--rw trace-type*      ioam-trace-type
+   +--rw max-length?    uint32
+   +--rw int-method?    method-type
+]]>
+        </sourcecode>
+      </section>
+
+      <section title="Integrity Protected Proof of Transit Profile">
+        <t>The "int-pot-profile" parameter is intended to contain the detailed
+        information for the proof of transit data with integrity protection.
+        This information is the same as for the Proof of Transit Profile; see
+        <xref target="RFC9617"/>, Sec. 3.5. This information also includes:
+          <dl spacing="compact">
+            <dt>node-action:</dt><dd>imported from the
+            <xref target="RFC9617">"ietf-ioam" YANG module</xref> with the same
+            definition.</dd>
+            <dt>int-method:</dt><dd>indicates which Integrity Protection Method
+            is used.</dd>
+          </dl>
+        </t>
+
+        <sourcecode type="yangtree">
+<![CDATA[
++--rw int-pot-profile! {int-proof-of-transit}?
+   +--rw use-namespace?   ioam:ioam-namespace
+   +--rw pot-type?        ioam:ioam-pot-type
+   +--rw node-action?     ioam:ioam-node-action
+   +--rw int-method?      method-type
+]]>
+        </sourcecode>
+      </section>
+
+      <section title="Integrity Protected Edge-to-Edge Profile">
+        <t>The "int-e2e-profile" parameter contains the detailed information for
+        the edge-to-edge data with integrity protection. This information is the
+        same as for the Edge-to-Edge Profile; see <xref target="RFC9617"/>,
+        Sec. 3.6. This information also includes:
+          <dl spacing="compact">
+            <dt>int-method:</dt><dd>indicates which Integrity Protection Method
+            is used.</dd>
+          </dl>
+        </t>
+
+        <sourcecode type="yangtree">
+<![CDATA[
++--rw int-e2e-profile! {int-edge-to-edge}?
+   +--rw node-action?   ioam-node-action
+   +--rw e2e-types
+   |  +--rw use-namespace?   ioam-namespace
+   |  +--rw e2e-type*        ioam-e2e-type
+   +--rw int-method?    method-type
+]]>
+        </sourcecode>
+      </section>
+    </section>
+
+    <section anchor="YANGModule" title="IOAM Integrity YANG Module">
+      <t>The "ietf-ioam-integrity" module defined in this document imports
+      the "ietf-ioam" module defined in <xref target="RFC9617"/>. This document
+      also references <xref target="I-D.ietf-ippm-ioam-data-integrity"/>.</t>
+
+      <sourcecode name="ietf-ioam-integrity@2025-11-13.yang"
+                  type="yang" markers="true">
+<![CDATA[
+module ietf-ioam-integrity {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-ioam-integrity";
+  prefix "ioam-int";
+
+  import ietf-ioam {
+    prefix ioam;
+    reference
+      "RFC 9617: A YANG Data Model for In Situ Operations,
+       Administration, and Maintenance (IOAM)";
+  }
+
+  organization
+    "IETF IPPM (IP Performance Measurement) Working Group";
+
+  contact
+    "WG Web:   <https://datatracker.ietf.org/wg/ippm>
+     WG List:  <mailto:ippm@ietf.org>
+     Author:   Tianran Zhou
+               <mailto:zhoutianran@huawei.com>
+     Author:   Justin Iurman
+               <mailto:justin.iurman@uliege.be>";
+
+  description
+    "This YANG module specifies a vendor-independent data model for
+     In Situ Operations, Administration, and Maintenance (IOAM)
+     Integrity Protected Options.
+
+     Copyright (c) 2025 IETF Trust and the persons identified as
+     authors of the code.  All rights reserved.
+
+     Redistribution and use in source and binary forms, with or
+     without modification, is permitted pursuant to, and subject to
+     the license terms contained in, the Revised BSD License set
+     forth in Section 4.c of the IETF Trust's Legal Provisions
+     Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
+
+     This version of this YANG module is part of RFC XXXX; see the
+     RFC itself for full legal notices.";
+
+  revision 2025-11-13 {
+    description
+      "Initial revision.";
+    reference
+      "RFC XXXX: A YANG Data Model for In Situ Operations,
+       Administration, and Maintenance (IOAM) Integrity Protected
+       Options";
+  }
+
+  /*
+   * FEATURES
+   */
+
+  feature int-incremental-trace
+  {
+    description
+      "This feature indicates that the Integrity Protected
+       Incremental Trace-Option is supported.";
+    reference
+      "RFC YYYY: Integrity Protection of In Situ Operations,
+       Administration, and Maintenance (IOAM) Data Fields";
+  }
+
+  feature int-preallocated-trace
+  {
+    description
+      "This feature indicates that the Integrity Protected
+       Pre-allocated Trace-Option is supported.";
+    reference
+      "RFC YYYY: Integrity Protection of In Situ Operations,
+       Administration, and Maintenance (IOAM) Data Fields";
+  }
+
+  feature int-proof-of-transit
+  {
+    description
+      "This feature indicates that the Integrity Protected Proof of
+       Transit Option is supported.";
+    reference
+      "RFC YYYY: Integrity Protection of In Situ Operations,
+       Administration, and Maintenance (IOAM) Data Fields";
+  }
+
+  feature int-edge-to-edge
+  {
+    description
+      "This feature indicates that the Integrity Protected
+       Edge-to-Edge Option is supported.";
+    reference
+      "RFC YYYY: Integrity Protection of In Situ Operations,
+       Administration, and Maintenance (IOAM) Data Fields";
+  }
+
+  /*
+   * IDENTITIES
+   */
+
+  identity method {
+    description
+      "Base identity to represent the Integrity Protection Method.";
+  }
+
+  identity method-0 {
+    base method;
+    description
+      "The Integrity Protection Method 0 uses AES-GMAC with a 12-byte
+       Nonce and a 16-byte ICV.";
+    reference
+      "RFC YYYY: Integrity Protection of In Situ Operations,
+       Administration, and Maintenance (IOAM) Data Fields";
+  }
+
+  /*
+   * TYPE DEFINITIONS
+   */
+
+  typedef method-type {
+    type identityref {
+      base method;
+    }
+    description
+      "It specifies the Integrity Protection Method.";
+  }
+
+  /*
+   * DATA NODES
+   */
+
+  augment "/ioam:ioam/ioam:profiles/ioam:profile" {
+    description
+      "This augmentation adds 4 profiles for the Integrity Protected
+       Options.";
+
+    container int-incremental-tracing-profile {
+      if-feature "int-incremental-trace";
+      presence
+        "Enables the Integrity Protected Incremental Trace-Option.";
+      description
+        "This container describes the profile for the Integrity
+         Protected Incremental Trace-Option.";
+
+      uses ioam:ioam-incremental-tracing-profile;
+
+      leaf int-method {
+        when "derived-from-or-self(../node-action,
+           'ioam:action-encapsulate')";
+        type method-type;
+        default "method-0";
+        description
+          "This object indicates the Integrity Protection Method for
+           this profile.";
+      }
+    }
+
+    container int-preallocated-tracing-profile {
+      if-feature "int-preallocated-trace";
+      presence
+        "Enables the Integrity Protected Pre-allocated
+         Trace-Option.";
+      description
+        "This container describes the profile for the Integrity
+         Protected Pre-allocated Trace-Option.";
+
+      uses ioam:ioam-preallocated-tracing-profile;
+
+      leaf int-method {
+        when "derived-from-or-self(../node-action,
+           'ioam:action-encapsulate')";
+        type method-type;
+        default "method-0";
+        description
+          "This object indicates the Integrity Protection Method for
+           this profile.";
+      }
+    }
+
+    container int-pot-profile {
+      if-feature "int-proof-of-transit";
+      presence
+        "Enables the Integrity Protected Proof of Transit Option.";
+      description
+        "This container describes the profile for the Integrity
+         Protected Proof of Transit Option.";
+
+      leaf use-namespace {
+        type ioam:ioam-namespace;
+        default "ioam:default-namespace";
+        description
+          "This object indicates the namespace used for the
+           POT types.";
+      }
+
+      leaf pot-type {
+        type ioam:ioam-pot-type;
+        description
+          "The type of a particular POT variant that specifies
+           the POT data that is included.";
+      }
+
+      leaf node-action {
+        type ioam:ioam-node-action;
+        default "ioam:action-transit";
+        description
+          "This object indicates the action the node needs to
+           take, e.g., encapsulation.";
+      }
+
+      leaf int-method {
+        when "derived-from-or-self(../node-action,
+           'ioam:action-encapsulate')";
+        type method-type;
+        default "method-0";
+        description
+          "This object indicates the Integrity Protection Method for
+           this profile.";
+      }
+    }
+
+    container int-e2e-profile {
+      if-feature "int-edge-to-edge";
+      presence
+        "Enables the Integrity Protected Edge-to-Edge Option.";
+      description
+        "This container describes the profile for the Integrity
+         Protected Edge-to-Edge Option.";
+
+      uses ioam:ioam-e2e-profile;
+
+      leaf int-method {
+        when "derived-from-or-self(../node-action,
+           'ioam:action-encapsulate')";
+        type method-type;
+        default "method-0";
+        description
+          "This object indicates the Integrity Protection Method for
+           this profile.";
+      }
+    }
+  }
+}
+]]>
+      </sourcecode>
+    </section>
+
+    <section title="Security Considerations">
+      <t>This section is modeled after the template described in Section 3.7.1
+      of <xref target="I-D.ietf-netmod-rfc8407bis"/>.</t>
+
+      <t>The "ietf-ioam-integrity" YANG module defines a data model that is
+      designed to be accessed via YANG-based management protocols, such as
+      NETCONF <xref target="RFC6241"/> and RESTCONF <xref target="RFC8040"/>.
+      These protocols have to use a secure transport layer (e.g., SSH
+      <xref target="RFC4252"/>, TLS <xref target="RFC8446"/>, and QUIC
+      <xref target="RFC9000"/>) and have to use mutual authentication.</t>
+
+      <t>The Network Configuration Access Control Model (NACM)
+      <xref target="RFC8341"/> provides the means to restrict access for
+      particular NETCONF or RESTCONF users to a preconfigured subset of all
+      available NETCONF or RESTCONF protocol operations and content.</t>
+
+      <t>There are a number of data nodes defined in this YANG module that are
+      writable/creatable/deletable (i.e., "config true", which is the default).
+      All writable data nodes are likely to be sensitive or vulnerable in some
+      network environments. Write operations (e.g., edit-config) and delete
+      operations to these data nodes without proper protection or authentication
+      can have a negative effect on network operations. The following subtrees
+      and data nodes have particular sensitivities/vulnerabilities:</t>
+
+      <dl spacing="normal">
+        <dt>/ioam:ioam/ioam:profiles/ioam:profile:</dt>
+        <dd>Please refer to the Security Considerations of
+        <xref target="RFC9617"/>.</dd>
+      </dl>
+
+      <t>Some of the readable data nodes in this YANG module may be considered
+      sensitive or vulnerable in some network environments.  It is thus
+      important to control read access (e.g., via get, get-config, or
+      notification) to these data nodes. Specifically, the following subtrees
+      and data nodes have particular sensitivities/vulnerabilities:</t>
+
+      <dl spacing="normal">
+        <dt>/ioam:ioam/ioam:profiles/ioam:profile:</dt>
+        <dd>Please refer to the Security Considerations of
+        <xref target="RFC9617"/>.</dd>
+      </dl>
+
+      <t>This YANG module uses groupings from other YANG modules that define
+      nodes that may be considered sensitive or vulnerable in network
+      environments. Refer to the Security Considerations of
+      <xref target="RFC9617"/> for information as to which nodes may be
+      considered sensitive or vulnerable in network environments.</t>
+    </section>
+
+    <section title="IANA Considerations">
+      <t>RFC Ed.: In this section and in <xref target="YANGModule"/>, please
+      replace all occurrences of 'RFC XXXX' with the actual RFC number. Also in
+      <xref target="YANGModule"/> and in the Abstract, please replace all
+      occurrences of 'RFC YYYY' with
+      the actual RFC number of <xref target="I-D.ietf-ippm-ioam-data-integrity"/>
+      (and remove this note).</t>
+
+      <t>IANA is requested to assign a new URI from the "IETF XML Registry"
+      <xref target="RFC3688"/>. The following URI is suggested:
+        <dl spacing="compact">
+          <dt>URI:</dt><dd>urn:ietf:params:xml:ns:yang:ietf-ioam-integrity</dd>
+          <dt>Registrant Contact:</dt><dd>The IESG.</dd>
+          <dt>XML:</dt><dd>N/A; the requested URI is an XML namespace.</dd>
+        </dl>
+      </t>
+
+      <t>This document also requests a new YANG module name in the "YANG Module
+      Names" registry <xref target="RFC6020"/> with the following suggestion:
+        <dl spacing="compact">
+          <dt>Name:</dt><dd>ietf-ioam-integrity</dd>
+          <dt>Namespace:</dt><dd>urn:ietf:params:xml:ns:yang:ietf-ioam-integrity</dd>
+          <dt>Prefix:</dt><dd>ioam-int</dd>
+          <dt>Reference:</dt><dd>RFC XXXX</dd>
+        </dl>
+      </t>
+    </section>
+
+    <section title="Acknowledgements">
+      <t>The authors would like to thank Alex Huang Feng and Will Hawkins for
+      their valuable feedback.</t>
+    </section>
+  </middle>
+
+  <back>
+    <references title="Normative References">
+      &RFC3688;
+      &RFC6020;
+      &RFC7950;
+      &RFC8340;
+      &RFC8341;
+      &RFC8342;
+      &RFC9617;
+      &I-D.ietf-ippm-ioam-data-integrity;
+    </references>
+
+    <references title="Informative References">
+      &RFC4252;
+      &RFC6241;
+      &RFC7799;
+      &RFC8040;
+      &RFC8446;
+      &RFC9000;
+      &I-D.ietf-netmod-rfc8407bis;
+    </references>
+
+    <section title="An Example of the Integrity Protected Incremental Tracing Profile">
+      <t>An example of the Integrity Protected Incremental Tracing Profile is
+      depicted in the following figure. This configuration is received by an
+      IOAM ingress node. This node encapsulates the IOAM data in the IPv6
+      Hop-by-Hop option header. The Integrity Protection Method to be used is
+      method 0. The trace type indicates that each on-path node needs to capture
+      the transit delay and add the data to the IOAM node data list. The
+      incremental tracing data space is variable; however, the node data list
+      must not exceed 512 bytes.</t>
+
+      <sourcecode name="" type="xml" markers="false">
+<![CDATA[
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="101">
+  <edit-config>
+    <target>
+      <candidate/>
+    </target>
+    <config>
+      <ioam xmlns="urn:ietf:params:xml:ns:yang:ietf-ioam">
+        <admin-config>
+          <enabled>true</enabled>
+        </admin-config>
+        <profiles>
+          <profile>
+            <profile-name>ietf-test-profile</profile-name>
+            <protocol-type>ipv6</protocol-type>
+            <int-incremental-tracing-profile
+             xmlns="urn:ietf:params:xml:ns:yang:ietf-ioam-integrity">
+              <node-action>action-encapsulate</node-action>
+              <trace-types>
+                <use-namespace>default-namespace</use-namespace>
+                <trace-type>trace-transit-delay</trace-type>
+              </trace-types>
+              <max-length>512</max-length>
+              <int-method>method-0</int-method>
+            </int-incremental-tracing-profile>
+          </profile>
+        </profiles>
+      </ioam>
+    </config>
+  </edit-config>
+</rpc>
+]]>
+      </sourcecode>
+    </section>
+
+    <section title="An Example of the Integrity Protected Pre-allocated Tracing Profile">
+      <t>An example of the Integrity Protected Pre-allocated Tracing Profile is
+      depicted in the following figure. This configuration is received by an
+      IOAM ingress node. This node first identifies the target flow by using the
+      ACL parameter "test-acl" and then encapsulates the IOAM data in the NSH.
+      The Integrity Protection Method to be used is method 0. The trace type
+      indicates that each on-path node needs to capture the namespace-specific
+      data in short format and add the data to the IOAM node data list. This
+      node pre-allocates the node data list in the packet with 512 bytes.</t>
+
+      <sourcecode name="" type="xml" markers="false">
+<![CDATA[
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="101">
+  <edit-config>
+    <target>
+      <candidate/>
+    </target>
+    <config>
+      <ioam xmlns="urn:ietf:params:xml:ns:yang:ietf-ioam">
+        <admin-config>
+          <enabled>true</enabled>
+        </admin-config>
+        <profiles>
+          <profile>
+            <profile-name>ietf-test-profile</profile-name>
+            <filter>
+              <filter-type>acl-filter</filter-type>
+              <ace-name>test-acl</ace-name>
+            </filter>
+            <protocol-type>nsh</protocol-type>
+            <int-preallocated-tracing-profile
+             xmlns="urn:ietf:params:xml:ns:yang:ietf-ioam-integrity">
+              <node-action>action-encapsulate</node-action>
+              <trace-types>
+                <use-namespace>default-namespace</use-namespace>
+                <trace-type>trace-namespace-data</trace-type>
+              </trace-types>
+              <max-length>512</max-length>
+              <int-method>method-0</int-method>
+            </int-preallocated-tracing-profile>
+          </profile>
+        </profiles>
+      </ioam>
+    </config>
+  </edit-config>
+</rpc>
+]]>
+      </sourcecode>
+    </section>
+
+    <section title="An Example of the Integrity Protected Proof of Transit Profile">
+      <t>An example of the Integrity Protected Proof of Transit Profile is
+      depicted in the following figure. This configuration is received by an
+      IOAM ingress node. This node encapsulates the IOAM data (POT Type 0) in
+      the IPv6 Hop-by-Hop option header. The Integrity Protection Method to be
+      used is method 0.</t>
+
+      <sourcecode name="" type="xml" markers="false">
+<![CDATA[
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="101">
+  <edit-config>
+    <target>
+      <candidate/>
+    </target>
+    <config>
+      <ioam xmlns="urn:ietf:params:xml:ns:yang:ietf-ioam">
+        <admin-config>
+          <enabled>true</enabled>
+        </admin-config>
+        <profiles>
+          <profile>
+            <profile-name>ietf-test-profile</profile-name>
+            <protocol-type>ipv6</protocol-type>
+            <int-pot-profile
+             xmlns="urn:ietf:params:xml:ns:yang:ietf-ioam-integrity">
+              <pot-type>pot-type-0</pot-type>
+              <node-action>action-encapsulate</node-action>
+              <int-method>method-0</int-method>
+            </int-pot-profile>
+          </profile>
+        </profiles>
+      </ioam>
+    </config>
+  </edit-config>
+</rpc>
+]]>
+      </sourcecode>
+
+    </section>
+
+    <section title="An Example of the Integrity Protected Edge-to-Edge Profile">
+      <t>An example of the Integrity Protected Edge-to-Edge Profile is depicted
+      in the following figure. This configuration is received by an IOAM ingress
+      node. This node encapsulates the IOAM data in the IPv6 Destination option
+      header. The Integrity Protection Method to be used is method 0. The
+      Edge-to-Edge type indicates the presence of a 64-bit sequence number.</t>
+
+      <sourcecode name="" type="xml" markers="false">
+<![CDATA[
+<rpc xmlns="urn:ietf:params:xml:ns:netconf:base:1.0"
+     message-id="101">
+  <edit-config>
+    <target>
+      <candidate/>
+    </target>
+    <config>
+      <ioam xmlns="urn:ietf:params:xml:ns:yang:ietf-ioam">
+        <admin-config>
+          <enabled>true</enabled>
+        </admin-config>
+        <profiles>
+          <profile>
+            <profile-name>ietf-test-profile</profile-name>
+            <protocol-type>ipv6</protocol-type>
+            <int-e2e-profile
+             xmlns="urn:ietf:params:xml:ns:yang:ietf-ioam-integrity">
+              <node-action>action-encapsulate</node-action>
+              <e2e-types>
+                <use-namespace>default-namespace</use-namespace>
+                <e2e-type>e2e-seq-num-64</e2e-type>
+              </e2e-types>
+              <int-method>method-0</int-method>
+            </int-e2e-profile>
+          </profile>
+        </profiles>
+      </ioam>
+    </config>
+  </edit-config>
+</rpc>
+]]>
+      </sourcecode>
+    </section>
+  </back>
+</rfc>

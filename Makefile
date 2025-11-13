@@ -1,4 +1,5 @@
-DRAFT=draft-iuzh-ippm-ioam-integrity-yang
+#DRAFT=draft-iuzh-ippm-ioam-integrity-yang
+DRAFT=draft-ietf-ippm-ioam-integrity-yang
 
 all: $(DRAFT).xml 
 	xml2rfc $(DRAFT).xml --text --html --pdf
