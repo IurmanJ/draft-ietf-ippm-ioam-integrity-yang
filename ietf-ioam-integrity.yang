@@ -1,18 +1,17 @@
 module ietf-ioam-integrity {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-ioam-integrity";
-  prefix "ioam-int";
+  prefix ioam-int;
 
   import ietf-ioam {
     prefix ioam;
     reference
       "RFC 9617: A YANG Data Model for In Situ Operations,
-       Administration, and Maintenance (IOAM)";
+                 Administration, and Maintenance (IOAM)";
   }
 
   organization
     "IETF IPPM (IP Performance Measurement) Working Group";
-
   contact
     "WG Web:   <https://datatracker.ietf.org/wg/ippm>
      WG List:  <mailto:ippm@ietf.org>
@@ -20,7 +19,6 @@ module ietf-ioam-integrity {
                <mailto:zhoutianran@huawei.com>
      Author:   Justin Iurman
                <mailto:justin.iurman@uliege.be>";
-
   description
     "This YANG module specifies a vendor-independent data model for
      In Situ Operations, Administration, and Maintenance (IOAM)
@@ -44,52 +42,52 @@ module ietf-ioam-integrity {
       "Initial revision.";
     reference
       "RFC XXXX: A YANG Data Model for In Situ Operations,
-       Administration, and Maintenance (IOAM) Integrity Protected
-       Options";
+                 Administration, and Maintenance (IOAM)
+                 Integrity Protected Options";
   }
 
   /*
    * FEATURES
    */
 
-  feature int-incremental-trace
-  {
+  feature int-incremental-trace {
     description
       "This feature indicates that the Integrity Protected
        Incremental Trace-Option is supported.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
-       Administration, and Maintenance (IOAM) Data Fields";
+                 Administration, and Maintenance (IOAM)
+                 Data Fields, Section 4.1";
   }
 
-  feature int-preallocated-trace
-  {
+  feature int-preallocated-trace {
     description
       "This feature indicates that the Integrity Protected
        Pre-allocated Trace-Option is supported.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
-       Administration, and Maintenance (IOAM) Data Fields";
+                 Administration, and Maintenance (IOAM)
+                 Data Fields, Section 4.1";
   }
 
-  feature int-proof-of-transit
-  {
+  feature int-proof-of-transit {
     description
       "This feature indicates that the Integrity Protected Proof of
        Transit Option is supported.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
-       Administration, and Maintenance (IOAM) Data Fields";
+                 Administration, and Maintenance (IOAM)
+                 Data Fields, Section 4.2";
   }
 
-  feature int-edge-to-edge
-  {
+  feature int-edge-to-edge {
     description
       "This feature indicates that the Integrity Protected
        Edge-to-Edge Option is supported.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
-       Administration, and Maintenance (IOAM) Data Fields";
+                 Administration, and Maintenance (IOAM)
+                 Data Fields, Section 4.3";
   }
 
   /*
@@ -108,7 +106,8 @@ module ietf-ioam-integrity {
        Nonce and a 16-byte ICV.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
-       Administration, and Maintenance (IOAM) Data Fields";
+                 Administration, and Maintenance (IOAM)
+                 Data Fields, Section 5";
   }
 
   /*
@@ -124,6 +123,24 @@ module ietf-ioam-integrity {
   }
 
   /*
+   * GROUP DEFINITIONS
+   */
+
+  grouping method-grouping {
+    description
+      "A grouping for Integrity Protection Methods.";
+    leaf int-method {
+      when "derived-from-or-self(../node-action,
+            'ioam:action-encapsulate')";
+      type method-type;
+      default "method-0";
+      description
+        "This object indicates the Integrity Protection Method for
+         this profile.";
+    }
+  }
+
+  /*
    * DATA NODES
    */
 
@@ -131,58 +148,33 @@ module ietf-ioam-integrity {
     description
       "This augmentation adds 4 profiles for the Integrity Protected
        Options.";
-
     container int-incremental-tracing-profile {
       if-feature "int-incremental-trace";
-      presence
-        "Enables the Integrity Protected Incremental Trace-Option.";
+      presence "Enables the Integrity Protected
+                Incremental Trace-Option.";
       description
         "This container describes the profile for the Integrity
          Protected Incremental Trace-Option.";
-
       uses ioam:ioam-incremental-tracing-profile;
-
-      leaf int-method {
-        when "derived-from-or-self(../node-action,
-           'ioam:action-encapsulate')";
-        type method-type;
-        default "method-0";
-        description
-          "This object indicates the Integrity Protection Method for
-           this profile.";
-      }
+      uses method-grouping;
     }
-
     container int-preallocated-tracing-profile {
       if-feature "int-preallocated-trace";
-      presence
-        "Enables the Integrity Protected Pre-allocated
-         Trace-Option.";
+      presence "Enables the Integrity Protected
+                Pre-allocated Trace-Option.";
       description
         "This container describes the profile for the Integrity
          Protected Pre-allocated Trace-Option.";
-
       uses ioam:ioam-preallocated-tracing-profile;
-
-      leaf int-method {
-        when "derived-from-or-self(../node-action,
-           'ioam:action-encapsulate')";
-        type method-type;
-        default "method-0";
-        description
-          "This object indicates the Integrity Protection Method for
-           this profile.";
-      }
+      uses method-grouping;
     }
-
     container int-pot-profile {
       if-feature "int-proof-of-transit";
-      presence
-        "Enables the Integrity Protected Proof of Transit Option.";
+      presence "Enables the Integrity Protected
+                Proof of Transit Option.";
       description
         "This container describes the profile for the Integrity
          Protected Proof of Transit Option.";
-
       leaf use-namespace {
         type ioam:ioam-namespace;
         default "ioam:default-namespace";
@@ -190,14 +182,12 @@ module ietf-ioam-integrity {
           "This object indicates the namespace used for the
            POT types.";
       }
-
       leaf pot-type {
         type ioam:ioam-pot-type;
         description
           "The type of a particular POT variant that specifies
            the POT data that is included.";
       }
-
       leaf node-action {
         type ioam:ioam-node-action;
         default "ioam:action-transit";
@@ -205,37 +195,17 @@ module ietf-ioam-integrity {
           "This object indicates the action the node needs to
            take, e.g., encapsulation.";
       }
-
-      leaf int-method {
-        when "derived-from-or-self(../node-action,
-           'ioam:action-encapsulate')";
-        type method-type;
-        default "method-0";
-        description
-          "This object indicates the Integrity Protection Method for
-           this profile.";
-      }
+      uses method-grouping;
     }
-
     container int-e2e-profile {
       if-feature "int-edge-to-edge";
-      presence
-        "Enables the Integrity Protected Edge-to-Edge Option.";
+      presence "Enables the Integrity Protected
+                Edge-to-Edge Option.";
       description
         "This container describes the profile for the Integrity
          Protected Edge-to-Edge Option.";
-
       uses ioam:ioam-e2e-profile;
-
-      leaf int-method {
-        when "derived-from-or-self(../node-action,
-           'ioam:action-encapsulate')";
-        type method-type;
-        default "method-0";
-        description
-          "This object indicates the Integrity Protection Method for
-           this profile.";
-      }
+      uses method-grouping;
     }
   }
 }
