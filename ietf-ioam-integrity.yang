@@ -10,15 +10,26 @@ module ietf-ioam-integrity {
                  Administration, and Maintenance (IOAM)";
   }
 
+  import iana-ioam-integrity-protection-methods {
+    prefix iana-ioam-ipm;
+    reference
+      "RFC XXXX: A YANG Data Model for In Situ Operations,
+                 Administration, and Maintenance (IOAM)
+                 Integrity Protected Options";
+  }
+
   organization
     "IETF IPPM (IP Performance Measurement) Working Group";
+
   contact
     "WG Web:   <https://datatracker.ietf.org/wg/ippm>
      WG List:  <mailto:ippm@ietf.org>
-     Author:   Tianran Zhou
+
+     Editor:   Tianran Zhou
                <mailto:zhoutianran@huawei.com>
-     Author:   Justin Iurman
+     Editor:   Justin Iurman
                <mailto:justin.iurman@uliege.be>";
+
   description
     "This YANG module specifies a vendor-independent data model for
      In Situ Operations, Administration, and Maintenance (IOAM)
@@ -28,18 +39,22 @@ module ietf-ioam-integrity {
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
-     without modification, is permitted pursuant to, and subject to
-     the license terms contained in, the Revised BSD License set
-     forth in Section 4.c of the IETF Trust's Legal Provisions
+     without modification, is permitted pursuant to, and subject
+     to the license terms contained in, the Revised BSD License
+     set forth in Section 4.c of the IETF Trust's Legal Provisions
      Relating to IETF Documents
      (https://trustee.ietf.org/license-info).
+
+     All revisions of IETF and IANA published modules can be found
+     at the YANG Parameters registry group
+     (https://www.iana.org/assignments/yang-parameters).
 
      This version of this YANG module is part of RFC XXXX; see the
      RFC itself for full legal notices.";
 
-  revision 2025-11-13 {
+  revision 2025-11-30 {
     description
-      "Initial revision.";
+      "Initial version.";
     reference
       "RFC XXXX: A YANG Data Model for In Situ Operations,
                  Administration, and Maintenance (IOAM)
@@ -91,49 +106,16 @@ module ietf-ioam-integrity {
   }
 
   /*
-   * IDENTITIES
-   */
-
-  identity method {
-    description
-      "Base identity to represent the Integrity Protection Method.";
-  }
-
-  identity method-0 {
-    base method;
-    description
-      "The Integrity Protection Method 0 uses AES-GMAC with a 12-byte
-       Nonce and a 16-byte ICV.";
-    reference
-      "RFC YYYY: Integrity Protection of In Situ Operations,
-                 Administration, and Maintenance (IOAM)
-                 Data Fields, Section 5";
-  }
-
-  /*
-   * TYPE DEFINITIONS
-   */
-
-  typedef method-type {
-    type identityref {
-      base method;
-    }
-    description
-      "It specifies the Integrity Protection Method.";
-  }
-
-  /*
    * GROUP DEFINITIONS
    */
 
-  grouping method-grouping {
+  grouping int-method-grouping {
     description
       "A grouping for Integrity Protection Methods.";
     leaf int-method {
       when "derived-from-or-self(../node-action,
             'ioam:action-encapsulate')";
-      type method-type;
-      default "method-0";
+      type iana-ioam-ipm:method-id;
       description
         "This object indicates the Integrity Protection Method for
          this profile.";
@@ -156,7 +138,7 @@ module ietf-ioam-integrity {
         "This container describes the profile for the Integrity
          Protected Incremental Trace-Option.";
       uses ioam:ioam-incremental-tracing-profile;
-      uses method-grouping;
+      uses int-method-grouping;
     }
     container int-preallocated-tracing-profile {
       if-feature "int-preallocated-trace";
@@ -166,7 +148,7 @@ module ietf-ioam-integrity {
         "This container describes the profile for the Integrity
          Protected Pre-allocated Trace-Option.";
       uses ioam:ioam-preallocated-tracing-profile;
-      uses method-grouping;
+      uses int-method-grouping;
     }
     container int-pot-profile {
       if-feature "int-proof-of-transit";
@@ -195,7 +177,7 @@ module ietf-ioam-integrity {
           "This object indicates the action the node needs to
            take, e.g., encapsulation.";
       }
-      uses method-grouping;
+      uses int-method-grouping;
     }
     container int-e2e-profile {
       if-feature "int-edge-to-edge";
@@ -205,7 +187,7 @@ module ietf-ioam-integrity {
         "This container describes the profile for the Integrity
          Protected Edge-to-Edge Option.";
       uses ioam:ioam-e2e-profile;
-      uses method-grouping;
+      uses int-method-grouping;
     }
   }
 }
