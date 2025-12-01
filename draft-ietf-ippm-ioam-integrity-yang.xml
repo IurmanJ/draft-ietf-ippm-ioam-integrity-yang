@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE rfc [
-<!ENTITY RFC2119 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY RFC3688 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3688.xml">
 <!ENTITY RFC4252 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4252.xml">
 <!ENTITY RFC6020 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6020.xml">
@@ -9,7 +8,6 @@
 <!ENTITY RFC7950 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7950.xml">
 <!ENTITY RFC7951 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7951.xml">
 <!ENTITY RFC8040 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8040.xml">
-<!ENTITY RFC8174 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
 <!ENTITY RFC8340 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8340.xml">
 <!ENTITY RFC8341 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8341.xml">
 <!ENTITY RFC8446 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml">
@@ -26,7 +24,7 @@
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="std" docName="draft-ietf-ippm-ioam-integrity-yang-01"
+<rfc category="std" docName="draft-ietf-ippm-ioam-integrity-yang-02"
      ipr="trust200902" submissionType="IETF" consensus="true">
   <front>
     <title abbrev="YANG Model for IOAM Integrity Options">A YANG Data Model for
@@ -59,7 +57,7 @@
       </address>
     </author>
 
-    <date day="30" month="November" year="2025"/>
+    <date day="01" month="December" year="2025"/>
 
     <area>ops</area>
     <workgroup>ippm</workgroup>
@@ -124,7 +122,7 @@
             <li>XXXX --> the assigned RFC number for this document</li>
             <li>YYYY --> the assigned RFC number for
                 <xref target="I-D.ietf-ippm-ioam-data-integrity"/></li>
-            <li>2025-11-30 --> the actual date of the publication of this
+            <li>2025-12-01 --> the actual date of the publication of this
                 document</li>
           </ul>
         </t>
@@ -132,14 +130,6 @@
     </section>
 
     <section title="Conventions used in this document">
-      <section title="Requirements Language">
-        <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-        "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-        "OPTIONAL" in this document are to be interpreted as described in BCP 14
-        <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only when,
-        they appear in all capitals, as shown here.</t>
-      </section>
-
       <section title="Abbreviations">
         <t>Abbreviations used in this document:
           <dl spacing="compact">
@@ -330,7 +320,7 @@ module: ietf-ioam-integrity
       the "ietf-ioam" module defined in <xref target="RFC9617"/>. This document
       also references <xref target="I-D.ietf-ippm-ioam-data-integrity"/>.</t>
 
-      <sourcecode name="ietf-ioam-integrity@2025-11-30.yang"
+      <sourcecode name="ietf-ioam-integrity@2025-12-01.yang"
                   type="yang" markers="true">
 <![CDATA[
 module ietf-ioam-integrity {
@@ -387,7 +377,7 @@ module ietf-ioam-integrity {
      This version of this YANG module is part of RFC XXXX; see the
      RFC itself for full legal notices.";
 
-  revision 2025-11-30 {
+  revision 2025-12-01 {
     description
       "Initial version.";
     reference
@@ -647,9 +637,10 @@ module ietf-ioam-integrity {
         statement, and sub-statements thereof, should be defined:
 
           <dl spacing="compact">
-            <dt>"enum":</dt><dd>Replicates a name from the registry.</dd>
+            <dt>"enum":</dt><dd>Prefix "method-" to the decimal value of the ID
+            from the registry.</dd>
             <dt>"value":</dt><dd>Contains the decimal value of the IANA-assigned
-            value.</dd>
+            ID value.</dd>
             <dt>"status":</dt><dd>Is included only if a registration has been
             deprecated or obsoleted. IANA "deprecated" maps to YANG status
             "deprecated", and IANA "obsolete" maps to YANG status
@@ -665,25 +656,7 @@ module ietf-ioam-integrity {
 
         <t>When the "iana-ioam-integrity-protection-methods" YANG module is
         updated, a new "revision" statement with a unique revision date needs to
-        be added in front of the existing revision statements. The "revision"
-        statement MUST contain both "description" and "reference" substatements
-        as follows.</t>
-
-        <t>The "description" substatement captures what changed in the revised
-        version. Typically, the description enumerates the changes such as
-        udpates to existing entries (e.g., update a description or a reference)
-        or notes which "enums" were added or had their status changed (e.g.,
-        deprecated, discouraged, or obsoleted).</t>
-
-        <t>The "description" substatement should include this text:
-        "Applied updates as specified by RFC number.".</t>
-
-        <t>The "reference" substatement points specifically to the published
-        module (i.e., IANA_FOO_URL_With_REV). It may also point to an
-        authoritative event triggering the update to the YANG module. In all
-        cases, this event is cited from the underlying IANA registry. If the
-        update is triggered by an RFC, that RFC must also be included in the
-        "reference" substatement.</t>
+        be added in front of the existing revision statements.</t>
 
         <t>IANA is requested to add this note to
         [reference-to-the-iana-foo-registry]:</t>
@@ -704,12 +677,10 @@ module ietf-ioam-integrity {
 
   <back>
     <references title="Normative References">
-      &RFC2119;
       &RFC3688;
       &RFC6020;
       &RFC7950;
       &RFC7951;
-      &RFC8174;
       &RFC8341;
       &RFC9617;
       &I-D.ietf-ippm-ioam-data-integrity;
@@ -752,7 +723,7 @@ module ietf-ioam-integrity {
              anchor="appendix-iana-module">
       <t>RFC Ed.: please remove this section.</t>
 
-      <sourcecode name="iana-ioam-integrity-protection-methods@2025-11-30.yang"
+      <sourcecode name="iana-ioam-integrity-protection-methods@2025-12-01.yang"
                   type="yang" markers="true">
 <![CDATA[
 module iana-ioam-integrity-protection-methods {
@@ -804,7 +775,7 @@ module iana-ioam-integrity-protection-methods {
     "IOAM Integrity Protection Methods
      (https://www.iana.org/assignments/ioam/ioam.xhtml)";
 
-  revision 2025-11-30 {
+  revision 2025-12-01 {
     description
       "Initial version.";
     reference
@@ -903,7 +874,7 @@ module: ietf-ioam-integrity
         <sourcecode type="json">
 <![CDATA[
 {
-  "ioam:ioam": {
+  "ietf-ioam:ioam": {
     "admin-config": {
       "enabled": true
     },
@@ -911,17 +882,17 @@ module: ietf-ioam-integrity
       "profile": [
         {
           "profile-name": "ietf-test-profile",
-          "protocol-type": "ipv6",
-          "int-incremental-tracing-profile": {
-            "node-action": "action-encapsulate",
+          "protocol-type": "ietf-ioam:ipv6",
+          "ietf-ioam-integrity:int-incremental-tracing-profile": {
+            "node-action": "ietf-ioam:action-encapsulate",
             "trace-types": {
-              "use-namespace": "default-namespace",
+              "use-namespace": "ietf-ioam:default-namespace",
               "trace-type": [
-                "trace-transit-delay"
+                "ietf-ioam:trace-transit-delay"
               ]
             },
             "max-length": 512,
-            "int-method": "method-0"
+            "int-method": "iana-ioam-integrity-protection-methods:method-0"
           }
         }
       ]
@@ -949,7 +920,7 @@ module: ietf-ioam-integrity
         <sourcecode type="json">
 <![CDATA[
 {
-  "ioam:ioam": {
+  "ietf-ioam:ioam": {
     "admin-config": {
       "enabled": true
     },
@@ -958,20 +929,20 @@ module: ietf-ioam-integrity
         {
           "profile-name": "ietf-test-profile",
           "filter": {
-            "filter-type": "acl-filter",
+            "filter-type": "ietf-ioam:acl-filter",
             "ace-name": "test-acl"
           },
-          "protocol-type": "nsh",
-          "int-preallocated-tracing-profile": {
-            "node-action": "action-encapsulate",
+          "protocol-type": "ietf-ioam:nsh",
+          "ietf-ioam-integrity:int-preallocated-tracing-profile": {
+            "node-action": "ietf-ioam:action-encapsulate",
             "trace-types": {
-              "use-namespace": "default-namespace",
+              "use-namespace": "ietf-ioam:default-namespace",
               "trace-type": [
-                "trace-namespace-data"
+                "ietf-ioam:trace-namespace-data"
               ]
             },
             "max-length": 512,
-            "int-method": "method-0"
+            "int-method": "iana-ioam-integrity-protection-methods:method-0"
           }
         }
       ]
@@ -995,7 +966,7 @@ module: ietf-ioam-integrity
         <sourcecode type="json">
 <![CDATA[
 {
-  "ioam:ioam": {
+  "ietf-ioam:ioam": {
     "admin-config": {
       "enabled": true
     },
@@ -1003,11 +974,11 @@ module: ietf-ioam-integrity
       "profile": [
         {
           "profile-name": "ietf-test-profile",
-          "protocol-type": "ipv6",
-          "int-pot-profile": {
-            "pot-type": "pot-type-0",
-            "node-action": "action-encapsulate",
-            "int-method": "method-0"
+          "protocol-type": "ietf-ioam:ipv6",
+          "ietf-ioam-integrity:int-pot-profile": {
+            "pot-type": "ietf-ioam:pot-type-0",
+            "node-action": "ietf-ioam:action-encapsulate",
+            "int-method": "iana-ioam-integrity-protection-methods:method-0"
           }
         }
       ]
@@ -1032,7 +1003,7 @@ module: ietf-ioam-integrity
         <sourcecode type="json">
 <![CDATA[
 {
-  "ioam:ioam": {
+  "ietf-ioam:ioam": {
     "admin-config": {
       "enabled": true
     },
@@ -1040,16 +1011,16 @@ module: ietf-ioam-integrity
       "profile": [
         {
           "profile-name": "ietf-test-profile",
-          "protocol-type": "ipv6",
-          "int-e2e-profile": {
-            "node-action": "action-encapsulate",
+          "protocol-type": "ietf-ioam:ipv6",
+          "ietf-ioam-integrity:int-e2e-profile": {
+            "node-action": "ietf-ioam:action-encapsulate",
             "e2e-types": {
-              "use-namespace": "default-namespace",
+              "use-namespace": "ietf-ioam:default-namespace",
               "e2e-type": [
-                "e2e-seq-num-64"
+                "ietf-ioam:e2e-seq-num-64"
               ]
             },
-            "int-method": "method-0"
+            "int-method": "iana-ioam-integrity-protection-methods:method-0"
           }
         }
       ]

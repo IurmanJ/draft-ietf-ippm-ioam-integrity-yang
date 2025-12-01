@@ -47,7 +47,7 @@ module iana-ioam-integrity-protection-methods {
     "IOAM Integrity Protection Methods
      (https://www.iana.org/assignments/ioam/ioam.xhtml)";
 
-  revision 2025-11-30 {
+  revision 2025-12-01 {
     description
       "Initial version.";
     reference
