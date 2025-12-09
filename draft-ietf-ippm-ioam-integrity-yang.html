@@ -1,0 +1,2415 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>A YANG Data Model for In Situ Operations, Administration, and Maintenance (IOAM) Integrity Protected Options</title>
+<meta content="Justin Iurman" name="author">
+<meta content="Tianran Zhou" name="author">
+<meta content="
+       In Situ Operations, Administration, and Maintenance (IOAM) is an
+      example of an on-path hybrid measurement method to collect operational and
+      telemetry information. The collected data may then be exported to systems
+      that will use it to, e.g., monitor, measure, or (re)configure the network.
+      Integrity Protection of In Situ Operations, Administration, and
+      Maintenance (IOAM) Data Fields (RFC YYYY)
+      defines IOAM Options with integrity protection, also called Integrity
+      Protected Options. This document defines a YANG module for the
+      management of these Integrity Protected Options. 
+    " name="description">
+<meta content="xml2rfc 3.31.0" name="generator">
+<meta content="OAM" name="keyword">
+<meta content="In Situ OAM" name="keyword">
+<meta content="IOAM" name="keyword">
+<meta content="Integrity" name="keyword">
+<meta content="Configuration" name="keyword">
+<meta content="YANG" name="keyword">
+<meta name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.31.0
+    Python 3.12.12
+    ConfigArgParse 1.7
+    google-i18n-address 3.1.1
+    intervaltree 3.1.0
+    Jinja2 3.1.6
+    lxml 5.3.1
+    platformdirs 4.5.0
+    pycountry 24.6.1
+    PyYAML 6.0.2
+    requests 2.32.5
+    wcwidth 0.2.14
+-->
+<link href="draft-ietf-ippm-ioam-integrity-yang.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  --font-title: "Sofia Sans Semi Condensed", sans-serif;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+section {
+  clear: both;
+}
+.section-number {
+  padding-right: 0.5em;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  font-weight: 680;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1#title {
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1#title, h1#rfcnum {
+  margin: 1.5em 0 0.2em;
+}
+h1#rfcnum + h1#title {
+  margin: 0.2em 0;
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+}
+#abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 16px;
+  line-height: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+/* font-family isn't space-separated, but =~ will have to do */
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+  & :is(ol, ul) {
+    margin-left: 1em;
+  }
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+  & li {
+    margin-top: 0.5em;
+  }
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  margin: 0 0 0 2em;
+  & li {
+    margin: 0;
+    & :first-child { margin-top: 0; }
+    & :last-child { margin-bottom: 0; }
+  }
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+  &.olPercent {
+    --indent: 5ch;
+    & > dt {
+      min-width: calc(var(--indent) - 2ch);
+    }
+  }
+  &.olPercent > dt {
+    float: none;
+  }
+
+  dl > dd > & {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+  }
+}
+dl:not(.dlNewline) > dt {
+  float: left;
+  margin-right: 2ch;
+  min-width: 8ch;
+}
+dl > dd {
+  margin-bottom: .8em;
+  margin-left: var(--indent) !important; /* stupid element overrides */
+  min-height: 2ex;
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+  & > :is(:first-child, .break:first-child + *) {
+    margin-top: 0;
+  }
+  & > :is(:last-child) {
+    margin-bottom: 0;
+  }
+}
+:is(dd, span).break {
+  display: none;
+}
+
+/* links */
+a, a[href].selfRef:hover {
+  text-decoration: none;
+}
+a[href] {
+  color: var(--link-color);
+}
+a[href].selfRef, .iref + a[href].internal {
+  color: var(--text-color);
+}
+a[href]:hover {
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+  caption-side: bottom;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
+  pre, svg {
+    display: inline-block;
+    /* In the horizontal direction, sometimes people make over-sized figures.
+       Scrollbars for those is therefore necessary: auto adds them as necessary..
+       In the vertical direction, the line-height can combine with the font
+       asender/descender height to produce scrollbars: hidden avoids that. */
+    overflow: auto hidden;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  width: auto;
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 0 3px 1em;
+}
+table p {
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+  &[href] {
+    color: var(--pilcrow-weak);
+    &:hover { text-decoration: none; }
+  }
+}
+@media not print {
+  :hover > a.pilcrow {
+    opacity: 1;
+  }
+  a.pilcrow[href]:hover {
+    color: var(--pilcrow-strong);
+    background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+.role {
+  font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+  & dt {
+    width: var(--identifier-width);
+    min-width: var(--identifier-width);
+    clear: left;
+    float: left;
+    text-align: right;
+    margin-right: 1ch;
+  }
+  & dd {
+    margin: 0;
+    margin-left: calc(1em + var(--identifier-width)) !important;
+    min-width: 5em;
+  }
+  & .authors {
+    & .author {
+      display: inline-block;
+      margin-right: 1.5em;
+    }
+    & .org {
+      font-style: italic;
+    }
+  }
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+
+  & nav {
+    & ul {
+      margin: 0 0.5em 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    & li {
+      line-height: 1.3em;
+      margin: 2px 0;
+      padding-left: 1.2em;
+      text-indent: -1.2em;
+    }
+  }
+  & a.xref {
+    white-space: normal;
+  }
+}
+
+.references {
+  & > dt {
+    text-align: right;
+    font-weight: bold;
+    min-width: 10ch;
+    margin-right: 1.5ch;
+    &:target::before {
+      content: "⇒";
+      margin: 0 10px 0 -25px;
+    }
+  }
+  & > dd {
+    margin-left: 12ch !important;
+    overflow: visible;
+    & .refInstance {
+      margin-bottom: 0.8em;
+    }
+    & .ascii {
+      margin-bottom: 0.25em;
+    }
+  }
+}
+
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  max-width: 20em;
+  margin: 1em auto 1em 0;
+
+  & .nameRole {
+    font-weight: 700;
+    margin-left: 0;
+  }
+  & .label {
+    margin: 0.5em 0;
+  }
+  & .type {
+    display: none;
+  }
+  & .alternative-contact {
+    margin: 0.5em 0 0.25em 0;
+  }
+  & .non-ascii {
+    margin: 0 0 0 2em;
+  }
+  & div.left {
+    text-align: left;
+  }
+  & div.right {
+    text-align: right;
+  }
+}
+
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+/* Comments */
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+
+@media screen {
+  #toc nav {
+    font-family: var(--font-title);
+    font-weight: 360;
+    & > ul { margin-bottom: 2em; }
+    & ul {
+      margin: 0 0 0 4px;
+      & :is(p, li) {
+        margin: 2px 0;
+      }
+    }
+  }
+  #toc a.toplink {
+    float: right;
+  }
+}
+@media not screen {
+  #toc a.toplink {
+    display: none;
+  }
+}
+
+
+/* TOC layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 1px 0 0 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+    &::before { /* css hamburger */
+      float: right;
+      position: relative;
+      width: 1em;
+      height: 1px;
+      left: -164px;
+      margin: 8px 0 0 0;
+      background: white none repeat scroll 0 0;
+      box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+      content: "";
+    }
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active {
+    opacity: 1;
+    & nav { display: block; }
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:is(:link, :focus, :hover),
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin: 2px 0.5em 0;
+  }
+}
+
+/* TOC layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+  #toc a.toplink {
+    margin: 8px 0.5em 0;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre, .vcard {
+    page-break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  :is(h2, h3, h4, h5, h6)+*, dd {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
+  stroke: var(--text-color);
+}
+svg :is([stroke="white"], [stroke^="#fff"]) {
+  stroke: var(--background-color);
+}
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
+  fill: var(--text-color);
+}
+svg :is([fill="white"], [fill^="#fff"]) {
+  fill: var(--background-color);
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">YANG Model for IOAM Integrity Options</td>
+<td class="right">December 2025</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Iurman &amp; Zhou</td>
+<td class="center">Expires 5 June 2026</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">ippm</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-ietf-ippm-ioam-integrity-yang-03</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2025-12-02" class="published">2 December 2025</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Standards Track</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2026-06-05">5 June 2026</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">J. Iurman</div>
+<div class="org">University of Liege</div>
+</div>
+<div class="author">
+      <div class="author-name">T. Zhou</div>
+<div class="org">Huawei</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">A YANG Data Model for In Situ Operations, Administration, and Maintenance (IOAM) Integrity Protected Options</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">In Situ Operations, Administration, and Maintenance (IOAM) is an
+      example of an on-path hybrid measurement method to collect operational and
+      telemetry information. The collected data may then be exported to systems
+      that will use it to, e.g., monitor, measure, or (re)configure the network.
+      Integrity Protection of In Situ Operations, Administration, and
+      Maintenance (IOAM) Data Fields (RFC YYYY)
+      defines IOAM Options with integrity protection, also called Integrity
+      Protected Options. This document defines a YANG module for the
+      management of these Integrity Protected Options.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 5 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2025 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-editorial-note-to-be-remove" class="internal xref">Editorial Note (to be removed by RFC Editor)</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-used-in-this-do" class="internal xref">Conventions used in this document</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
+                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-abbreviations" class="internal xref">Abbreviations</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
+                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
+                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.  <a href="#name-tree-diagrams" class="internal xref">Tree Diagrams</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-design-of-the-ioam-integrit" class="internal xref">Design of the IOAM Integrity YANG Data Model</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-overview" class="internal xref">Overview</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-integrity-protected-pre-all" class="internal xref">Integrity Protected Pre-allocated Tracing Profile</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-integrity-protected-increme" class="internal xref">Integrity Protected Incremental Tracing Profile</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-integrity-protected-proof-o" class="internal xref">Integrity Protected Proof of Transit Profile</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
+                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-integrity-protected-edge-to" class="internal xref">Integrity Protected Edge-to-Edge Profile</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-ioam-integrity-yang-module" class="internal xref">IOAM Integrity YANG Module</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-iana-maintained-iana-ioam-i" class="internal xref">IANA-Maintained "iana-ioam-integrity-protection-methods" Module</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-acknowledgements" class="internal xref">Acknowledgements</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-initial-version-of-the-ioam" class="internal xref">Initial Version of the IOAM Integrity Protection Methods IANA-Maintained Module</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-full-tree-of-the-ioam-integ" class="internal xref">Full tree of the IOAM Integrity YANG Data Model</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-example-of-the-integrity-pr" class="internal xref">Example of the Integrity Protected Incremental Tracing Profile</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-example-of-the-integrity-pro" class="internal xref">Example of the Integrity Protected Pre-allocated Tracing Profile</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-E" class="auto internal xref">Appendix E</a>.  <a href="#name-example-of-the-integrity-prot" class="internal xref">Example of the Integrity Protected Proof of Transit and Integrity Protected Edge-to-Edge Profiles</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-F" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">In Situ Operations, Administration, and Maintenance (IOAM) is an
+      example of an on-path hybrid measurement method <span>[<a href="#RFC7799" class="cite xref">RFC7799</a>]</span>
+      to collect operational and telemetry information. The collected data may
+      then be exported to systems that will use it to, e.g., monitor, measure,
+      or (re)configure the network.
+      <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span> defines IOAM Options
+      with integrity protection, also called Integrity Protected Options. This
+      document defines a data model for the management of these Integrity
+      Protected Options using the YANG data modeling language
+      <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>. This YANG data model supports four IOAM Integrity
+      Protected Options, which are as follows:<a href="#section-1-1" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-1-2.1">Integrity Protected Incremental Trace-Option (Section 4.1 of
+              <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>)<a href="#section-1-2.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-1-2.2">Integrity Protected Pre-allocated Trace-Option (Section 4.1 of
+              <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>)<a href="#section-1-2.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-1-2.3">Integrity Protected Proof of Transit (POT) Option (Section 4.2 of
+              <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>)<a href="#section-1-2.3" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-1-2.4">Integrity Protected Edge-to-Edge (E2E) Option (Section 4.3 of
+              <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>)<a href="#section-1-2.4" class="pilcrow">¶</a>
+</li>
+      </ul>
+<section id="section-1.1">
+        <h3 id="name-editorial-note-to-be-remove">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-editorial-note-to-be-remove" class="section-name selfRef">Editorial Note (to be removed by RFC Editor)</a>
+        </h3>
+<p id="section-1.1-1">Note to the RFC Editor: this section is to be removed prior to
+        publication.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">This document contains placeholder values that need to be replaced
+        with finalized values at the time of publication. This note summarizes
+        all of the substitutions that are needed. No other RFC Editor
+        instructions are specified elsewhere in this document, except in
+        <a href="#appendix-iana-module" class="auto internal xref">Appendix A</a>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3">Please apply the following replacements:<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-1.1-4.1">XXXX --&gt; the assigned RFC number for this document<a href="#section-1.1-4.1" class="pilcrow">¶</a>
+</li>
+          <li class="compact" id="section-1.1-4.2">YYYY --&gt; the assigned RFC number for
+                <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span><a href="#section-1.1-4.2" class="pilcrow">¶</a>
+</li>
+          <li class="compact" id="section-1.1-4.3">2025-12-02 --&gt; the actual date of the publication of this
+                document<a href="#section-1.1-4.3" class="pilcrow">¶</a>
+</li>
+        </ul>
+</section>
+</section>
+<section id="section-2">
+      <h2 id="name-conventions-used-in-this-do">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-conventions-used-in-this-do" class="section-name selfRef">Conventions used in this document</a>
+      </h2>
+<section id="section-2.1">
+        <h3 id="name-abbreviations">
+<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-abbreviations" class="section-name selfRef">Abbreviations</a>
+        </h3>
+<p id="section-2.1-1">Abbreviations used in this document:<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-2.1-2">
+          <dt id="section-2.1-2.1">OAM:</dt>
+          <dd style="margin-left: 1.5em" id="section-2.1-2.2">Operations, Administration, and Maintenance<a href="#section-2.1-2.2" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-2.1-2.3">IOAM:</dt>
+          <dd style="margin-left: 1.5em" id="section-2.1-2.4">In Situ OAM<a href="#section-2.1-2.4" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-2.1-2.5">POT:</dt>
+          <dd style="margin-left: 1.5em" id="section-2.1-2.6">Proof of Transit<a href="#section-2.1-2.6" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-2.1-2.7">E2E:</dt>
+          <dd style="margin-left: 1.5em" id="section-2.1-2.8">Edge to Edge<a href="#section-2.1-2.8" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+</dl>
+</section>
+<section id="section-2.2">
+        <h3 id="name-terminology">
+<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+        </h3>
+<p id="section-2.2-1">The following terms are defined in <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span> and are
+        used in this specification:<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-2.2-2.1">augment<a href="#section-2.2-2.1" class="pilcrow">¶</a>
+</li>
+          <li class="compact" id="section-2.2-2.2">data model<a href="#section-2.2-2.2" class="pilcrow">¶</a>
+</li>
+          <li class="compact" id="section-2.2-2.3">data node<a href="#section-2.2-2.3" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-2.2-3">The terminology for describing YANG data models is found in
+        <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
+</section>
+<section id="section-2.3">
+        <h3 id="name-tree-diagrams">
+<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-tree-diagrams" class="section-name selfRef">Tree Diagrams</a>
+        </h3>
+<p id="section-2.3-1">Tree diagrams used in this document follow the notation defined in
+        <span>[<a href="#RFC8340" class="cite xref">RFC8340</a>]</span>.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+</section>
+</section>
+<section id="section-3">
+      <h2 id="name-design-of-the-ioam-integrit">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-design-of-the-ioam-integrit" class="section-name selfRef">Design of the IOAM Integrity YANG Data Model</a>
+      </h2>
+<section id="section-3.1">
+        <h3 id="name-overview">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-overview" class="section-name selfRef">Overview</a>
+        </h3>
+<p id="section-3.1-1">The IOAM Integrity model is organized as a list of profiles, as shown
+        in <a href="#fig_overview_model" class="auto internal xref">Figure 1</a>. In this model, the "int" prefix
+        refers to "INTegrity protection".<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<span id="name-overview-of-the-ioam-integr"></span><div id="fig_overview_model">
+<figure id="figure-1">
+          <div class="lang-yangtree sourcecode" id="section-3.1-2.1">
+<pre>
+
+module: ietf-ioam-integrity
+
+  augment /ioam:ioam/ioam:profiles/ioam:profile:
+    +--rw int-incremental-tracing-profile! {int-incremental-trace}?
+    |  ...
+    +--rw int-preallocated-tracing-profile! {int-preallocated-trace}?
+    |  ...
+    +--rw int-pot-profile! {int-proof-of-transit}?
+    |  ...
+    +--rw int-e2e-profile! {int-edge-to-edge}?
+
+</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-overview-of-the-ioam-integr" class="selfRef">Overview of the IOAM Integrity model</a>
+          </figcaption></figure>
+</div>
+<p id="section-3.1-3">This document defines augmentations to the "ietf-ioam" YANG module
+        <span>[<a href="#RFC9617" class="cite xref">RFC9617</a>]</span> by adding integrity-related profiles. Each
+        profile is associated with one flow and the corresponding IOAM information.
+        These integrity-related profiles are indicated by
+        four defined features, i.e., "int-incremental-trace",
+        "int-preallocated-trace", "int-proof-of-transit", and
+        "int-edge-to-edge".
+        The structures of the new profiles follow what is defined in
+        <span>[<a href="#RFC9617" class="cite xref">RFC9617</a>]</span>, but for distinct purposes.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+</section>
+<section id="section-3.2">
+        <h3 id="name-integrity-protected-pre-all">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-integrity-protected-pre-all" class="section-name selfRef">Integrity Protected Pre-allocated Tracing Profile</a>
+        </h3>
+<p id="section-3.2-1">As illustrated in <a href="#fig_pre_profile" class="auto internal xref">Figure 2</a>, the
+        "int-preallocated-tracing-profile" container provides the detailed
+        information for the pre-allocated tracing data with integrity
+        protection. This information has the same structure as the Pre-allocated
+        Tracing Profile (Section 3.2 of <span>[<a href="#RFC9617" class="cite xref">RFC9617</a>]</span>), but has the
+        following additional data node:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-3.2-2">
+          <dt id="section-3.2-2.1">int-method:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.2-2.2">indicates which Integrity Protection Method
+            is used, as defined in the "IOAM Integrity Protection Methods" IANA
+            registry <span>[<a href="#IANA-IOAM" class="cite xref">IANA-IOAM</a>]</span>.<a href="#section-3.2-2.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+</dl>
+<span id="name-integrity-protected-pre-allo"></span><div id="fig_pre_profile">
+<figure id="figure-2">
+          <div class="lang-yangtree sourcecode" id="section-3.2-3.1">
+<pre>
+
++--rw int-preallocated-tracing-profile! {int-preallocated-trace}?
+   +--rw node-action?   ioam-node-action
+   +--rw trace-types
+   |  +--rw use-namespace?   ioam-namespace
+   |  +--rw trace-type*      ioam-trace-type
+   +--rw max-length?    uint32
+   +--rw int-method?    iana-ioam-ipm:method-id
+
+</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-integrity-protected-pre-allo" class="selfRef">Integrity Protected Pre-allocated Tracing Profile</a>
+          </figcaption></figure>
+</div>
+</section>
+<section id="section-3.3">
+        <h3 id="name-integrity-protected-increme">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-integrity-protected-increme" class="section-name selfRef">Integrity Protected Incremental Tracing Profile</a>
+        </h3>
+<p id="section-3.3-1">As illustrated in <a href="#fig_inc_profile" class="auto internal xref">Figure 3</a>, the
+        "int-incremental-tracing-profile" container provides the detailed
+        information for the incremental tracing data with integrity protection.
+        This information has the same structure as the Incremental Tracing
+        Profile (Section 3.3 of <span>[<a href="#RFC9617" class="cite xref">RFC9617</a>]</span>), but has the following
+        additional data node:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-3.3-2">
+          <dt id="section-3.3-2.1">int-method:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.3-2.2">indicates which Integrity Protection Method
+            is used, as defined in the "IOAM Integrity Protection Methods" IANA
+            registry <span>[<a href="#IANA-IOAM" class="cite xref">IANA-IOAM</a>]</span>.<a href="#section-3.3-2.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+</dl>
+<span id="name-integrity-protected-incremen"></span><div id="fig_inc_profile">
+<figure id="figure-3">
+          <div class="lang-yangtree sourcecode" id="section-3.3-3.1">
+<pre>
+
++--rw int-incremental-tracing-profile! {int-incremental-trace}?
+   +--rw node-action?   ioam-node-action
+   +--rw trace-types
+   |  +--rw use-namespace?   ioam-namespace
+   |  +--rw trace-type*      ioam-trace-type
+   +--rw max-length?    uint32
+   +--rw int-method?    iana-ioam-ipm:method-id
+
+</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-integrity-protected-incremen" class="selfRef">Integrity Protected Incremental Tracing Profile</a>
+          </figcaption></figure>
+</div>
+</section>
+<section id="section-3.4">
+        <h3 id="name-integrity-protected-proof-o">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-integrity-protected-proof-o" class="section-name selfRef">Integrity Protected Proof of Transit Profile</a>
+        </h3>
+<p id="section-3.4-1">As illustrated in <a href="#fig_pot_profile" class="auto internal xref">Figure 4</a>, the
+        "int-pot-profile" container is intended to provide the detailed
+        information for the proof of transit data with integrity protection.
+        This information has the same structure as the Proof of Transit Profile
+        (Section 3.5 of <span>[<a href="#RFC9617" class="cite xref">RFC9617</a>]</span>), but has the following
+        additional data nodes:<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-3.4-2">
+          <dt id="section-3.4-2.1">node-action:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.4-2.2">imported from the "ietf-ioam" YANG module
+            <span>[<a href="#RFC9617" class="cite xref">RFC9617</a>]</span> with the same definition.<a href="#section-3.4-2.2" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-3.4-2.3">int-method:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.4-2.4">indicates which Integrity Protection Method
+            is used, as defined in the "IOAM Integrity Protection Methods" IANA
+            registry <span>[<a href="#IANA-IOAM" class="cite xref">IANA-IOAM</a>]</span>.<a href="#section-3.4-2.4" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+</dl>
+<span id="name-integrity-protected-proof-of"></span><div id="fig_pot_profile">
+<figure id="figure-4">
+          <div class="lang-yangtree sourcecode" id="section-3.4-3.1">
+<pre>
+
++--rw int-pot-profile! {int-proof-of-transit}?
+   +--rw use-namespace?   ioam:ioam-namespace
+   +--rw pot-type?        ioam:ioam-pot-type
+   +--rw node-action?     ioam:ioam-node-action
+   +--rw int-method?      iana-ioam-ipm:method-id
+
+</pre>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-integrity-protected-proof-of" class="selfRef">Integrity Protected Proof of Transit Profile</a>
+          </figcaption></figure>
+</div>
+</section>
+<section id="section-3.5">
+        <h3 id="name-integrity-protected-edge-to">
+<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-integrity-protected-edge-to" class="section-name selfRef">Integrity Protected Edge-to-Edge Profile</a>
+        </h3>
+<p id="section-3.5-1">As illustrated in <a href="#fig_e2e_profile" class="auto internal xref">Figure 5</a>, the
+        "int-e2e-profile" container provides the detailed information for the
+        edge-to-edge data with integrity protection. This information has the
+        same structure as the Edge-to-Edge Profile (Section 3.6 of
+        <span>[<a href="#RFC9617" class="cite xref">RFC9617</a>]</span>), but has the following additional data node:<a href="#section-3.5-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-3.5-2">
+          <dt id="section-3.5-2.1">int-method:</dt>
+          <dd style="margin-left: 1.5em" id="section-3.5-2.2">indicates which Integrity Protection Method
+            is used, as defined in the "IOAM Integrity Protection Methods" IANA
+            registry <span>[<a href="#IANA-IOAM" class="cite xref">IANA-IOAM</a>]</span>.<a href="#section-3.5-2.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+</dl>
+<span id="name-integrity-protected-edge-to-"></span><div id="fig_e2e_profile">
+<figure id="figure-5">
+          <div class="lang-yangtree sourcecode" id="section-3.5-3.1">
+<pre>
+
++--rw int-e2e-profile! {int-edge-to-edge}?
+   +--rw node-action?   ioam-node-action
+   +--rw e2e-types
+   |  +--rw use-namespace?   ioam-namespace
+   |  +--rw e2e-type*        ioam-e2e-type
+   +--rw int-method?    iana-ioam-ipm:method-id
+
+</pre>
+</div>
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<a href="#name-integrity-protected-edge-to-" class="selfRef">Integrity Protected Edge-to-Edge Profile</a>
+          </figcaption></figure>
+</div>
+</section>
+</section>
+<section id="section-4">
+      <h2 id="name-ioam-integrity-yang-module">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-ioam-integrity-yang-module" class="section-name selfRef">IOAM Integrity YANG Module</a>
+      </h2>
+<p id="section-4-1">The "ietf-ioam-integrity" module defined in this document imports
+      the "ietf-ioam" module defined in <span>[<a href="#RFC9617" class="cite xref">RFC9617</a>]</span>. This document
+      also references <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<div class="breakable lang-yang sourcecode" id="section-4-2">
+<pre>&lt;CODE BEGINS&gt; file "ietf-ioam-integrity@2025-12-02.yang"
+
+
+module ietf-ioam-integrity {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:ietf-ioam-integrity";
+  prefix ioam-int;
+
+  import ietf-ioam {
+    prefix ioam;
+    reference
+      "RFC 9617: A YANG Data Model for In Situ Operations,
+                 Administration, and Maintenance (IOAM)";
+  }
+
+  import iana-ioam-integrity-protection-methods {
+    prefix iana-ioam-ipm;
+    reference
+      "RFC XXXX: A YANG Data Model for In Situ Operations,
+                 Administration, and Maintenance (IOAM)
+                 Integrity Protected Options";
+  }
+
+  organization
+    "IETF IPPM (IP Performance Measurement) Working Group";
+
+  contact
+    "WG Web:   &lt;https://datatracker.ietf.org/wg/ippm&gt;
+     WG List:  &lt;mailto:ippm@ietf.org&gt;
+
+     Editor:   Tianran Zhou
+               &lt;mailto:zhoutianran@huawei.com&gt;
+     Editor:   Justin Iurman
+               &lt;mailto:justin.iurman@uliege.be&gt;";
+
+  description
+    "This YANG module specifies a vendor-independent data model for
+     In Situ Operations, Administration, and Maintenance (IOAM)
+     Integrity Protected Options.
+
+     Copyright (c) 2025 IETF Trust and the persons identified as
+     authors of the code.  All rights reserved.
+
+     Redistribution and use in source and binary forms, with or
+     without modification, is permitted pursuant to, and subject
+     to the license terms contained in, the Revised BSD License
+     set forth in Section 4.c of the IETF Trust's Legal Provisions
+     Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
+
+     All revisions of IETF and IANA published modules can be found
+     at the YANG Parameters registry group
+     (https://www.iana.org/assignments/yang-parameters).
+
+     This version of this YANG module is part of RFC XXXX; see the
+     RFC itself for full legal notices.";
+
+  revision 2025-12-02 {
+    description
+      "Initial version.";
+    reference
+      "RFC XXXX: A YANG Data Model for In Situ Operations,
+                 Administration, and Maintenance (IOAM)
+                 Integrity Protected Options";
+  }
+
+  /*
+   * FEATURES
+   */
+
+  feature int-incremental-trace {
+    description
+      "This feature indicates that the Integrity Protected
+       Incremental Trace-Option is supported.";
+    reference
+      "RFC YYYY: Integrity Protection of In Situ Operations,
+                 Administration, and Maintenance (IOAM)
+                 Data Fields, Section 4.1";
+  }
+
+  feature int-preallocated-trace {
+    description
+      "This feature indicates that the Integrity Protected
+       Pre-allocated Trace-Option is supported.";
+    reference
+      "RFC YYYY: Integrity Protection of In Situ Operations,
+                 Administration, and Maintenance (IOAM)
+                 Data Fields, Section 4.1";
+  }
+
+  feature int-proof-of-transit {
+    description
+      "This feature indicates that the Integrity Protected Proof of
+       Transit Option is supported.";
+    reference
+      "RFC YYYY: Integrity Protection of In Situ Operations,
+                 Administration, and Maintenance (IOAM)
+                 Data Fields, Section 4.2";
+  }
+
+  feature int-edge-to-edge {
+    description
+      "This feature indicates that the Integrity Protected
+       Edge-to-Edge Option is supported.";
+    reference
+      "RFC YYYY: Integrity Protection of In Situ Operations,
+                 Administration, and Maintenance (IOAM)
+                 Data Fields, Section 4.3";
+  }
+
+  /*
+   * GROUP DEFINITIONS
+   */
+
+  grouping int-method-grouping {
+    description
+      "A grouping for Integrity Protection Methods.";
+    leaf int-method {
+      when "derived-from-or-self(../node-action,
+            'ioam:action-encapsulate')";
+      type iana-ioam-ipm:method-id;
+      description
+        "This object indicates the Integrity Protection Method for
+         this profile.";
+    }
+  }
+
+  /*
+   * DATA NODES
+   */
+
+  augment "/ioam:ioam/ioam:profiles/ioam:profile" {
+    description
+      "This augmentation adds 4 profiles for the Integrity Protected
+       Options.";
+    container int-incremental-tracing-profile {
+      if-feature "int-incremental-trace";
+      presence "Enables the Integrity Protected
+                Incremental Trace-Option.";
+      description
+        "This container describes the profile for the Integrity
+         Protected Incremental Trace-Option.";
+      uses ioam:ioam-incremental-tracing-profile;
+      uses int-method-grouping;
+    }
+    container int-preallocated-tracing-profile {
+      if-feature "int-preallocated-trace";
+      presence "Enables the Integrity Protected
+                Pre-allocated Trace-Option.";
+      description
+        "This container describes the profile for the Integrity
+         Protected Pre-allocated Trace-Option.";
+      uses ioam:ioam-preallocated-tracing-profile;
+      uses int-method-grouping;
+    }
+    container int-pot-profile {
+      if-feature "int-proof-of-transit";
+      presence "Enables the Integrity Protected
+                Proof of Transit Option.";
+      description
+        "This container describes the profile for the Integrity
+         Protected Proof of Transit Option.";
+      leaf use-namespace {
+        type ioam:ioam-namespace;
+        default "ioam:default-namespace";
+        description
+          "This object indicates the namespace used for the
+           POT types.";
+      }
+      leaf pot-type {
+        type ioam:ioam-pot-type;
+        description
+          "The type of a particular POT variant that specifies
+           the POT data that is included.";
+      }
+      leaf node-action {
+        type ioam:ioam-node-action;
+        default "ioam:action-transit";
+        description
+          "This object indicates the action the node needs to
+           take, e.g., encapsulation.";
+      }
+      uses int-method-grouping;
+    }
+    container int-e2e-profile {
+      if-feature "int-edge-to-edge";
+      presence "Enables the Integrity Protected
+                Edge-to-Edge Option.";
+      description
+        "This container describes the profile for the Integrity
+         Protected Edge-to-Edge Option.";
+      uses ioam:ioam-e2e-profile;
+      uses int-method-grouping;
+    }
+  }
+}
+
+
+&lt;CODE ENDS&gt;</pre><a href="#section-4-2" class="pilcrow">¶</a>
+</div>
+</section>
+<section id="section-5">
+      <h2 id="name-security-considerations">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-5-1">This section is modeled after the template described in Section 3.7
+      of <span>[<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">The "ietf-ioam-integrity" YANG module defines a data model that is
+      designed to be accessed via YANG-based management protocols, such as
+      NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> and RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.
+      These YANG-based management protocols (1) have to use a secure transport
+      layer (e.g., SSH <span>[<a href="#RFC4252" class="cite xref">RFC4252</a>]</span>, TLS <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>,
+      and QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) and (2) have to use mutual
+      authentication.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">The Network Configuration Access Control Model (NACM)
+      <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span> provides the means to restrict access for
+      particular NETCONF or RESTCONF users to a preconfigured subset of all
+      available NETCONF or RESTCONF protocol operations and content.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">There are a number of data nodes defined in this YANG module that are
+      writable/creatable/deletable (i.e., "config true", which is the default).
+      All writable data nodes are likely to be sensitive or vulnerable in some
+      network environments. Write operations (e.g., edit-config) and delete
+      operations to these data nodes without proper protection or authentication
+      can have a negative effect on network operations. The following subtrees
+      and data nodes have particular sensitivities/vulnerabilities:<a href="#section-5-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-5-5">
+        <dt id="section-5-5.1">/ioam:ioam/ioam:profiles/ioam:profile:</dt>
+        <dd style="margin-left: 1.5em" id="section-5-5.2">The entries in the "profile" list include the whole IOAM profile
+        configurations. Unexpected changes to these entries could lead to
+        incorrect IOAM behavior for the corresponding flows. Consequently, such
+        changes would impact performance monitoring, data analytics, and
+        associated interactions with network services. Also, unauthorized access
+        to integrity-related parameters may impact the integrity protection
+        service, thus preventing the interpretation and validation of IOAM
+        data.<a href="#section-5-5.2" class="pilcrow">¶</a>
+</dd>
+      <dd class="break"></dd>
+</dl>
+<p id="section-5-6">Some of the readable data nodes in this YANG module may be considered
+      sensitive or vulnerable in some network environments.  It is thus
+      important to control read access (e.g., via get, get-config, or
+      notification) to these data nodes. Specifically, the following subtrees
+      and data nodes have particular sensitivities/vulnerabilities:<a href="#section-5-6" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-5-7">
+        <dt id="section-5-7.1">/ioam:ioam/ioam:profiles/ioam:profile:</dt>
+        <dd style="margin-left: 1.5em" id="section-5-7.2">The information contained in this subtree might reveal information
+        about the services deployed for customers. For instance, a customer
+        might be given access to monitor the status of their services. In this
+        scenario, the customer's access should be restricted to nodes
+        representing their services so as not to divulge information about the
+        underlying network structure or services.<a href="#section-5-7.2" class="pilcrow">¶</a>
+</dd>
+      <dd class="break"></dd>
+</dl>
+<p id="section-5-8">This YANG module uses groupings from other YANG modules that define
+      nodes that may be considered sensitive or vulnerable in network
+      environments. Refer to the Security Considerations of
+      <span>[<a href="#RFC9617" class="cite xref">RFC9617</a>]</span> for information as to which nodes may be
+      considered sensitive or vulnerable in network environments.<a href="#section-5-8" class="pilcrow">¶</a></p>
+</section>
+<section id="section-6">
+      <h2 id="name-iana-considerations">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-6-1">IANA is requested to register the following URIs in the "ns" registry
+      within the "IETF XML Registry" group <span>[<a href="#RFC3688" class="cite xref">RFC3688</a>]</span>:<a href="#section-6-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-6-2">
+        <dt id="section-6-2.1">URI:</dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.2">urn:ietf:params:xml:ns:yang:ietf-ioam-integrity<a href="#section-6-2.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.3">Registrant Contact:</dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.4">The IESG.<a href="#section-6-2.4" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-2.5">XML:</dt>
+        <dd style="margin-left: 1.5em" id="section-6-2.6">N/A; the requested URI is an XML namespace.<a href="#section-6-2.6" class="pilcrow">¶</a>
+</dd>
+      <dd class="break"></dd>
+</dl>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-6-3">
+        <dt id="section-6-3.1">URI:</dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.2">urn:ietf:params:xml:ns:yang:iana-ioam-integrity-protection-methods<a href="#section-6-3.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-3.3">Registrant Contact:</dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.4">The IESG.<a href="#section-6-3.4" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-3.5">XML:</dt>
+        <dd style="margin-left: 1.5em" id="section-6-3.6">N/A; the requested URI is an XML namespace.<a href="#section-6-3.6" class="pilcrow">¶</a>
+</dd>
+      <dd class="break"></dd>
+</dl>
+<p id="section-6-4">IANA is requested to register the following YANG modules in the "YANG
+      Module Names" registry <span>[<a href="#RFC6020" class="cite xref">RFC6020</a>]</span> within the "YANG
+      Parameters" registry group:<a href="#section-6-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-6-5">
+        <dt id="section-6-5.1">Name:</dt>
+        <dd style="margin-left: 1.5em" id="section-6-5.2">ietf-ioam-integrity<a href="#section-6-5.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-5.3">Maintained by IANA?:</dt>
+        <dd style="margin-left: 1.5em" id="section-6-5.4">N<a href="#section-6-5.4" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-5.5">Namespace:</dt>
+        <dd style="margin-left: 1.5em" id="section-6-5.6">urn:ietf:params:xml:ns:yang:ietf-ioam-integrity<a href="#section-6-5.6" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-5.7">Prefix:</dt>
+        <dd style="margin-left: 1.5em" id="section-6-5.8">ioam-int<a href="#section-6-5.8" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-5.9">Reference:</dt>
+        <dd style="margin-left: 1.5em" id="section-6-5.10">RFC XXXX<a href="#section-6-5.10" class="pilcrow">¶</a>
+</dd>
+      <dd class="break"></dd>
+</dl>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-6-6">
+        <dt id="section-6-6.1">Name:</dt>
+        <dd style="margin-left: 1.5em" id="section-6-6.2">iana-ioam-integrity-protection-methods<a href="#section-6-6.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-6.3">Maintained by IANA?:</dt>
+        <dd style="margin-left: 1.5em" id="section-6-6.4">Y<a href="#section-6-6.4" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-6.5">Namespace:</dt>
+        <dd style="margin-left: 1.5em" id="section-6-6.6">urn:ietf:params:xml:ns:yang:iana-ioam-integrity-protection-methods<a href="#section-6-6.6" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-6.7">Prefix:</dt>
+        <dd style="margin-left: 1.5em" id="section-6-6.8">iana-ioam-ipm<a href="#section-6-6.8" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-6-6.9">Reference:</dt>
+        <dd style="margin-left: 1.5em" id="section-6-6.10">RFC XXXX<a href="#section-6-6.10" class="pilcrow">¶</a>
+</dd>
+      <dd class="break"></dd>
+</dl>
+<section id="section-6.1">
+        <h3 id="name-iana-maintained-iana-ioam-i">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-iana-maintained-iana-ioam-i" class="section-name selfRef">IANA-Maintained "iana-ioam-integrity-protection-methods" Module</a>
+        </h3>
+<p id="section-6.1-1">This document defines the initial version of the IANA-maintained
+        "iana-ioam-integrity-protection-methods" YANG module. The most recent
+        version of the YANG module is available from the "YANG Parameters"
+        registry group <span>[<a href="#IANA-YANG-PARAMETERS" class="cite xref">IANA-YANG-PARAMETERS</a>]</span>.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">IANA is requested to add this note to the registry:<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<blockquote id="section-6.1-3">
+          <p id="section-6.1-3.1">New values must not be directly added to the
+          "iana-ioam-integrity-protection-methods" YANG module. They must
+          instead be added to the "IOAM Integrity Protection Methods"
+          registry.<a href="#section-6.1-3.1" class="pilcrow">¶</a></p>
+</blockquote>
+<p id="section-6.1-4">When a value is added to the "IOAM Integrity Protection Methods"
+        registry, a new "enum" statement must be added to the
+        "iana-ioam-integrity-protection-methods" YANG module. The "enum"
+        statement, and sub-statements thereof, should be defined:<a href="#section-6.1-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-6.1-5">
+          <dt id="section-6.1-5.1">"enum":</dt>
+          <dd style="margin-left: 1.5em" id="section-6.1-5.2">Prefix "method-" to the decimal value of the ID
+            from the registry.<a href="#section-6.1-5.2" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-6.1-5.3">"value":</dt>
+          <dd style="margin-left: 1.5em" id="section-6.1-5.4">Contains the decimal value of the IANA-assigned
+            ID value.<a href="#section-6.1-5.4" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-6.1-5.5">"status":</dt>
+          <dd style="margin-left: 1.5em" id="section-6.1-5.6">Is included only if a registration has been
+            deprecated or obsoleted. IANA "deprecated" maps to YANG status
+            "deprecated", and IANA "obsolete" maps to YANG status
+            "obsolete".<a href="#section-6.1-5.6" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-6.1-5.7">"description":</dt>
+          <dd style="margin-left: 1.5em" id="section-6.1-5.8">Replicates the description from the
+            registry.<a href="#section-6.1-5.8" class="pilcrow">¶</a>
+</dd>
+          <dd class="break"></dd>
+<dt id="section-6.1-5.9">"reference":</dt>
+          <dd style="margin-left: 1.5em" id="section-6.1-5.10">Replicates the reference(s) from the
+            registry with the title of the document(s) added.<a href="#section-6.1-5.10" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+</dl>
+<p id="section-6.1-6">Unassigned or reserved values are not present in the module.<a href="#section-6.1-6" class="pilcrow">¶</a></p>
+<p id="section-6.1-7">When the "iana-ioam-integrity-protection-methods" YANG module is
+        updated, a new "revision" statement with a unique revision date needs to
+        be added in front of the existing revision statements.<a href="#section-6.1-7" class="pilcrow">¶</a></p>
+<p id="section-6.1-8">IANA is requested to add this note to
+        [reference-to-the-iana-foo-registry]:<a href="#section-6.1-8" class="pilcrow">¶</a></p>
+<blockquote id="section-6.1-9">
+          <p id="section-6.1-9.1">When this registry is modified, the YANG module
+          "iana-ioam-integrity-protection-methods" [IANA_FOO_URL]
+          must be updated as defined in RFC XXXX.<a href="#section-6.1-9.1" class="pilcrow">¶</a></p>
+</blockquote>
+</section>
+</section>
+<section id="section-7">
+      <h2 id="name-acknowledgements">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-acknowledgements" class="section-name selfRef">Acknowledgements</a>
+      </h2>
+<p id="section-7-1">The authors would like to thank Alex Huang Feng, Will Hawkins, and
+      Mohamed Boucadair for their valuable feedback.<a href="#section-7-1" class="pilcrow">¶</a></p>
+</section>
+<section id="section-8">
+      <h2 id="name-references">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<section id="section-8.1">
+        <h3 id="name-normative-references">
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="I-D.ietf-ippm-ioam-data-integrity">[I-D.ietf-ippm-ioam-data-integrity]</dt>
+        <dd>
+<span class="refAuthor">Brockners, F.</span>, <span class="refAuthor">Bhandari, S.</span>, <span class="refAuthor">Mizrahi, T.</span>, and <span class="refAuthor">J. Iurman</span>, <span class="refTitle">"Integrity Protection of In Situ Operations, Administration, and Maintenance (IOAM) Data Fields"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ippm-ioam-data-integrity-15</span>, <time datetime="2025-10-01" class="refDate">1 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ippm-ioam-data-integrity-15">https://datatracker.ietf.org/doc/html/draft-ietf-ippm-ioam-data-integrity-15</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="IANA-IOAM">[IANA-IOAM]</dt>
+        <dd>
+<span class="refTitle">"In Situ OAM (IOAM)"</span>, <span>n.d.</span>, <span>&lt;<a href="https://www.iana.org/assignments/ioam/ioam.xhtml">https://www.iana.org/assignments/ioam/ioam.xhtml</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3688">[RFC3688]</dt>
+        <dd>
+<span class="refAuthor">Mealling, M.</span>, <span class="refTitle">"The IETF XML Registry"</span>, <span class="seriesInfo">BCP 81</span>, <span class="seriesInfo">RFC 3688</span>, <span class="seriesInfo">DOI 10.17487/RFC3688</span>, <time datetime="2004-01" class="refDate">January 2004</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3688">https://www.rfc-editor.org/info/rfc3688</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6020">[RFC6020]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"YANG - A Data Modeling Language for the Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6020</span>, <span class="seriesInfo">DOI 10.17487/RFC6020</span>, <time datetime="2010-10" class="refDate">October 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6020">https://www.rfc-editor.org/info/rfc6020</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7950">[RFC7950]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"The YANG 1.1 Data Modeling Language"</span>, <span class="seriesInfo">RFC 7950</span>, <span class="seriesInfo">DOI 10.17487/RFC7950</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7950">https://www.rfc-editor.org/info/rfc7950</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7951">[RFC7951]</dt>
+        <dd>
+<span class="refAuthor">Lhotka, L.</span>, <span class="refTitle">"JSON Encoding of Data Modeled with YANG"</span>, <span class="seriesInfo">RFC 7951</span>, <span class="seriesInfo">DOI 10.17487/RFC7951</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7951">https://www.rfc-editor.org/info/rfc7951</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8341">[RFC8341]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span> and <span class="refAuthor">M. Bjorklund</span>, <span class="refTitle">"Network Configuration Access Control Model"</span>, <span class="seriesInfo">STD 91</span>, <span class="seriesInfo">RFC 8341</span>, <span class="seriesInfo">DOI 10.17487/RFC8341</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8341">https://www.rfc-editor.org/info/rfc8341</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9617">[RFC9617]</dt>
+      <dd>
+<span class="refAuthor">Zhou, T., Ed.</span>, <span class="refAuthor">Guichard, J.</span>, <span class="refAuthor">Brockners, F.</span>, and <span class="refAuthor">S. Raghavan</span>, <span class="refTitle">"A YANG Data Model for In Situ Operations, Administration, and Maintenance (IOAM)"</span>, <span class="seriesInfo">RFC 9617</span>, <span class="seriesInfo">DOI 10.17487/RFC9617</span>, <time datetime="2024-08" class="refDate">August 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9617">https://www.rfc-editor.org/info/rfc9617</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+<section id="section-8.2">
+        <h3 id="name-informative-references">
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="I-D.ietf-netmod-rfc8407bis">[I-D.ietf-netmod-rfc8407bis]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-28</span>, <time datetime="2025-06-05" class="refDate">5 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-28">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-28</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="IANA-YANG-PARAMETERS">[IANA-YANG-PARAMETERS]</dt>
+        <dd>
+<span class="refTitle">"YANG Parameters"</span>, <span>n.d.</span>, <span>&lt;<a href="https://www.iana.org/assignments/yang-parameters">https://www.iana.org/assignments/yang-parameters</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC4252">[RFC4252]</dt>
+        <dd>
+<span class="refAuthor">Ylonen, T.</span> and <span class="refAuthor">C. Lonvick, Ed.</span>, <span class="refTitle">"The Secure Shell (SSH) Authentication Protocol"</span>, <span class="seriesInfo">RFC 4252</span>, <span class="seriesInfo">DOI 10.17487/RFC4252</span>, <time datetime="2006-01" class="refDate">January 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4252">https://www.rfc-editor.org/info/rfc4252</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6241">[RFC6241]</dt>
+        <dd>
+<span class="refAuthor">Enns, R., Ed.</span>, <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refAuthor">Schoenwaelder, J., Ed.</span>, and <span class="refAuthor">A. Bierman, Ed.</span>, <span class="refTitle">"Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6241</span>, <span class="seriesInfo">DOI 10.17487/RFC6241</span>, <time datetime="2011-06" class="refDate">June 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6241">https://www.rfc-editor.org/info/rfc6241</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7799">[RFC7799]</dt>
+        <dd>
+<span class="refAuthor">Morton, A.</span>, <span class="refTitle">"Active and Passive Metrics and Methods (with Hybrid Types In-Between)"</span>, <span class="seriesInfo">RFC 7799</span>, <span class="seriesInfo">DOI 10.17487/RFC7799</span>, <time datetime="2016-05" class="refDate">May 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7799">https://www.rfc-editor.org/info/rfc7799</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8040">[RFC8040]</dt>
+        <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8040">https://www.rfc-editor.org/info/rfc8040</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8340">[RFC8340]</dt>
+        <dd>
+<span class="refAuthor">Bjorklund, M.</span> and <span class="refAuthor">L. Berger, Ed.</span>, <span class="refTitle">"YANG Tree Diagrams"</span>, <span class="seriesInfo">BCP 215</span>, <span class="seriesInfo">RFC 8340</span>, <span class="seriesInfo">DOI 10.17487/RFC8340</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8340">https://www.rfc-editor.org/info/rfc8340</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8446">[RFC8446]</dt>
+        <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8446">https://www.rfc-editor.org/info/rfc8446</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9000">[RFC9000]</dt>
+      <dd>
+<span class="refAuthor">Iyengar, J., Ed.</span> and <span class="refAuthor">M. Thomson, Ed.</span>, <span class="refTitle">"QUIC: A UDP-Based Multiplexed and Secure Transport"</span>, <span class="seriesInfo">RFC 9000</span>, <span class="seriesInfo">DOI 10.17487/RFC9000</span>, <time datetime="2021-05" class="refDate">May 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9000">https://www.rfc-editor.org/info/rfc9000</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</section>
+<div id="appendix-iana-module">
+<section id="appendix-A">
+      <h2 id="name-initial-version-of-the-ioam">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-initial-version-of-the-ioam" class="section-name selfRef">Initial Version of the IOAM Integrity Protection Methods IANA-Maintained Module</a>
+      </h2>
+<p id="appendix-A-1">RFC Ed.: please remove this section.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<div class="breakable lang-yang sourcecode" id="appendix-A-2">
+<pre>&lt;CODE BEGINS&gt; file "iana-ioam-integrity-protection-methods@2025-12-02.yang"
+
+
+module iana-ioam-integrity-protection-methods {
+  yang-version 1.1;
+  namespace "urn:ietf:params:xml:ns:yang:iana-ioam-integrity-protection-methods";
+  prefix iana-ioam-ipm;
+
+  organization
+    "Internet Assigned Numbers Authority (IANA)";
+
+  contact
+    "Internet Assigned Numbers Authority
+
+     ICANN
+     12025 Waterfront Drive, Suite 300
+     Los Angeles, CA 90094
+
+     Tel: +1 424 254 5300
+
+     &lt;mailto:iana@iana.org&gt;";
+
+  description
+    "This YANG module is maintained by IANA and reflects
+     the 'IOAM Integrity Protection Methods' registry.
+
+     Copyright (c) 2025 IETF Trust and the persons
+     identified as authors of the code.  All rights reserved.
+
+     Redistribution and use in source and binary forms, with or
+     without modification, is permitted pursuant to, and subject to
+     the license terms contained in, the Revised BSD License set
+     forth in Section 4.c of the IETF Trust's Legal Provisions
+     Relating to IETF Documents
+     (https://trustee.ietf.org/license-info).
+
+     All revisions of IETF and IANA published modules can be found
+     at the YANG Parameters registry group
+     (https://www.iana.org/assignments/yang-parameters).
+
+     The initial version of this YANG module is part of RFC XXXX;
+     see the RFC itself for full legal notices.
+
+  // RFC Ed.: replace the IANA_FOO_URL and remove this note
+
+     The latest version of this YANG module is available at
+     &lt;IANA_FOO_URL&gt;.";
+
+  reference
+    "IOAM Integrity Protection Methods
+     (https://www.iana.org/assignments/ioam/ioam.xhtml)";
+
+  revision 2025-12-02 {
+    description
+      "Initial version.";
+    reference
+      "URL of the published initial version of the module
+
+  // RFC Ed.: replace above with the URL of the module
+  //          and remove this note
+
+       RFC XXXX: A YANG Data Model for In Situ Operations,
+                 Administration, and Maintenance (IOAM)
+                 Integrity Protected Options";
+  }
+
+  /*
+   * Type definitions
+   */
+
+  typedef method-id {
+    type enumeration {
+      enum method-0 {
+        value 0;
+        description
+          "See Section 5.";
+        reference
+          "RFC YYYY: Integrity Protection of In Situ Operations,
+                     Administration, and Maintenance (IOAM)
+                     Data Fields";
+      }
+    }
+    description
+      "Identifier for an IOAM Integrity Protection Method,
+       matching the 'IOAM Integrity Protection Methods'
+       IANA registry.";
+    reference
+      "https://www.iana.org/assignments/ioam/ioam.xhtml";
+  }
+}
+
+
+&lt;CODE ENDS&gt;</pre><a href="#appendix-A-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<section id="appendix-B">
+      <h2 id="name-full-tree-of-the-ioam-integ">
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-full-tree-of-the-ioam-integ" class="section-name selfRef">Full tree of the IOAM Integrity YANG Data Model</a>
+      </h2>
+<p id="appendix-B-1"><a href="#fig_full_tree" class="auto internal xref">Figure 6</a> illustrates the full tree of the IOAM
+      Integrity YANG Data Model.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<span id="name-full-tree-of-the-ioam-integr"></span><div id="fig_full_tree">
+<figure id="figure-6">
+        <div class="lang-yangtree sourcecode" id="appendix-B-2.1">
+<pre>
+
+module: ietf-ioam-integrity
+
+  augment /ioam:ioam/ioam:profiles/ioam:profile:
+    +--rw int-incremental-tracing-profile! {int-incremental-trace}?
+    |  +--rw node-action?   ioam-node-action
+    |  +--rw trace-types
+    |  |  +--rw use-namespace?   ioam-namespace
+    |  |  +--rw trace-type*      ioam-trace-type
+    |  +--rw max-length?    uint32
+    |  +--rw int-method?    iana-ioam-ipm:method-id
+    +--rw int-preallocated-tracing-profile! {int-preallocated-trace}?
+    |  +--rw node-action?   ioam-node-action
+    |  +--rw trace-types
+    |  |  +--rw use-namespace?   ioam-namespace
+    |  |  +--rw trace-type*      ioam-trace-type
+    |  +--rw max-length?    uint32
+    |  +--rw int-method?    iana-ioam-ipm:method-id
+    +--rw int-pot-profile! {int-proof-of-transit}?
+    |  +--rw use-namespace?   ioam:ioam-namespace
+    |  +--rw pot-type?        ioam:ioam-pot-type
+    |  +--rw node-action?     ioam:ioam-node-action
+    |  +--rw int-method?      iana-ioam-ipm:method-id
+    +--rw int-e2e-profile! {int-edge-to-edge}?
+       +--rw node-action?   ioam-node-action
+       +--rw e2e-types
+       |  +--rw use-namespace?   ioam-namespace
+       |  +--rw e2e-type*        ioam-e2e-type
+       +--rw int-method?    iana-ioam-ipm:method-id
+
+</pre>
+</div>
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<a href="#name-full-tree-of-the-ioam-integr" class="selfRef">Full tree of the IOAM Integrity YANG Data Model</a>
+        </figcaption></figure>
+</div>
+</section>
+<section id="appendix-C">
+      <h2 id="name-example-of-the-integrity-pr">
+<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-example-of-the-integrity-pr" class="section-name selfRef">Example of the Integrity Protected Incremental Tracing Profile</a>
+      </h2>
+<p id="appendix-C-1">A JSON <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span> example of the Integrity Protected
+      Incremental Tracing Profile is depicted in
+      <a href="#fig_json_ex_inc" class="auto internal xref">Figure 7</a>. This configuration is received by an
+      IOAM ingress node. This node encapsulates the IOAM data in the IPv6
+      Hop-by-Hop option header. The Integrity Protection Method to be used is
+      method 0. The trace type indicates that each on-path node needs to capture
+      the transit delay and add the data to the IOAM node data list. The
+      incremental tracing data space is variable; however, the node data list
+      must not exceed 512 bytes.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<span id="name-json-encoded-integrity-prot"></span><div id="fig_json_ex_inc">
+<figure id="figure-7">
+        <div class="lang-json sourcecode" id="appendix-C-2.1">
+<pre>
+
+{
+  "ietf-ioam:ioam": {
+    "admin-config": {
+      "enabled": true
+    },
+    "profiles": {
+      "profile": [
+        {
+          "profile-name": "ietf-test-profile",
+          "protocol-type": "ietf-ioam:ipv6",
+          "ietf-ioam-integrity:int-incremental-tracing-profile": {
+            "node-action": "ietf-ioam:action-encapsulate",
+            "trace-types": {
+              "use-namespace": "ietf-ioam:default-namespace",
+              "trace-type": [
+                "ietf-ioam:trace-transit-delay"
+              ]
+            },
+            "max-length": 512,
+            "int-method": "method-0"
+          }
+        }
+      ]
+    }
+  }
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<a href="#name-json-encoded-integrity-prot" class="selfRef">JSON-encoded Integrity Protected Incremental Tracing Profile</a>
+        </figcaption></figure>
+</div>
+</section>
+<section id="appendix-D">
+      <h2 id="name-example-of-the-integrity-pro">
+<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-example-of-the-integrity-pro" class="section-name selfRef">Example of the Integrity Protected Pre-allocated Tracing Profile</a>
+      </h2>
+<p id="appendix-D-1">A JSON <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span> example of the Integrity Protected
+      Pre-allocated Tracing Profile is depicted in
+      <a href="#fig_json_ex_pre" class="auto internal xref">Figure 8</a>. This configuration is received by an
+      IOAM ingress node. This node first identifies the target flow by using the
+      ACL parameter "test-acl" and then encapsulates the IOAM data in the NSH.
+      The Integrity Protection Method to be used is method 0. The trace type
+      indicates that each on-path node needs to capture the namespace-specific
+      data in short format and add the data to the IOAM node data list. This
+      node pre-allocates the node data list in the packet with 512 bytes.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+<span id="name-json-encoded-integrity-prote"></span><div id="fig_json_ex_pre">
+<figure id="figure-8">
+        <div class="lang-json sourcecode" id="appendix-D-2.1">
+<pre>
+
+{
+  "ietf-ioam:ioam": {
+    "admin-config": {
+      "enabled": true
+    },
+    "profiles": {
+      "profile": [
+        {
+          "profile-name": "ietf-test-profile",
+          "filter": {
+            "filter-type": "ietf-ioam:acl-filter",
+            "ace-name": "test-acl"
+          },
+          "protocol-type": "ietf-ioam:nsh",
+          "ietf-ioam-integrity:int-preallocated-tracing-profile": {
+            "node-action": "ietf-ioam:action-encapsulate",
+            "trace-types": {
+              "use-namespace": "ietf-ioam:default-namespace",
+              "trace-type": [
+                "ietf-ioam:trace-namespace-data"
+              ]
+            },
+            "max-length": 512,
+            "int-method": "method-0"
+          }
+        }
+      ]
+    }
+  }
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<a href="#name-json-encoded-integrity-prote" class="selfRef">JSON-encoded Integrity Protected Pre-allocated Tracing Profile</a>
+        </figcaption></figure>
+</div>
+</section>
+<section id="appendix-E">
+      <h2 id="name-example-of-the-integrity-prot">
+<a href="#appendix-E" class="section-number selfRef">Appendix E. </a><a href="#name-example-of-the-integrity-prot" class="section-name selfRef">Example of the Integrity Protected Proof of Transit and Integrity Protected Edge-to-Edge Profiles</a>
+      </h2>
+<p id="appendix-E-1">A JSON <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span> example of the Integrity Protected
+      Proof of Transit Profile, combined with the Integrity Protected
+      Edge-to-Edge Profile, is depicted in <a href="#fig_json_ex_pot_e2e" class="auto internal xref">Figure 9</a>.
+      This configuration is received by an IOAM ingress node. This node
+      encapsulates the Integrity Protected Proof of Transit Type 0 in an IPv6
+      Hop-by-Hop Options header, and also encapsulates the Integrity Protected
+      Edge-to-Edge in an IPv6 Destination Options header. The Edge-to-Edge type
+      indicates the presence of a 64-bit sequence number. The Integrity
+      Protection Method to be used for both is method 0.<a href="#appendix-E-1" class="pilcrow">¶</a></p>
+<span id="name-json-encoded-integrity-protec"></span><div id="fig_json_ex_pot_e2e">
+<figure id="figure-9">
+        <div class="lang-json sourcecode" id="appendix-E-2.1">
+<pre>
+
+{
+  "ietf-ioam:ioam": {
+    "admin-config": {
+      "enabled": true
+    },
+    "profiles": {
+      "profile": [
+        {
+          "profile-name": "ietf-test-profile-pot",
+          "protocol-type": "ietf-ioam:ipv6",
+          "ietf-ioam-integrity:int-pot-profile": {
+            "pot-type": "ietf-ioam:pot-type-0",
+            "node-action": "ietf-ioam:action-encapsulate",
+            "int-method": "method-0"
+          }
+        },
+        {
+          "profile-name": "ietf-test-profile-e2e",
+          "protocol-type": "ietf-ioam:ipv6",
+          "ietf-ioam-integrity:int-e2e-profile": {
+            "node-action": "ietf-ioam:action-encapsulate",
+            "e2e-types": {
+              "use-namespace": "ietf-ioam:default-namespace",
+              "e2e-type": [
+                "ietf-ioam:e2e-seq-num-64"
+              ]
+            },
+            "int-method": "method-0"
+          }
+        }
+      ]
+    }
+  }
+}
+
+</pre>
+</div>
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<a href="#name-json-encoded-integrity-protec" class="selfRef">JSON-encoded Integrity Protected Proof of Transit and Integrity Protected Edge-to-Edge Profiles</a>
+        </figcaption></figure>
+</div>
+</section>
+<div id="authors-addresses">
+<section id="appendix-F">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Justin Iurman</span></div>
+<div dir="auto" class="left"><span class="org">University of Liege</span></div>
+<div dir="auto" class="left"><span class="street-address">10, Allee de la decouverte (B28)</span></div>
+<div dir="auto" class="left">
+<span class="postal-code">4000</span> <span class="locality">Sart-Tilman</span>
+</div>
+<div dir="auto" class="left"><span class="country-name">Belgium</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:justin.iurman@uliege.be" class="email">justin.iurman@uliege.be</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Tianran Zhou</span></div>
+<div dir="auto" class="left"><span class="org">Huawei</span></div>
+<div dir="auto" class="left"><span class="street-address">156 Beiqing Rd.</span></div>
+<div dir="auto" class="left"><span class="locality">Beijing</span></div>
+<div dir="auto" class="left"><span class="postal-code">100095</span></div>
+<div dir="auto" class="left"><span class="country-name">China</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:zhoutianran@huawei.com" class="email">zhoutianran@huawei.com</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
