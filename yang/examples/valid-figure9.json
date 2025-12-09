@@ -1,0 +1,34 @@
+{
+  "ietf-ioam:ioam": {
+    "admin-config": {
+      "enabled": true
+    },
+    "profiles": {
+      "profile": [
+        {
+          "profile-name": "ietf-test-profile-pot",
+          "protocol-type": "ietf-ioam:ipv6",
+          "ietf-ioam-integrity:int-pot-profile": {
+            "pot-type": "ietf-ioam:pot-type-0",
+            "node-action": "ietf-ioam:action-encapsulate",
+            "int-method": "method-0"
+          }
+        },
+        {
+          "profile-name": "ietf-test-profile-e2e",
+          "protocol-type": "ietf-ioam:ipv6",
+          "ietf-ioam-integrity:int-e2e-profile": {
+            "node-action": "ietf-ioam:action-encapsulate",
+            "e2e-types": {
+              "use-namespace": "ietf-ioam:default-namespace",
+              "e2e-type": [
+                "ietf-ioam:e2e-seq-num-64"
+              ]
+            },
+            "int-method": "method-0"
+          }
+        }
+      ]
+    }
+  }
+}
