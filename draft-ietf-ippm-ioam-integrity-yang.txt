@@ -5,8 +5,8 @@
 ippm                                                           J. Iurman
 Internet-Draft                                       University of Liege
 Intended status: Standards Track                                 T. Zhou
-Expires: 5 June 2026                                              Huawei
-                                                         2 December 2025
+Expires: 12 June 2026                                             Huawei
+                                                         9 December 2025
 
 
      A YANG Data Model for In Situ Operations, Administration, and
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 June 2026.
+   This Internet-Draft will expire on 12 June 2026.
 
 Copyright Notice
 
@@ -128,7 +128,7 @@ Table of Contents
    *  XXXX --> the assigned RFC number for this document
    *  YYYY --> the assigned RFC number for
       [I-D.ietf-ippm-ioam-data-integrity]
-   *  2025-12-02 --> the actual date of the publication of this document
+   *  2025-12-09 --> the actual date of the publication of this document
 
 2.  Conventions used in this document
 
@@ -281,7 +281,7 @@ Table of Contents
    "ietf-ioam" module defined in [RFC9617].  This document also
    references [I-D.ietf-ippm-ioam-data-integrity].
 
-   <CODE BEGINS> file "ietf-ioam-integrity@2025-12-02.yang"
+   <CODE BEGINS> file "ietf-ioam-integrity@2025-12-09.yang"
    module ietf-ioam-integrity {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-ioam-integrity";
@@ -336,7 +336,7 @@ Table of Contents
         This version of this YANG module is part of RFC XXXX; see the
         RFC itself for full legal notices.";
 
-     revision 2025-12-02 {
+     revision 2025-12-09 {
        description
          "Initial version.";
        reference
@@ -706,7 +706,7 @@ Appendix A.  Initial Version of the IOAM Integrity Protection Methods
    RFC Ed.: please remove this section.
 
    <CODE BEGINS>
-     file "iana-ioam-integrity-protection-methods@2025-12-02.yang"
+     file "iana-ioam-integrity-protection-methods@2025-12-09.yang"
    module iana-ioam-integrity-protection-methods {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:iana-ioam-integrity-protection-methods";
@@ -756,7 +756,7 @@ Appendix A.  Initial Version of the IOAM Integrity Protection Methods
        "IOAM Integrity Protection Methods
         (https://www.iana.org/assignments/ioam/ioam.xhtml)";
 
-     revision 2025-12-02 {
+     revision 2025-12-09 {
        description
          "Initial version.";
        reference
@@ -779,7 +779,7 @@ Appendix A.  Initial Version of the IOAM Integrity Protection Methods
          enum method-0 {
            value 0;
            description
-             "See Section 5.";
+             "IPM 0.";
            reference
              "RFC YYYY: Integrity Protection of In Situ Operations,
                         Administration, and Maintenance (IOAM)
@@ -829,6 +829,9 @@ Appendix B.  Full tree of the IOAM Integrity YANG Data Model
           |  +--rw use-namespace?   ioam-namespace
           |  +--rw e2e-type*        ioam-e2e-type
           +--rw int-method?    iana-ioam-ipm:method-id
+
+     grouping int-method-grouping:
+       +-- int-method?   iana-ioam-ipm:method-id
 
          Figure 6: Full tree of the IOAM Integrity YANG Data Model
 

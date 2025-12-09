@@ -1061,7 +1061,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Iurman &amp; Zhou</td>
-<td class="center">Expires 5 June 2026</td>
+<td class="center">Expires 12 June 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1074,12 +1074,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-ippm-ioam-integrity-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-12-02" class="published">2 December 2025</time>
+<time datetime="2025-12-09" class="published">9 December 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-06-05">5 June 2026</time></dd>
+<dd class="expires"><time datetime="2026-06-12">12 June 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1125,7 +1125,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1293,7 +1293,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
           <li class="compact" id="section-1.1-4.2">YYYY --&gt; the assigned RFC number for
                 <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span><a href="#section-1.1-4.2" class="pilcrow">¶</a>
 </li>
-          <li class="compact" id="section-1.1-4.3">2025-12-02 --&gt; the actual date of the publication of this
+          <li class="compact" id="section-1.1-4.3">2025-12-09 --&gt; the actual date of the publication of this
                 document<a href="#section-1.1-4.3" class="pilcrow">¶</a>
 </li>
         </ul>
@@ -1557,7 +1557,7 @@ module: ietf-ioam-integrity
       the "ietf-ioam" module defined in <span>[<a href="#RFC9617" class="cite xref">RFC9617</a>]</span>. This document
       also references <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div class="breakable lang-yang sourcecode" id="section-4-2">
-<pre>&lt;CODE BEGINS&gt; file "ietf-ioam-integrity@2025-12-02.yang"
+<pre>&lt;CODE BEGINS&gt; file "ietf-ioam-integrity@2025-12-09.yang"
 
 
 module ietf-ioam-integrity {
@@ -1614,7 +1614,7 @@ module ietf-ioam-integrity {
      This version of this YANG module is part of RFC XXXX; see the
      RFC itself for full legal notices.";
 
-  revision 2025-12-02 {
+  revision 2025-12-09 {
     description
       "Initial version.";
     reference
@@ -2060,7 +2060,7 @@ module ietf-ioam-integrity {
       </h2>
 <p id="appendix-A-1">RFC Ed.: please remove this section.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <div class="breakable lang-yang sourcecode" id="appendix-A-2">
-<pre>&lt;CODE BEGINS&gt; file "iana-ioam-integrity-protection-methods@2025-12-02.yang"
+<pre>&lt;CODE BEGINS&gt; file "iana-ioam-integrity-protection-methods@2025-12-09.yang"
 
 
 module iana-ioam-integrity-protection-methods {
@@ -2112,7 +2112,7 @@ module iana-ioam-integrity-protection-methods {
     "IOAM Integrity Protection Methods
      (https://www.iana.org/assignments/ioam/ioam.xhtml)";
 
-  revision 2025-12-02 {
+  revision 2025-12-09 {
     description
       "Initial version.";
     reference
@@ -2135,7 +2135,7 @@ module iana-ioam-integrity-protection-methods {
       enum method-0 {
         value 0;
         description
-          "See Section 5.";
+          "IPM 0.";
         reference
           "RFC YYYY: Integrity Protection of In Situ Operations,
                      Administration, and Maintenance (IOAM)
@@ -2195,6 +2195,9 @@ module: ietf-ioam-integrity
        |  +--rw use-namespace?   ioam-namespace
        |  +--rw e2e-type*        ioam-e2e-type
        +--rw int-method?    iana-ioam-ipm:method-id
+
+  grouping int-method-grouping:
+    +-- int-method?   iana-ioam-ipm:method-id
 
 </pre>
 </div>
