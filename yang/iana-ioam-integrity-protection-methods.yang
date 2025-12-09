@@ -47,7 +47,7 @@ module iana-ioam-integrity-protection-methods {
     "IOAM Integrity Protection Methods
      (https://www.iana.org/assignments/ioam/ioam.xhtml)";
 
-  revision 2025-12-02 {
+  revision 2025-12-09 {
     description
       "Initial version.";
     reference
@@ -70,7 +70,7 @@ module iana-ioam-integrity-protection-methods {
       enum method-0 {
         value 0;
         description
-          "See Section 5.";
+          "IPM 0.";
         reference
           "RFC YYYY: Integrity Protection of In Situ Operations,
                      Administration, and Maintenance (IOAM)
