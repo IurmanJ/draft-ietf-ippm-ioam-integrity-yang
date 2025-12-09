@@ -11,7 +11,7 @@ Expires: 5 June 2026                                              Huawei
 
      A YANG Data Model for In Situ Operations, Administration, and
              Maintenance (IOAM) Integrity Protected Options
-                 draft-ietf-ippm-ioam-integrity-yang-03
+               draft-ietf-ippm-ioam-integrity-yang-latest
 
 Abstract
 
