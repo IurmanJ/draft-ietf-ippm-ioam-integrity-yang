@@ -5,8 +5,8 @@
 ippm                                                           J. Iurman
 Internet-Draft                                       University of Liege
 Intended status: Standards Track                                 T. Zhou
-Expires: 12 June 2026                                             Huawei
-                                                         9 December 2025
+Expires: 16 July 2026                                             Huawei
+                                                         12 January 2026
 
 
      A YANG Data Model for In Situ Operations, Administration, and
@@ -40,11 +40,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 June 2026.
+   This Internet-Draft will expire on 16 July 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -128,7 +128,7 @@ Table of Contents
    *  XXXX --> the assigned RFC number for this document
    *  YYYY --> the assigned RFC number for
       [I-D.ietf-ippm-ioam-data-integrity]
-   *  2025-12-09 --> the actual date of the publication of this document
+   *  2026-01-12 --> the actual date of the publication of this document
 
 2.  Conventions used in this document
 
@@ -198,7 +198,9 @@ Table of Contents
 
    int-method:  indicates which Integrity Protection Method is used, as
       defined in the "IOAM Integrity Protection Methods" IANA registry
-      [IANA-IOAM].
+      [IANA-IOAM].  It is only defined at the encapsulating node because
+      the Integrity Protection Method is selected and initialized when
+      IOAM data is encapsulated.
 
    +--rw int-preallocated-tracing-profile! {int-preallocated-trace}?
       +--rw node-action?   ioam-node-action
@@ -220,7 +222,9 @@ Table of Contents
 
    int-method:  indicates which Integrity Protection Method is used, as
       defined in the "IOAM Integrity Protection Methods" IANA registry
-      [IANA-IOAM].
+      [IANA-IOAM].  It is only defined at the encapsulating node because
+      the Integrity Protection Method is selected and initialized when
+      IOAM data is encapsulated.
 
    +--rw int-incremental-tracing-profile! {int-incremental-trace}?
       +--rw node-action?   ioam-node-action
@@ -244,7 +248,9 @@ Table of Contents
       with the same definition.
    int-method:  indicates which Integrity Protection Method is used, as
       defined in the "IOAM Integrity Protection Methods" IANA registry
-      [IANA-IOAM].
+      [IANA-IOAM].  It is only defined at the encapsulating node because
+      the Integrity Protection Method is selected and initialized when
+      IOAM data is encapsulated.
 
    +--rw int-pot-profile! {int-proof-of-transit}?
       +--rw use-namespace?   ioam:ioam-namespace
@@ -264,7 +270,9 @@ Table of Contents
 
    int-method:  indicates which Integrity Protection Method is used, as
       defined in the "IOAM Integrity Protection Methods" IANA registry
-      [IANA-IOAM].
+      [IANA-IOAM].  It is only defined at the encapsulating node because
+      the Integrity Protection Method is selected and initialized when
+      IOAM data is encapsulated.
 
    +--rw int-e2e-profile! {int-edge-to-edge}?
       +--rw node-action?   ioam-node-action
@@ -281,7 +289,7 @@ Table of Contents
    "ietf-ioam" module defined in [RFC9617].  This document also
    references [I-D.ietf-ippm-ioam-data-integrity].
 
-   <CODE BEGINS> file "ietf-ioam-integrity@2025-12-09.yang"
+   <CODE BEGINS> file "ietf-ioam-integrity@2026-01-12.yang"
    module ietf-ioam-integrity {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-ioam-integrity";
@@ -319,7 +327,7 @@ Table of Contents
         In Situ Operations, Administration, and Maintenance (IOAM)
         Integrity Protected Options.
 
-        Copyright (c) 2025 IETF Trust and the persons identified as
+        Copyright (c) 2026 IETF Trust and the persons identified as
         authors of the code.  All rights reserved.
 
         Redistribution and use in source and binary forms, with or
@@ -334,9 +342,20 @@ Table of Contents
         (https://www.iana.org/assignments/yang-parameters).
 
         This version of this YANG module is part of RFC XXXX; see the
-        RFC itself for full legal notices.";
+        RFC itself for full legal notices.
 
-     revision 2025-12-09 {
+        Operational Considerations:
+
+         - This model does not treat as mutually exclusive an IOAM
+           Option and its integrity protected equivalent (i.e., an IOAM
+           Integrity Protected Option). For example, an implementation
+           may support the simultaneous configuration of an
+           IOAM-Namespace with the Pre-allocated Trace Option and
+           another IOAM-Namespace with the Integrity Protected
+           Pre-allocated Trace Option. Therefore, the model does not
+           impose constraints that would prevent such use cases.";
+
+     revision 2026-01-12 {
        description
          "Initial version.";
        reference
@@ -402,7 +421,8 @@ Table of Contents
          type iana-ioam-ipm:method-id;
          description
            "This object indicates the Integrity Protection Method for
-            this profile.";
+            this profile. 'int-method' is only defined at the
+            encapsulating node.";
        }
      }
 
@@ -706,7 +726,7 @@ Appendix A.  Initial Version of the IOAM Integrity Protection Methods
    RFC Ed.: please remove this section.
 
    <CODE BEGINS>
-     file "iana-ioam-integrity-protection-methods@2025-12-09.yang"
+     file "iana-ioam-integrity-protection-methods@2026-01-12.yang"
    module iana-ioam-integrity-protection-methods {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:iana-ioam-integrity-protection-methods";
@@ -730,7 +750,7 @@ Appendix A.  Initial Version of the IOAM Integrity Protection Methods
        "This YANG module is maintained by IANA and reflects
         the 'IOAM Integrity Protection Methods' registry.
 
-        Copyright (c) 2025 IETF Trust and the persons
+        Copyright (c) 2026 IETF Trust and the persons
         identified as authors of the code.  All rights reserved.
 
         Redistribution and use in source and binary forms, with or
@@ -756,7 +776,7 @@ Appendix A.  Initial Version of the IOAM Integrity Protection Methods
        "IOAM Integrity Protection Methods
         (https://www.iana.org/assignments/ioam/ioam.xhtml)";
 
-     revision 2025-12-09 {
+     revision 2026-01-12 {
        description
          "Initial version.";
        reference
@@ -779,11 +799,12 @@ Appendix A.  Initial Version of the IOAM Integrity Protection Methods
          enum method-0 {
            value 0;
            description
-             "IPM 0.";
+             "IPM 0: AES-GMAC, 16-octet (full) Authentication Tag,
+                     12-octet Initialization Vector.";
            reference
              "RFC YYYY: Integrity Protection of In Situ Operations,
                         Administration, and Maintenance (IOAM)
-                        Data Fields";
+                        Data Fields, Section 5";
          }
        }
        description
