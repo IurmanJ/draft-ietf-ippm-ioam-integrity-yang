@@ -35,7 +35,7 @@ module ietf-ioam-integrity {
      In Situ Operations, Administration, and Maintenance (IOAM)
      Integrity Protected Options.
 
-     Copyright (c) 2025 IETF Trust and the persons identified as
+     Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -50,9 +50,20 @@ module ietf-ioam-integrity {
      (https://www.iana.org/assignments/yang-parameters).
 
      This version of this YANG module is part of RFC XXXX; see the
-     RFC itself for full legal notices.";
+     RFC itself for full legal notices.
 
-  revision 2025-12-09 {
+     Operational Considerations:
+
+      - This model does not treat as mutually exclusive an IOAM
+        Option and its integrity protected equivalent (i.e., an IOAM
+        Integrity Protected Option). For example, an implementation
+        may support the simultaneous configuration of an
+        IOAM-Namespace with the Pre-allocated Trace Option and
+        another IOAM-Namespace with the Integrity Protected
+        Pre-allocated Trace Option. Therefore, the model does not
+        impose constraints that would prevent such use cases.";
+
+  revision 2026-01-12 {
     description
       "Initial version.";
     reference
@@ -118,7 +129,8 @@ module ietf-ioam-integrity {
       type iana-ioam-ipm:method-id;
       description
         "This object indicates the Integrity Protection Method for
-         this profile.";
+         this profile. 'int-method' is only defined at the
+         encapsulating node.";
     }
   }
 
