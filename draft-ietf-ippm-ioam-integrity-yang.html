@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>A YANG Data Model for In Situ Operations, Administration, and Maintenance (IOAM) Integrity Protected Options</title>
+<title>A YANG Data Model for In Situ Operations, Administration, and Maintenance (IOAM) Integrity-Protected Options</title>
 <meta content="Justin Iurman" name="author">
 <meta content="Tianran Zhou" name="author">
 <meta content="
@@ -14,11 +14,12 @@
       that will use it to, e.g., monitor, measure, or (re)configure the network.
       Integrity Protection of In Situ Operations, Administration, and
       Maintenance (IOAM) Data Fields (RFC YYYY)
-      defines IOAM Options with integrity protection, also called Integrity
-      Protected Options. This document defines a YANG module for the
-      management of these Integrity Protected Options. 
+      defines IOAM Options with integrity protection, also called
+      Integrity-Protected Options. This document defines a YANG data model for the
+      management of these Integrity-Protected Options. The document also defines
+      an IANA-maintained YANG module for IOAM Integrity Protection Methods. 
     " name="description">
-<meta content="xml2rfc 3.31.0" name="generator">
+<meta content="xml2rfc 3.32.0" name="generator">
 <meta content="OAM" name="keyword">
 <meta content="In Situ OAM" name="keyword">
 <meta content="IOAM" name="keyword">
@@ -27,18 +28,18 @@
 <meta content="YANG" name="keyword">
 <meta content="draft-ietf-ippm-ioam-integrity-yang-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.31.0
+  xml2rfc 3.32.0
     Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.0.2
-    platformdirs 4.5.1
+    platformdirs 4.9.4
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.32.5
-    wcwidth 0.2.14
+    wcwidth 0.6.0
 -->
 <link href="draft-ietf-ippm-ioam-integrity-yang.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -179,7 +180,7 @@
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
   font-family: 'Oxygen Mono';
@@ -187,7 +188,8 @@
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 }
 
 @font-face {
@@ -579,6 +581,7 @@ aside, blockquote {
 }
 blockquote {
   margin: 1em 0;
+  border-left: 2px var(--pilcrow-strong) solid;
 }
 cite {
   display: block;
@@ -649,7 +652,7 @@ a.pilcrow {
   }
 }
 @media not print {
-  :hover > a.pilcrow {
+  :hover > a.pilcrow, a.pilcrow:focus {
     opacity: 1;
   }
   a.pilcrow[href]:hover {
@@ -1057,11 +1060,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">YANG Model for IOAM Integrity Options</td>
-<td class="right">January 2026</td>
+<td class="right">April 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Iurman &amp; Zhou</td>
-<td class="center">Expires 16 July 2026</td>
+<td class="center">Expires 17 October 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1074,12 +1077,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-ippm-ioam-integrity-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-01-12" class="published">12 January 2026</time>
+<time datetime="2026-04-15" class="published">15 April 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-07-16">16 July 2026</time></dd>
+<dd class="expires"><time datetime="2026-10-17">17 October 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1093,7 +1096,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </dd>
 </dl>
 </div>
-<h1 id="title">A YANG Data Model for In Situ Operations, Administration, and Maintenance (IOAM) Integrity Protected Options</h1>
+<h1 id="title">A YANG Data Model for In Situ Operations, Administration, and Maintenance (IOAM) Integrity-Protected Options</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">In Situ Operations, Administration, and Maintenance (IOAM) is an
@@ -1102,9 +1105,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
       that will use it to, e.g., monitor, measure, or (re)configure the network.
       Integrity Protection of In Situ Operations, Administration, and
       Maintenance (IOAM) Data Fields (RFC YYYY)
-      defines IOAM Options with integrity protection, also called Integrity
-      Protected Options. This document defines a YANG module for the
-      management of these Integrity Protected Options.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+      defines IOAM Options with integrity protection, also called
+      Integrity-Protected Options. This document defines a YANG data model for the
+      management of these Integrity-Protected Options. The document also defines
+      an IANA-maintained YANG module for IOAM Integrity Protection Methods.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1125,7 +1129,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 16 July 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 17 October 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1183,16 +1187,16 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-overview" class="internal xref">Overview</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-integrity-protected-pre-all" class="internal xref">Integrity Protected Pre-allocated Tracing Profile</a></p>
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-integrity-protected-pre-all" class="internal xref">Integrity-Protected Pre-allocated Tracing Profile</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-integrity-protected-increme" class="internal xref">Integrity Protected Incremental Tracing Profile</a></p>
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-integrity-protected-increme" class="internal xref">Integrity-Protected Incremental Tracing Profile</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
-                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-integrity-protected-proof-o" class="internal xref">Integrity Protected Proof of Transit Profile</a></p>
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-integrity-protected-proof-o" class="internal xref">Integrity-Protected Proof of Transit Profile</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
-                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-integrity-protected-edge-to" class="internal xref">Integrity Protected Edge-to-Edge Profile</a></p>
+                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-integrity-protected-edge-to" class="internal xref">Integrity-Protected Edge-to-Edge Profile</a></p>
 </li>
             </ul>
 </li>
@@ -1206,7 +1210,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-iana-maintained-iana-ioam-i" class="internal xref">IANA-Maintained "iana-ioam-integrity-protection-methods" Module</a></p>
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-iana-maintained-iana-ioam-i" class="internal xref">IANA-Maintained "iana-ioam-integrity-protection-methods" YANG Module</a></p>
 </li>
             </ul>
 </li>
@@ -1225,19 +1229,19 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-initial-version-of-the-ioam" class="internal xref">Initial Version of the IOAM Integrity Protection Methods IANA-Maintained Module</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-initial-version-of-the-ioam" class="internal xref">Initial Version of the IOAM Integrity Protection Methods IANA-Maintained YANG Module</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
             <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-full-tree-of-the-ioam-integ" class="internal xref">Full tree of the IOAM Integrity YANG Data Model</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-example-of-the-integrity-pr" class="internal xref">Example of the Integrity Protected Incremental Tracing Profile</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-example-of-the-integrity-pr" class="internal xref">Example of the Integrity-Protected Incremental Tracing Profile</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-example-of-the-integrity-pro" class="internal xref">Example of the Integrity Protected Pre-allocated Tracing Profile</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-example-of-the-integrity-pro" class="internal xref">Example of the Integrity-Protected Pre-allocated Tracing Profile</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-E" class="auto internal xref">Appendix E</a>.  <a href="#name-example-of-the-integrity-prot" class="internal xref">Example of the Integrity Protected Proof of Transit and Integrity Protected Edge-to-Edge Profiles</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-E" class="auto internal xref">Appendix E</a>.  <a href="#name-example-of-the-integrity-prot" class="internal xref">Example of the Integrity-Protected Proof of Transit and Integrity-Protected Edge-to-Edge Profiles</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
             <p id="section-toc.1-1.14.1"><a href="#appendix-F" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
@@ -1256,25 +1260,29 @@ svg :is([fill="white"], [fill^="#fff"]) {
       then be exported to systems that will use it to, e.g., monitor, measure,
       or (re)configure the network.
       <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span> defines IOAM Options
-      with integrity protection, also called Integrity Protected Options. This
-      document defines a data model for the management of these Integrity
-      Protected Options using the YANG data modeling language
-      <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>. This YANG data model supports four IOAM Integrity
-      Protected Options, which are as follows:<a href="#section-1-1" class="pilcrow">¶</a></p>
+      with integrity protection, also called Integrity-Protected Options. This
+      document defines a YANG data model for the management of these
+      Integrity-Protected Options using the YANG data modeling language
+      <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>. This YANG data model supports four IOAM
+      Integrity-Protected Options, which are as follows:<a href="#section-1-1" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="section-1-2.1">Integrity Protected Incremental Trace-Option (Section 4.1 of
+<li class="compact" id="section-1-2.1">Integrity-Protected Incremental Trace-Option (Section 4.1 of
               <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>)<a href="#section-1-2.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="section-1-2.2">Integrity Protected Pre-allocated Trace-Option (Section 4.1 of
+        <li class="compact" id="section-1-2.2">Integrity-Protected Pre-allocated Trace-Option (Section 4.1 of
               <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>)<a href="#section-1-2.2" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="section-1-2.3">Integrity Protected Proof of Transit (POT) Option (Section 4.2 of
+        <li class="compact" id="section-1-2.3">Integrity-Protected Proof of Transit (POT) Option (Section 4.2 of
               <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>)<a href="#section-1-2.3" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="section-1-2.4">Integrity Protected Edge-to-Edge (E2E) Option (Section 4.3 of
+        <li class="compact" id="section-1-2.4">Integrity-Protected Edge-to-Edge (E2E) Option (Section 4.3 of
               <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>)<a href="#section-1-2.4" class="pilcrow">¶</a>
 </li>
       </ul>
+<p id="section-1-3">
+
+      The document also defines an IANA-maintained YANG module for IOAM
+      Integrity Protection Methods.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <section id="section-1.1">
         <h3 id="name-editorial-note-to-be-remove">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-editorial-note-to-be-remove" class="section-name selfRef">Editorial Note (to be removed by RFC Editor)</a>
@@ -1293,7 +1301,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
           <li class="compact" id="section-1.1-4.2">YYYY --&gt; the assigned RFC number for
                 <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span><a href="#section-1.1-4.2" class="pilcrow">¶</a>
 </li>
-          <li class="compact" id="section-1.1-4.3">2026-01-12 --&gt; the actual date of the publication of this
+          <li class="compact" id="section-1.1-4.3">2026-04-15 --&gt; the actual date of the publication of this
                 document<a href="#section-1.1-4.3" class="pilcrow">¶</a>
 </li>
         </ul>
@@ -1361,7 +1369,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-overview" class="section-name selfRef">Overview</a>
         </h3>
 <p id="section-3.1-1">The IOAM Integrity model is organized as a list of profiles, as shown
-        in <a href="#fig_overview_model" class="auto internal xref">Figure 1</a>. In this model, the "int" prefix
+        in <a href="#fig_overview_model" class="auto internal xref">Figure 1</a>. Full tree is provided in
+        <a href="#appendix-full-tree" class="auto internal xref">Appendix B</a>. In this model, the "int" prefix
         refers to "INTegrity protection".<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <span id="name-overview-of-the-ioam-integr"></span><div id="fig_overview_model">
 <figure id="figure-1">
@@ -1397,7 +1406,7 @@ module: ietf-ioam-integrity
 </section>
 <section id="section-3.2">
         <h3 id="name-integrity-protected-pre-all">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-integrity-protected-pre-all" class="section-name selfRef">Integrity Protected Pre-allocated Tracing Profile</a>
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-integrity-protected-pre-all" class="section-name selfRef">Integrity-Protected Pre-allocated Tracing Profile</a>
         </h3>
 <p id="section-3.2-1">As illustrated in <a href="#fig_pre_profile" class="auto internal xref">Figure 2</a>, the
         "int-preallocated-tracing-profile" container provides the detailed
@@ -1431,13 +1440,15 @@ module: ietf-ioam-integrity
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
-<a href="#name-integrity-protected-pre-allo" class="selfRef">Integrity Protected Pre-allocated Tracing Profile</a>
+<a href="#name-integrity-protected-pre-allo" class="selfRef">Integrity-Protected Pre-allocated Tracing Profile</a>
           </figcaption></figure>
 </div>
+<p id="section-3.2-4">An example of the Integrity-Protected Pre-allocated Tracing Profile
+        with data is provided in <a href="#appendix-example-prealloc" class="auto internal xref">Appendix D</a>.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 </section>
 <section id="section-3.3">
         <h3 id="name-integrity-protected-increme">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-integrity-protected-increme" class="section-name selfRef">Integrity Protected Incremental Tracing Profile</a>
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-integrity-protected-increme" class="section-name selfRef">Integrity-Protected Incremental Tracing Profile</a>
         </h3>
 <p id="section-3.3-1">As illustrated in <a href="#fig_inc_profile" class="auto internal xref">Figure 3</a>, the
         "int-incremental-tracing-profile" container provides the detailed
@@ -1471,13 +1482,15 @@ module: ietf-ioam-integrity
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-integrity-protected-incremen" class="selfRef">Integrity Protected Incremental Tracing Profile</a>
+<a href="#name-integrity-protected-incremen" class="selfRef">Integrity-Protected Incremental Tracing Profile</a>
           </figcaption></figure>
 </div>
+<p id="section-3.3-4">An example of the Integrity-Protected Incremental Tracing Profile
+        with data is provided in <a href="#appendix-example-incremental" class="auto internal xref">Appendix C</a>.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 </section>
 <section id="section-3.4">
         <h3 id="name-integrity-protected-proof-o">
-<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-integrity-protected-proof-o" class="section-name selfRef">Integrity Protected Proof of Transit Profile</a>
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-integrity-protected-proof-o" class="section-name selfRef">Integrity-Protected Proof of Transit Profile</a>
         </h3>
 <p id="section-3.4-1">As illustrated in <a href="#fig_pot_profile" class="auto internal xref">Figure 4</a>, the
         "int-pot-profile" container is intended to provide the detailed
@@ -1514,13 +1527,15 @@ module: ietf-ioam-integrity
 </pre>
 </div>
 <figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-integrity-protected-proof-of" class="selfRef">Integrity Protected Proof of Transit Profile</a>
+<a href="#name-integrity-protected-proof-of" class="selfRef">Integrity-Protected Proof of Transit Profile</a>
           </figcaption></figure>
 </div>
+<p id="section-3.4-4">An example of the Integrity-Protected Proof of Transit Profile with
+        data is provided in <a href="#appendix-example-pot-and-e2e" class="auto internal xref">Appendix E</a>.<a href="#section-3.4-4" class="pilcrow">¶</a></p>
 </section>
 <section id="section-3.5">
         <h3 id="name-integrity-protected-edge-to">
-<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-integrity-protected-edge-to" class="section-name selfRef">Integrity Protected Edge-to-Edge Profile</a>
+<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-integrity-protected-edge-to" class="section-name selfRef">Integrity-Protected Edge-to-Edge Profile</a>
         </h3>
 <p id="section-3.5-1">As illustrated in <a href="#fig_e2e_profile" class="auto internal xref">Figure 5</a>, the
         "int-e2e-profile" container provides the detailed information for the
@@ -1552,9 +1567,11 @@ module: ietf-ioam-integrity
 </pre>
 </div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
-<a href="#name-integrity-protected-edge-to-" class="selfRef">Integrity Protected Edge-to-Edge Profile</a>
+<a href="#name-integrity-protected-edge-to-" class="selfRef">Integrity-Protected Edge-to-Edge Profile</a>
           </figcaption></figure>
 </div>
+<p id="section-3.5-4">An example of the Integrity-Protected Edge-to-Edge Profile with data
+        is provided in <a href="#appendix-example-pot-and-e2e" class="auto internal xref">Appendix E</a>.<a href="#section-3.5-4" class="pilcrow">¶</a></p>
 </section>
 </section>
 <section id="section-4">
@@ -1565,7 +1582,7 @@ module: ietf-ioam-integrity
       the "ietf-ioam" module defined in <span>[<a href="#RFC9617" class="cite xref">RFC9617</a>]</span>. This document
       also references <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div class="breakable lang-yang sourcecode" id="section-4-2">
-<pre>&lt;CODE BEGINS&gt; file "ietf-ioam-integrity@2026-01-12.yang"
+<pre>&lt;CODE BEGINS&gt; file "ietf-ioam-integrity@2026-04-15.yang"
 
 
 module ietf-ioam-integrity {
@@ -1585,7 +1602,7 @@ module ietf-ioam-integrity {
     reference
       "RFC XXXX: A YANG Data Model for In Situ Operations,
                  Administration, and Maintenance (IOAM)
-                 Integrity Protected Options";
+                 Integrity-Protected Options";
   }
 
   organization
@@ -1593,7 +1610,7 @@ module ietf-ioam-integrity {
 
   contact
     "WG Web:   &lt;https://datatracker.ietf.org/wg/ippm&gt;
-     WG List:  &lt;mailto:ippm@ietf.org&gt;
+     WG List:  IPPM &lt;mailto:ippm@ietf.org&gt;
 
      Editor:   Tianran Zhou
                &lt;mailto:zhoutianran@huawei.com&gt;
@@ -1603,7 +1620,7 @@ module ietf-ioam-integrity {
   description
     "This YANG module specifies a vendor-independent data model for
      In Situ Operations, Administration, and Maintenance (IOAM)
-     Integrity Protected Options.
+     Integrity-Protected Options.
 
      Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -1626,20 +1643,20 @@ module ietf-ioam-integrity {
 
       - This model does not treat as mutually exclusive an IOAM
         Option and its integrity protected equivalent (i.e., an IOAM
-        Integrity Protected Option). For example, an implementation
+        Integrity-Protected Option). For example, an implementation
         may support the simultaneous configuration of an
         IOAM-Namespace with the Pre-allocated Trace Option and
-        another IOAM-Namespace with the Integrity Protected
+        another IOAM-Namespace with the Integrity-Protected
         Pre-allocated Trace Option. Therefore, the model does not
         impose constraints that would prevent such use cases.";
 
-  revision 2026-01-12 {
+  revision 2026-04-15 {
     description
       "Initial version.";
     reference
       "RFC XXXX: A YANG Data Model for In Situ Operations,
                  Administration, and Maintenance (IOAM)
-                 Integrity Protected Options";
+                 Integrity-Protected Options";
   }
 
   /*
@@ -1648,7 +1665,7 @@ module ietf-ioam-integrity {
 
   feature int-incremental-trace {
     description
-      "This feature indicates that the Integrity Protected
+      "This feature indicates that the Integrity-Protected
        Incremental Trace-Option is supported.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
@@ -1658,7 +1675,7 @@ module ietf-ioam-integrity {
 
   feature int-preallocated-trace {
     description
-      "This feature indicates that the Integrity Protected
+      "This feature indicates that the Integrity-Protected
        Pre-allocated Trace-Option is supported.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
@@ -1668,7 +1685,7 @@ module ietf-ioam-integrity {
 
   feature int-proof-of-transit {
     description
-      "This feature indicates that the Integrity Protected Proof of
+      "This feature indicates that the Integrity-Protected Proof of
        Transit Option is supported.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
@@ -1678,7 +1695,7 @@ module ietf-ioam-integrity {
 
   feature int-edge-to-edge {
     description
-      "This feature indicates that the Integrity Protected
+      "This feature indicates that the Integrity-Protected
        Edge-to-Edge Option is supported.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
@@ -1710,35 +1727,35 @@ module ietf-ioam-integrity {
 
   augment "/ioam:ioam/ioam:profiles/ioam:profile" {
     description
-      "This augmentation adds 4 profiles for the Integrity Protected
+      "This augmentation adds 4 profiles for the Integrity-Protected
        Options.";
     container int-incremental-tracing-profile {
       if-feature "int-incremental-trace";
-      presence "Enables the Integrity Protected
+      presence "Enables the Integrity-Protected
                 Incremental Trace-Option.";
       description
-        "This container describes the profile for the Integrity
-         Protected Incremental Trace-Option.";
+        "This container describes the profile for the
+         Integrity-Protected Incremental Trace-Option.";
       uses ioam:ioam-incremental-tracing-profile;
       uses int-method-grouping;
     }
     container int-preallocated-tracing-profile {
       if-feature "int-preallocated-trace";
-      presence "Enables the Integrity Protected
+      presence "Enables the Integrity-Protected
                 Pre-allocated Trace-Option.";
       description
-        "This container describes the profile for the Integrity
-         Protected Pre-allocated Trace-Option.";
+        "This container describes the profile for the
+         Integrity-Protected Pre-allocated Trace-Option.";
       uses ioam:ioam-preallocated-tracing-profile;
       uses int-method-grouping;
     }
     container int-pot-profile {
       if-feature "int-proof-of-transit";
-      presence "Enables the Integrity Protected
+      presence "Enables the Integrity-Protected
                 Proof of Transit Option.";
       description
-        "This container describes the profile for the Integrity
-         Protected Proof of Transit Option.";
+        "This container describes the profile for the
+         Integrity-Protected Proof of Transit Option.";
       leaf use-namespace {
         type ioam:ioam-namespace;
         default "ioam:default-namespace";
@@ -1763,11 +1780,11 @@ module ietf-ioam-integrity {
     }
     container int-e2e-profile {
       if-feature "int-edge-to-edge";
-      presence "Enables the Integrity Protected
+      presence "Enables the Integrity-Protected
                 Edge-to-Edge Option.";
       description
-        "This container describes the profile for the Integrity
-         Protected Edge-to-Edge Option.";
+        "This container describes the profile for the
+         Integrity-Protected Edge-to-Edge Option.";
       uses ioam:ioam-e2e-profile;
       uses int-method-grouping;
     }
@@ -1782,13 +1799,15 @@ module ietf-ioam-integrity {
       <h2 id="name-security-considerations">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-5-1">This section is modeled after the template described in Section 3.7
-      of <span>[<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">This section is modeled after the template described in Section 3.7.1
+      of <span>[<a href="#RFC9907" class="cite xref">RFC9907</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">The "ietf-ioam-integrity" YANG module defines a data model that is
       designed to be accessed via YANG-based management protocols, such as
-      NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> and RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.
+      the Network Configuration Protocol (NETCONF) <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> and
+      RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>.
       These YANG-based management protocols (1) have to use a secure transport
-      layer (e.g., SSH <span>[<a href="#RFC4252" class="cite xref">RFC4252</a>]</span>, TLS <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>,
+      layer (e.g., Secure Shell (SSH) <span>[<a href="#RFC4252" class="cite xref">RFC4252</a>]</span>, TLS
+      <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>,
       and QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) and (2) have to use mutual
       authentication.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">The Network Configuration Access Control Model (NACM)
@@ -1920,7 +1939,7 @@ module ietf-ioam-integrity {
 </dl>
 <section id="section-6.1">
         <h3 id="name-iana-maintained-iana-ioam-i">
-<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-iana-maintained-iana-ioam-i" class="section-name selfRef">IANA-Maintained "iana-ioam-integrity-protection-methods" Module</a>
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-iana-maintained-iana-ioam-i" class="section-name selfRef">IANA-Maintained "iana-ioam-integrity-protection-methods" YANG Module</a>
         </h3>
 <p id="section-6.1-1">This document defines the initial version of the IANA-maintained
         "iana-ioam-integrity-protection-methods" YANG module. The most recent
@@ -1962,20 +1981,16 @@ module ietf-ioam-integrity {
           <dd class="break"></dd>
 <dt id="section-6.1-5.9">"reference":</dt>
           <dd style="margin-left: 1.5em" id="section-6.1-5.10">Replicates the reference(s) from the
-            registry with the title of the document(s) added.<a href="#section-6.1-5.10" class="pilcrow">¶</a>
+            registry. References to documents should also include titles.<a href="#section-6.1-5.10" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 </dl>
-<p id="section-6.1-6">Unassigned or reserved values are not present in the module.<a href="#section-6.1-6" class="pilcrow">¶</a></p>
-<p id="section-6.1-7">When the "iana-ioam-integrity-protection-methods" YANG module is
-        updated, a new "revision" statement with a unique revision date needs to
-        be added in front of the existing revision statements.<a href="#section-6.1-7" class="pilcrow">¶</a></p>
-<p id="section-6.1-8">IANA is requested to add this note to
-        [reference-to-the-iana-foo-registry]:<a href="#section-6.1-8" class="pilcrow">¶</a></p>
-<blockquote id="section-6.1-9">
-          <p id="section-6.1-9.1">When this registry is modified, the YANG module
+<p id="section-6.1-6">IANA is requested to add this note to
+        [reference-to-the-iana-foo-registry]:<a href="#section-6.1-6" class="pilcrow">¶</a></p>
+<blockquote id="section-6.1-7">
+          <p id="section-6.1-7.1">When this registry is modified, the YANG module
           "iana-ioam-integrity-protection-methods" [IANA_FOO_URL]
-          must be updated as defined in RFC XXXX.<a href="#section-6.1-9.1" class="pilcrow">¶</a></p>
+          must be updated as defined in RFC XXXX.<a href="#section-6.1-7.1" class="pilcrow">¶</a></p>
 </blockquote>
 </section>
 </section>
@@ -1997,7 +2012,7 @@ module ietf-ioam-integrity {
 <dl class="references">
 <dt id="I-D.ietf-ippm-ioam-data-integrity">[I-D.ietf-ippm-ioam-data-integrity]</dt>
         <dd>
-<span class="refAuthor">Brockners, F.</span>, <span class="refAuthor">Bhandari, S.</span>, <span class="refAuthor">Mizrahi, T.</span>, and <span class="refAuthor">J. Iurman</span>, <span class="refTitle">"Integrity Protection of In Situ Operations, Administration, and Maintenance (IOAM) Data Fields"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ippm-ioam-data-integrity-15</span>, <time datetime="2025-10-01" class="refDate">1 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ippm-ioam-data-integrity-15">https://datatracker.ietf.org/doc/html/draft-ietf-ippm-ioam-data-integrity-15</a>&gt;</span>. </dd>
+<span class="refAuthor">Brockners, F.</span>, <span class="refAuthor">Bhandari, S.</span>, <span class="refAuthor">Mizrahi, T.</span>, and <span class="refAuthor">J. Iurman</span>, <span class="refTitle">"Integrity Protection of In Situ Operations, Administration, and Maintenance (IOAM) Data Fields"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ippm-ioam-data-integrity-17</span>, <time datetime="2026-03-16" class="refDate">16 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ippm-ioam-data-integrity-17">https://datatracker.ietf.org/doc/html/draft-ietf-ippm-ioam-data-integrity-17</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA-IOAM">[IANA-IOAM]</dt>
         <dd>
@@ -2015,10 +2030,6 @@ module ietf-ioam-integrity {
         <dd>
 <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"The YANG 1.1 Data Modeling Language"</span>, <span class="seriesInfo">RFC 7950</span>, <span class="seriesInfo">DOI 10.17487/RFC7950</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7950">https://www.rfc-editor.org/info/rfc7950</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC7951">[RFC7951]</dt>
-        <dd>
-<span class="refAuthor">Lhotka, L.</span>, <span class="refTitle">"JSON Encoding of Data Modeled with YANG"</span>, <span class="seriesInfo">RFC 7951</span>, <span class="seriesInfo">DOI 10.17487/RFC7951</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7951">https://www.rfc-editor.org/info/rfc7951</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC8341">[RFC8341]</dt>
         <dd>
 <span class="refAuthor">Bierman, A.</span> and <span class="refAuthor">M. Bjorklund</span>, <span class="refTitle">"Network Configuration Access Control Model"</span>, <span class="seriesInfo">STD 91</span>, <span class="seriesInfo">RFC 8341</span>, <span class="seriesInfo">DOI 10.17487/RFC8341</span>, <time datetime="2018-03" class="refDate">March 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8341">https://www.rfc-editor.org/info/rfc8341</a>&gt;</span>. </dd>
@@ -2034,10 +2045,6 @@ module ietf-ioam-integrity {
 <a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
-<dt id="I-D.ietf-netmod-rfc8407bis">[I-D.ietf-netmod-rfc8407bis]</dt>
-        <dd>
-<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-28</span>, <time datetime="2025-06-05" class="refDate">5 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-28">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-28</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="IANA-YANG-PARAMETERS">[IANA-YANG-PARAMETERS]</dt>
         <dd>
 <span class="refTitle">"YANG Parameters"</span>, <span>n.d.</span>, <span>&lt;<a href="https://www.iana.org/assignments/yang-parameters">https://www.iana.org/assignments/yang-parameters</a>&gt;</span>. </dd>
@@ -2054,6 +2061,10 @@ module ietf-ioam-integrity {
         <dd>
 <span class="refAuthor">Morton, A.</span>, <span class="refTitle">"Active and Passive Metrics and Methods (with Hybrid Types In-Between)"</span>, <span class="seriesInfo">RFC 7799</span>, <span class="seriesInfo">DOI 10.17487/RFC7799</span>, <time datetime="2016-05" class="refDate">May 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7799">https://www.rfc-editor.org/info/rfc7799</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC7951">[RFC7951]</dt>
+        <dd>
+<span class="refAuthor">Lhotka, L.</span>, <span class="refTitle">"JSON Encoding of Data Modeled with YANG"</span>, <span class="seriesInfo">RFC 7951</span>, <span class="seriesInfo">DOI 10.17487/RFC7951</span>, <time datetime="2016-08" class="refDate">August 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7951">https://www.rfc-editor.org/info/rfc7951</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8040">[RFC8040]</dt>
         <dd>
 <span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Bjorklund, M.</span>, and <span class="refAuthor">K. Watsen</span>, <span class="refTitle">"RESTCONF Protocol"</span>, <span class="seriesInfo">RFC 8040</span>, <span class="seriesInfo">DOI 10.17487/RFC8040</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8040">https://www.rfc-editor.org/info/rfc8040</a>&gt;</span>. </dd>
@@ -2067,8 +2078,12 @@ module ietf-ioam-integrity {
 <span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8446">https://www.rfc-editor.org/info/rfc8446</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9000">[RFC9000]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Iyengar, J., Ed.</span> and <span class="refAuthor">M. Thomson, Ed.</span>, <span class="refTitle">"QUIC: A UDP-Based Multiplexed and Secure Transport"</span>, <span class="seriesInfo">RFC 9000</span>, <span class="seriesInfo">DOI 10.17487/RFC9000</span>, <time datetime="2021-05" class="refDate">May 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9000">https://www.rfc-editor.org/info/rfc9000</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9907">[RFC9907]</dt>
+      <dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M., Ed.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="seriesInfo">BCP 216</span>, <span class="seriesInfo">RFC 9907</span>, <span class="seriesInfo">DOI 10.17487/RFC9907</span>, <time datetime="2026-03" class="refDate">March 2026</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9907">https://www.rfc-editor.org/info/rfc9907</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2076,11 +2091,11 @@ module ietf-ioam-integrity {
 <div id="appendix-iana-module">
 <section id="appendix-A">
       <h2 id="name-initial-version-of-the-ioam">
-<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-initial-version-of-the-ioam" class="section-name selfRef">Initial Version of the IOAM Integrity Protection Methods IANA-Maintained Module</a>
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-initial-version-of-the-ioam" class="section-name selfRef">Initial Version of the IOAM Integrity Protection Methods IANA-Maintained YANG Module</a>
       </h2>
 <p id="appendix-A-1">RFC Ed.: please remove this section.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <div class="breakable lang-yang sourcecode" id="appendix-A-2">
-<pre>&lt;CODE BEGINS&gt; file "iana-ioam-integrity-protection-methods@2026-01-12.yang"
+<pre>&lt;CODE BEGINS&gt; file "iana-ioam-integrity-protection-methods@2026-04-15.yang"
 
 
 module iana-ioam-integrity-protection-methods {
@@ -2098,7 +2113,7 @@ module iana-ioam-integrity-protection-methods {
      12025 Waterfront Drive, Suite 300
      Los Angeles, CA 90094
 
-     Tel: +1 424 254 5300
+     Tel: +1 310 301 5800
 
      &lt;mailto:iana@iana.org&gt;";
 
@@ -2132,7 +2147,7 @@ module iana-ioam-integrity-protection-methods {
     "IOAM Integrity Protection Methods
      (https://www.iana.org/assignments/ioam/ioam.xhtml)";
 
-  revision 2026-01-12 {
+  revision 2026-04-15 {
     description
       "Initial version.";
     reference
@@ -2143,7 +2158,7 @@ module iana-ioam-integrity-protection-methods {
 
        RFC XXXX: A YANG Data Model for In Situ Operations,
                  Administration, and Maintenance (IOAM)
-                 Integrity Protected Options";
+                 Integrity-Protected Options";
   }
 
   /*
@@ -2155,8 +2170,8 @@ module iana-ioam-integrity-protection-methods {
       enum method-0 {
         value 0;
         description
-          "IPM 0: AES-GMAC, 16-octet (full) Authentication Tag,
-                  12-octet Initialization Vector.";
+          "AES-GMAC, 16-octet (full) Authentication Tag,
+           12-octet Initialization Vector.";
         reference
           "RFC YYYY: Integrity Protection of In Situ Operations,
                      Administration, and Maintenance (IOAM)
@@ -2177,6 +2192,7 @@ module iana-ioam-integrity-protection-methods {
 </div>
 </section>
 </div>
+<div id="appendix-full-tree">
 <section id="appendix-B">
       <h2 id="name-full-tree-of-the-ioam-integ">
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-full-tree-of-the-ioam-integ" class="section-name selfRef">Full tree of the IOAM Integrity YANG Data Model</a>
@@ -2227,11 +2243,13 @@ module: ietf-ioam-integrity
         </figcaption></figure>
 </div>
 </section>
+</div>
+<div id="appendix-example-incremental">
 <section id="appendix-C">
       <h2 id="name-example-of-the-integrity-pr">
-<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-example-of-the-integrity-pr" class="section-name selfRef">Example of the Integrity Protected Incremental Tracing Profile</a>
+<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-example-of-the-integrity-pr" class="section-name selfRef">Example of the Integrity-Protected Incremental Tracing Profile</a>
       </h2>
-<p id="appendix-C-1">A JSON <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span> example of the Integrity Protected
+<p id="appendix-C-1">A JSON <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span> example of the Integrity-Protected
       Incremental Tracing Profile is depicted in
       <a href="#fig_json_ex_inc" class="auto internal xref">Figure 7</a>. This configuration is received by an
       IOAM ingress node. This node encapsulates the IOAM data in the IPv6
@@ -2275,15 +2293,17 @@ module: ietf-ioam-integrity
 </pre>
 </div>
 <figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
-<a href="#name-json-encoded-integrity-prot" class="selfRef">JSON-encoded Integrity Protected Incremental Tracing Profile</a>
+<a href="#name-json-encoded-integrity-prot" class="selfRef">JSON-encoded Integrity-Protected Incremental Tracing Profile</a>
         </figcaption></figure>
 </div>
 </section>
+</div>
+<div id="appendix-example-prealloc">
 <section id="appendix-D">
       <h2 id="name-example-of-the-integrity-pro">
-<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-example-of-the-integrity-pro" class="section-name selfRef">Example of the Integrity Protected Pre-allocated Tracing Profile</a>
+<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-example-of-the-integrity-pro" class="section-name selfRef">Example of the Integrity-Protected Pre-allocated Tracing Profile</a>
       </h2>
-<p id="appendix-D-1">A JSON <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span> example of the Integrity Protected
+<p id="appendix-D-1">A JSON <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span> example of the Integrity-Protected
       Pre-allocated Tracing Profile is depicted in
       <a href="#fig_json_ex_pre" class="auto internal xref">Figure 8</a>. This configuration is received by an
       IOAM ingress node. This node first identifies the target flow by using the
@@ -2331,20 +2351,22 @@ module: ietf-ioam-integrity
 </pre>
 </div>
 <figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
-<a href="#name-json-encoded-integrity-prote" class="selfRef">JSON-encoded Integrity Protected Pre-allocated Tracing Profile</a>
+<a href="#name-json-encoded-integrity-prote" class="selfRef">JSON-encoded Integrity-Protected Pre-allocated Tracing Profile</a>
         </figcaption></figure>
 </div>
 </section>
+</div>
+<div id="appendix-example-pot-and-e2e">
 <section id="appendix-E">
       <h2 id="name-example-of-the-integrity-prot">
-<a href="#appendix-E" class="section-number selfRef">Appendix E. </a><a href="#name-example-of-the-integrity-prot" class="section-name selfRef">Example of the Integrity Protected Proof of Transit and Integrity Protected Edge-to-Edge Profiles</a>
+<a href="#appendix-E" class="section-number selfRef">Appendix E. </a><a href="#name-example-of-the-integrity-prot" class="section-name selfRef">Example of the Integrity-Protected Proof of Transit and Integrity-Protected Edge-to-Edge Profiles</a>
       </h2>
-<p id="appendix-E-1">A JSON <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span> example of the Integrity Protected
-      Proof of Transit Profile, combined with the Integrity Protected
+<p id="appendix-E-1">A JSON <span>[<a href="#RFC7951" class="cite xref">RFC7951</a>]</span> example of the Integrity-Protected
+      Proof of Transit Profile, combined with the Integrity-Protected
       Edge-to-Edge Profile, is depicted in <a href="#fig_json_ex_pot_e2e" class="auto internal xref">Figure 9</a>.
       This configuration is received by an IOAM ingress node. This node
-      encapsulates the Integrity Protected Proof of Transit Type 0 in an IPv6
-      Hop-by-Hop Options header, and also encapsulates the Integrity Protected
+      encapsulates the Integrity-Protected Proof of Transit Type 0 in an IPv6
+      Hop-by-Hop Options header, and also encapsulates the Integrity-Protected
       Edge-to-Edge in an IPv6 Destination Options header. The Edge-to-Edge type
       indicates the presence of a 64-bit sequence number. The Integrity
       Protection Method to be used for both is method 0.<a href="#appendix-E-1" class="pilcrow">¶</a></p>
@@ -2391,10 +2413,11 @@ module: ietf-ioam-integrity
 </pre>
 </div>
 <figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
-<a href="#name-json-encoded-integrity-protec" class="selfRef">JSON-encoded Integrity Protected Proof of Transit and Integrity Protected Edge-to-Edge Profiles</a>
+<a href="#name-json-encoded-integrity-protec" class="selfRef">JSON-encoded Integrity-Protected Proof of Transit and Integrity-Protected Edge-to-Edge Profiles</a>
         </figcaption></figure>
 </div>
 </section>
+</div>
 <div id="authors-addresses">
 <section id="appendix-F">
       <h2 id="name-authors-addresses">
