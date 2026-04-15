@@ -13,7 +13,7 @@ module iana-ioam-integrity-protection-methods {
      12025 Waterfront Drive, Suite 300
      Los Angeles, CA 90094
 
-     Tel: +1 424 254 5300
+     Tel: +1 310 301 5800
 
      <mailto:iana@iana.org>";
 
@@ -47,7 +47,7 @@ module iana-ioam-integrity-protection-methods {
     "IOAM Integrity Protection Methods
      (https://www.iana.org/assignments/ioam/ioam.xhtml)";
 
-  revision 2026-01-12 {
+  revision 2026-04-15 {
     description
       "Initial version.";
     reference
@@ -58,7 +58,7 @@ module iana-ioam-integrity-protection-methods {
 
        RFC XXXX: A YANG Data Model for In Situ Operations,
                  Administration, and Maintenance (IOAM)
-                 Integrity Protected Options";
+                 Integrity-Protected Options";
   }
 
   /*

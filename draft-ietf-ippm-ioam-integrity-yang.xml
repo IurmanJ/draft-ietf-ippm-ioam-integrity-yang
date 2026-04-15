@@ -13,8 +13,8 @@
 <!ENTITY RFC8446 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml">
 <!ENTITY RFC9000 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.9000.xml">
 <!ENTITY RFC9617 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.9617.xml">
+<!ENTITY RFC9907 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.9907.xml">
 <!ENTITY I-D.ietf-ippm-ioam-data-integrity SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-ippm-ioam-data-integrity.xml">
-<!ENTITY I-D.ietf-netmod-rfc8407bis SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-netmod-rfc8407bis.xml">
 ]>
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
 <?rfc strict="yes" ?>
@@ -28,8 +28,8 @@
      ipr="trust200902" submissionType="IETF" consensus="true">
   <front>
     <title abbrev="YANG Model for IOAM Integrity Options">A YANG Data Model for
-    In Situ Operations, Administration, and Maintenance (IOAM) Integrity
-    Protected Options</title>
+    In Situ Operations, Administration, and Maintenance (IOAM)
+    Integrity-Protected Options</title>
 
     <seriesInfo name="Internet-Draft"
                 value="draft-ietf-ippm-ioam-integrity-yang-latest"/>
@@ -60,7 +60,7 @@
       </address>
     </author>
 
-    <date day="12" month="January" year="2026"/>
+    <date day="15" month="April" year="2026"/>
 
     <area>ops</area>
     <workgroup>ippm</workgroup>
@@ -79,9 +79,10 @@
       that will use it to, e.g., monitor, measure, or (re)configure the network.
       Integrity Protection of In Situ Operations, Administration, and
       Maintenance (IOAM) Data Fields (RFC YYYY)
-      defines IOAM Options with integrity protection, also called Integrity
-      Protected Options. This document defines a YANG module for the
-      management of these Integrity Protected Options.</t>
+      defines IOAM Options with integrity protection, also called
+      Integrity-Protected Options. This document defines a YANG data model for the
+      management of these Integrity-Protected Options. The document also defines
+      an IANA-maintained YANG module for IOAM Integrity Protection Methods.</t>
     </abstract>
   </front>
 
@@ -93,21 +94,24 @@
       then be exported to systems that will use it to, e.g., monitor, measure,
       or (re)configure the network.
       <xref target="I-D.ietf-ippm-ioam-data-integrity"/> defines IOAM Options
-      with integrity protection, also called Integrity Protected Options. This
-      document defines a data model for the management of these Integrity
-      Protected Options using the YANG data modeling language
-      <xref target="RFC7950"/>. This YANG data model supports four IOAM Integrity
-      Protected Options, which are as follows:
+      with integrity protection, also called Integrity-Protected Options. This
+      document defines a YANG data model for the management of these
+      Integrity-Protected Options using the YANG data modeling language
+      <xref target="RFC7950"/>. This YANG data model supports four IOAM
+      Integrity-Protected Options, which are as follows:
         <ul spacing="compact">
-          <li>Integrity Protected Incremental Trace-Option (Section 4.1 of
+          <li>Integrity-Protected Incremental Trace-Option (Section 4.1 of
               <xref target="I-D.ietf-ippm-ioam-data-integrity"/>)</li>
-          <li>Integrity Protected Pre-allocated Trace-Option (Section 4.1 of
+          <li>Integrity-Protected Pre-allocated Trace-Option (Section 4.1 of
               <xref target="I-D.ietf-ippm-ioam-data-integrity"/>)</li>
-          <li>Integrity Protected Proof of Transit (POT) Option (Section 4.2 of
+          <li>Integrity-Protected Proof of Transit (POT) Option (Section 4.2 of
               <xref target="I-D.ietf-ippm-ioam-data-integrity"/>)</li>
-          <li>Integrity Protected Edge-to-Edge (E2E) Option (Section 4.3 of
+          <li>Integrity-Protected Edge-to-Edge (E2E) Option (Section 4.3 of
               <xref target="I-D.ietf-ippm-ioam-data-integrity"/>)</li>
         </ul>
+
+      The document also defines an IANA-maintained YANG module for IOAM
+      Integrity Protection Methods.
       </t>
 
       <section title="Editorial Note (to be removed by RFC Editor)">
@@ -125,7 +129,7 @@
             <li>XXXX --> the assigned RFC number for this document</li>
             <li>YYYY --> the assigned RFC number for
                 <xref target="I-D.ietf-ippm-ioam-data-integrity"/></li>
-            <li>2026-01-12 --> the actual date of the publication of this
+            <li>2026-04-15 --> the actual date of the publication of this
                 document</li>
           </ul>
         </t>
@@ -167,7 +171,8 @@
     <section title="Design of the IOAM Integrity YANG Data Model">
       <section title="Overview">
         <t>The IOAM Integrity model is organized as a list of profiles, as shown
-        in <xref target="fig_overview_model"/>. In this model, the "int" prefix
+        in <xref target="fig_overview_model"/>. Full tree is provided in
+        <xref target="appendix-full-tree"/>. In this model, the "int" prefix
         refers to "INTegrity protection".</t>
 
         <figure anchor="fig_overview_model"
@@ -199,7 +204,7 @@ module: ietf-ioam-integrity
         <xref target="RFC9617"/>, but for distinct purposes.</t>
       </section>
 
-      <section title="Integrity Protected Pre-allocated Tracing Profile">
+      <section title="Integrity-Protected Pre-allocated Tracing Profile">
         <t>As illustrated in <xref target="fig_pre_profile"/>, the
         "int-preallocated-tracing-profile" container provides the detailed
         information for the pre-allocated tracing data with integrity
@@ -216,7 +221,7 @@ module: ietf-ioam-integrity
         </t>
 
         <figure anchor="fig_pre_profile"
-                title="Integrity Protected Pre-allocated Tracing Profile">
+                title="Integrity-Protected Pre-allocated Tracing Profile">
           <sourcecode type="yangtree">
 <![CDATA[
 +--rw int-preallocated-tracing-profile! {int-preallocated-trace}?
@@ -229,9 +234,12 @@ module: ietf-ioam-integrity
 ]]>
           </sourcecode>
         </figure>
+
+        <t>An example of the Integrity-Protected Pre-allocated Tracing Profile
+        with data is provided in <xref target="appendix-example-prealloc"/>.</t>
       </section>
 
-      <section title="Integrity Protected Incremental Tracing Profile">
+      <section title="Integrity-Protected Incremental Tracing Profile">
         <t>As illustrated in <xref target="fig_inc_profile"/>, the
         "int-incremental-tracing-profile" container provides the detailed
         information for the incremental tracing data with integrity protection.
@@ -248,7 +256,7 @@ module: ietf-ioam-integrity
         </t>
 
         <figure anchor="fig_inc_profile"
-                title="Integrity Protected Incremental Tracing Profile">
+                title="Integrity-Protected Incremental Tracing Profile">
           <sourcecode type="yangtree">
 <![CDATA[
 +--rw int-incremental-tracing-profile! {int-incremental-trace}?
@@ -261,9 +269,12 @@ module: ietf-ioam-integrity
 ]]>
           </sourcecode>
         </figure>
+
+        <t>An example of the Integrity-Protected Incremental Tracing Profile
+        with data is provided in <xref target="appendix-example-incremental"/>.</t>
       </section>
 
-      <section title="Integrity Protected Proof of Transit Profile">
+      <section title="Integrity-Protected Proof of Transit Profile">
         <t>As illustrated in <xref target="fig_pot_profile"/>, the
         "int-pot-profile" container is intended to provide the detailed
         information for the proof of transit data with integrity protection.
@@ -282,7 +293,7 @@ module: ietf-ioam-integrity
         </t>
 
         <figure anchor="fig_pot_profile"
-                title="Integrity Protected Proof of Transit Profile">
+                title="Integrity-Protected Proof of Transit Profile">
           <sourcecode type="yangtree">
 <![CDATA[
 +--rw int-pot-profile! {int-proof-of-transit}?
@@ -293,9 +304,12 @@ module: ietf-ioam-integrity
 ]]>
           </sourcecode>
         </figure>
+
+        <t>An example of the Integrity-Protected Proof of Transit Profile with
+        data is provided in <xref target="appendix-example-pot-and-e2e"/>.</t>
       </section>
 
-      <section title="Integrity Protected Edge-to-Edge Profile">
+      <section title="Integrity-Protected Edge-to-Edge Profile">
         <t>As illustrated in <xref target="fig_e2e_profile"/>, the
         "int-e2e-profile" container provides the detailed information for the
         edge-to-edge data with integrity protection. This information has the
@@ -311,7 +325,7 @@ module: ietf-ioam-integrity
         </t>
 
         <figure anchor="fig_e2e_profile"
-                title="Integrity Protected Edge-to-Edge Profile">
+                title="Integrity-Protected Edge-to-Edge Profile">
           <sourcecode type="yangtree">
 <![CDATA[
 +--rw int-e2e-profile! {int-edge-to-edge}?
@@ -323,6 +337,9 @@ module: ietf-ioam-integrity
 ]]>
           </sourcecode>
         </figure>
+
+        <t>An example of the Integrity-Protected Edge-to-Edge Profile with data
+        is provided in <xref target="appendix-example-pot-and-e2e"/>.</t>
       </section>
     </section>
 
@@ -331,7 +348,7 @@ module: ietf-ioam-integrity
       the "ietf-ioam" module defined in <xref target="RFC9617"/>. This document
       also references <xref target="I-D.ietf-ippm-ioam-data-integrity"/>.</t>
 
-      <sourcecode name="ietf-ioam-integrity@2026-01-12.yang"
+      <sourcecode name="ietf-ioam-integrity@2026-04-15.yang"
                   type="yang" markers="true">
 <![CDATA[
 module ietf-ioam-integrity {
@@ -351,7 +368,7 @@ module ietf-ioam-integrity {
     reference
       "RFC XXXX: A YANG Data Model for In Situ Operations,
                  Administration, and Maintenance (IOAM)
-                 Integrity Protected Options";
+                 Integrity-Protected Options";
   }
 
   organization
@@ -359,7 +376,7 @@ module ietf-ioam-integrity {
 
   contact
     "WG Web:   <https://datatracker.ietf.org/wg/ippm>
-     WG List:  <mailto:ippm@ietf.org>
+     WG List:  IPPM <mailto:ippm@ietf.org>
 
      Editor:   Tianran Zhou
                <mailto:zhoutianran@huawei.com>
@@ -369,7 +386,7 @@ module ietf-ioam-integrity {
   description
     "This YANG module specifies a vendor-independent data model for
      In Situ Operations, Administration, and Maintenance (IOAM)
-     Integrity Protected Options.
+     Integrity-Protected Options.
 
      Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -392,20 +409,20 @@ module ietf-ioam-integrity {
 
       - This model does not treat as mutually exclusive an IOAM
         Option and its integrity protected equivalent (i.e., an IOAM
-        Integrity Protected Option). For example, an implementation
+        Integrity-Protected Option). For example, an implementation
         may support the simultaneous configuration of an
         IOAM-Namespace with the Pre-allocated Trace Option and
-        another IOAM-Namespace with the Integrity Protected
+        another IOAM-Namespace with the Integrity-Protected
         Pre-allocated Trace Option. Therefore, the model does not
         impose constraints that would prevent such use cases.";
 
-  revision 2026-01-12 {
+  revision 2026-04-15 {
     description
       "Initial version.";
     reference
       "RFC XXXX: A YANG Data Model for In Situ Operations,
                  Administration, and Maintenance (IOAM)
-                 Integrity Protected Options";
+                 Integrity-Protected Options";
   }
 
   /*
@@ -414,7 +431,7 @@ module ietf-ioam-integrity {
 
   feature int-incremental-trace {
     description
-      "This feature indicates that the Integrity Protected
+      "This feature indicates that the Integrity-Protected
        Incremental Trace-Option is supported.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
@@ -424,7 +441,7 @@ module ietf-ioam-integrity {
 
   feature int-preallocated-trace {
     description
-      "This feature indicates that the Integrity Protected
+      "This feature indicates that the Integrity-Protected
        Pre-allocated Trace-Option is supported.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
@@ -434,7 +451,7 @@ module ietf-ioam-integrity {
 
   feature int-proof-of-transit {
     description
-      "This feature indicates that the Integrity Protected Proof of
+      "This feature indicates that the Integrity-Protected Proof of
        Transit Option is supported.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
@@ -444,7 +461,7 @@ module ietf-ioam-integrity {
 
   feature int-edge-to-edge {
     description
-      "This feature indicates that the Integrity Protected
+      "This feature indicates that the Integrity-Protected
        Edge-to-Edge Option is supported.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
@@ -476,35 +493,35 @@ module ietf-ioam-integrity {
 
   augment "/ioam:ioam/ioam:profiles/ioam:profile" {
     description
-      "This augmentation adds 4 profiles for the Integrity Protected
+      "This augmentation adds 4 profiles for the Integrity-Protected
        Options.";
     container int-incremental-tracing-profile {
       if-feature "int-incremental-trace";
-      presence "Enables the Integrity Protected
+      presence "Enables the Integrity-Protected
                 Incremental Trace-Option.";
       description
-        "This container describes the profile for the Integrity
-         Protected Incremental Trace-Option.";
+        "This container describes the profile for the
+         Integrity-Protected Incremental Trace-Option.";
       uses ioam:ioam-incremental-tracing-profile;
       uses int-method-grouping;
     }
     container int-preallocated-tracing-profile {
       if-feature "int-preallocated-trace";
-      presence "Enables the Integrity Protected
+      presence "Enables the Integrity-Protected
                 Pre-allocated Trace-Option.";
       description
-        "This container describes the profile for the Integrity
-         Protected Pre-allocated Trace-Option.";
+        "This container describes the profile for the
+         Integrity-Protected Pre-allocated Trace-Option.";
       uses ioam:ioam-preallocated-tracing-profile;
       uses int-method-grouping;
     }
     container int-pot-profile {
       if-feature "int-proof-of-transit";
-      presence "Enables the Integrity Protected
+      presence "Enables the Integrity-Protected
                 Proof of Transit Option.";
       description
-        "This container describes the profile for the Integrity
-         Protected Proof of Transit Option.";
+        "This container describes the profile for the
+         Integrity-Protected Proof of Transit Option.";
       leaf use-namespace {
         type ioam:ioam-namespace;
         default "ioam:default-namespace";
@@ -529,11 +546,11 @@ module ietf-ioam-integrity {
     }
     container int-e2e-profile {
       if-feature "int-edge-to-edge";
-      presence "Enables the Integrity Protected
+      presence "Enables the Integrity-Protected
                 Edge-to-Edge Option.";
       description
-        "This container describes the profile for the Integrity
-         Protected Edge-to-Edge Option.";
+        "This container describes the profile for the
+         Integrity-Protected Edge-to-Edge Option.";
       uses ioam:ioam-e2e-profile;
       uses int-method-grouping;
     }
@@ -544,14 +561,16 @@ module ietf-ioam-integrity {
     </section>
 
     <section title="Security Considerations">
-      <t>This section is modeled after the template described in Section 3.7
-      of <xref target="I-D.ietf-netmod-rfc8407bis"/>.</t>
+      <t>This section is modeled after the template described in Section 3.7.1
+      of <xref target="RFC9907"/>.</t>
 
       <t>The "ietf-ioam-integrity" YANG module defines a data model that is
       designed to be accessed via YANG-based management protocols, such as
-      NETCONF <xref target="RFC6241"/> and RESTCONF <xref target="RFC8040"/>.
+      the Network Configuration Protocol (NETCONF) <xref target="RFC6241"/> and
+      RESTCONF <xref target="RFC8040"/>.
       These YANG-based management protocols (1) have to use a secure transport
-      layer (e.g., SSH <xref target="RFC4252"/>, TLS <xref target="RFC8446"/>,
+      layer (e.g., Secure Shell (SSH) <xref target="RFC4252"/>, TLS
+      <xref target="RFC8446"/>,
       and QUIC <xref target="RFC9000"/>) and (2) have to use mutual
       authentication.</t>
 
@@ -639,7 +658,7 @@ module ietf-ioam-integrity {
         </dl>
       </t>
 
-      <section title='IANA-Maintained "iana-ioam-integrity-protection-methods" Module'>
+      <section title='IANA-Maintained "iana-ioam-integrity-protection-methods" YANG Module'>
         <t>This document defines the initial version of the IANA-maintained
         "iana-ioam-integrity-protection-methods" YANG module. The most recent
         version of the YANG module is available from the "YANG Parameters"
@@ -671,15 +690,9 @@ module ietf-ioam-integrity {
             <dt>"description":</dt><dd>Replicates the description from the
             registry.</dd>
             <dt>"reference":</dt><dd>Replicates the reference(s) from the
-            registry with the title of the document(s) added.</dd>
+            registry. References to documents should also include titles.</dd>
           </dl>
         </t>
-
-        <t>Unassigned or reserved values are not present in the module.</t>
-
-        <t>When the "iana-ioam-integrity-protection-methods" YANG module is
-        updated, a new "revision" statement with a unique revision date needs to
-        be added in front of the existing revision statements.</t>
 
         <t>IANA is requested to add this note to
         [reference-to-the-iana-foo-registry]:</t>
@@ -703,7 +716,6 @@ module ietf-ioam-integrity {
       &RFC3688;
       &RFC6020;
       &RFC7950;
-      &RFC7951;
       &RFC8341;
       &RFC9617;
       &I-D.ietf-ippm-ioam-data-integrity;
@@ -724,11 +736,12 @@ module ietf-ioam-integrity {
       &RFC4252;
       &RFC6241;
       &RFC7799;
+      &RFC7951;
       &RFC8040;
       &RFC8340;
       &RFC8446;
       &RFC9000;
-      &I-D.ietf-netmod-rfc8407bis;
+      &RFC9907;
 
       <reference anchor="IANA-YANG-PARAMETERS"
                  target="https://www.iana.org/assignments/yang-parameters">
@@ -742,11 +755,11 @@ module ietf-ioam-integrity {
       </reference>
     </references>
 
-    <section title="Initial Version of the IOAM Integrity Protection Methods IANA-Maintained Module"
+    <section title="Initial Version of the IOAM Integrity Protection Methods IANA-Maintained YANG Module"
              anchor="appendix-iana-module">
       <t>RFC Ed.: please remove this section.</t>
 
-      <sourcecode name="iana-ioam-integrity-protection-methods@2026-01-12.yang"
+      <sourcecode name="iana-ioam-integrity-protection-methods@2026-04-15.yang"
                   type="yang" markers="true">
 <![CDATA[
 module iana-ioam-integrity-protection-methods {
@@ -764,7 +777,7 @@ module iana-ioam-integrity-protection-methods {
      12025 Waterfront Drive, Suite 300
      Los Angeles, CA 90094
 
-     Tel: +1 424 254 5300
+     Tel: +1 310 301 5800
 
      <mailto:iana@iana.org>";
 
@@ -798,7 +811,7 @@ module iana-ioam-integrity-protection-methods {
     "IOAM Integrity Protection Methods
      (https://www.iana.org/assignments/ioam/ioam.xhtml)";
 
-  revision 2026-01-12 {
+  revision 2026-04-15 {
     description
       "Initial version.";
     reference
@@ -809,7 +822,7 @@ module iana-ioam-integrity-protection-methods {
 
        RFC XXXX: A YANG Data Model for In Situ Operations,
                  Administration, and Maintenance (IOAM)
-                 Integrity Protected Options";
+                 Integrity-Protected Options";
   }
 
   /*
@@ -821,8 +834,8 @@ module iana-ioam-integrity-protection-methods {
       enum method-0 {
         value 0;
         description
-          "IPM 0: AES-GMAC, 16-octet (full) Authentication Tag,
-                  12-octet Initialization Vector.";
+          "AES-GMAC, 16-octet (full) Authentication Tag,
+           12-octet Initialization Vector.";
         reference
           "RFC YYYY: Integrity Protection of In Situ Operations,
                      Administration, and Maintenance (IOAM)
@@ -841,7 +854,8 @@ module iana-ioam-integrity-protection-methods {
       </sourcecode>
     </section>
 
-    <section title="Full tree of the IOAM Integrity YANG Data Model">
+    <section title="Full tree of the IOAM Integrity YANG Data Model"
+             anchor="appendix-full-tree">
       <t><xref target="fig_full_tree"/> illustrates the full tree of the IOAM
       Integrity YANG Data Model.</t>
 
@@ -885,8 +899,9 @@ module: ietf-ioam-integrity
       </figure>
     </section>
 
-    <section title="Example of the Integrity Protected Incremental Tracing Profile">
-      <t>A JSON <xref target="RFC7951"/> example of the Integrity Protected
+    <section title="Example of the Integrity-Protected Incremental Tracing Profile"
+             anchor="appendix-example-incremental">
+      <t>A JSON <xref target="RFC7951"/> example of the Integrity-Protected
       Incremental Tracing Profile is depicted in
       <xref target="fig_json_ex_inc"/>. This configuration is received by an
       IOAM ingress node. This node encapsulates the IOAM data in the IPv6
@@ -897,7 +912,7 @@ module: ietf-ioam-integrity
       must not exceed 512 bytes.</t>
 
       <figure anchor="fig_json_ex_inc"
-              title="JSON-encoded Integrity Protected Incremental Tracing Profile">
+              title="JSON-encoded Integrity-Protected Incremental Tracing Profile">
         <sourcecode type="json">
 <![CDATA[
 {
@@ -931,8 +946,9 @@ module: ietf-ioam-integrity
       </figure>
     </section>
 
-    <section title="Example of the Integrity Protected Pre-allocated Tracing Profile">
-      <t>A JSON <xref target="RFC7951"/> example of the Integrity Protected
+    <section title="Example of the Integrity-Protected Pre-allocated Tracing Profile"
+             anchor="appendix-example-prealloc">
+      <t>A JSON <xref target="RFC7951"/> example of the Integrity-Protected
       Pre-allocated Tracing Profile is depicted in
       <xref target="fig_json_ex_pre"/>. This configuration is received by an
       IOAM ingress node. This node first identifies the target flow by using the
@@ -943,7 +959,7 @@ module: ietf-ioam-integrity
       node pre-allocates the node data list in the packet with 512 bytes.</t>
 
       <figure anchor="fig_json_ex_pre"
-              title="JSON-encoded Integrity Protected Pre-allocated Tracing Profile">
+              title="JSON-encoded Integrity-Protected Pre-allocated Tracing Profile">
         <sourcecode type="json">
 <![CDATA[
 {
@@ -981,19 +997,20 @@ module: ietf-ioam-integrity
       </figure>
     </section>
 
-    <section title="Example of the Integrity Protected Proof of Transit and Integrity Protected Edge-to-Edge Profiles">
-      <t>A JSON <xref target="RFC7951"/> example of the Integrity Protected
-      Proof of Transit Profile, combined with the Integrity Protected
+    <section title="Example of the Integrity-Protected Proof of Transit and Integrity-Protected Edge-to-Edge Profiles"
+             anchor="appendix-example-pot-and-e2e">
+      <t>A JSON <xref target="RFC7951"/> example of the Integrity-Protected
+      Proof of Transit Profile, combined with the Integrity-Protected
       Edge-to-Edge Profile, is depicted in <xref target="fig_json_ex_pot_e2e"/>.
       This configuration is received by an IOAM ingress node. This node
-      encapsulates the Integrity Protected Proof of Transit Type 0 in an IPv6
-      Hop-by-Hop Options header, and also encapsulates the Integrity Protected
+      encapsulates the Integrity-Protected Proof of Transit Type 0 in an IPv6
+      Hop-by-Hop Options header, and also encapsulates the Integrity-Protected
       Edge-to-Edge in an IPv6 Destination Options header. The Edge-to-Edge type
       indicates the presence of a 64-bit sequence number. The Integrity
       Protection Method to be used for both is method 0.</t>
 
       <figure anchor="fig_json_ex_pot_e2e"
-              title="JSON-encoded Integrity Protected Proof of Transit and Integrity Protected Edge-to-Edge Profiles">
+              title="JSON-encoded Integrity-Protected Proof of Transit and Integrity-Protected Edge-to-Edge Profiles">
         <sourcecode type="json">
 <![CDATA[
 {

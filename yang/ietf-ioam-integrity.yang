@@ -15,7 +15,7 @@ module ietf-ioam-integrity {
     reference
       "RFC XXXX: A YANG Data Model for In Situ Operations,
                  Administration, and Maintenance (IOAM)
-                 Integrity Protected Options";
+                 Integrity-Protected Options";
   }
 
   organization
@@ -23,7 +23,7 @@ module ietf-ioam-integrity {
 
   contact
     "WG Web:   <https://datatracker.ietf.org/wg/ippm>
-     WG List:  <mailto:ippm@ietf.org>
+     WG List:  IPPM <mailto:ippm@ietf.org>
 
      Editor:   Tianran Zhou
                <mailto:zhoutianran@huawei.com>
@@ -33,7 +33,7 @@ module ietf-ioam-integrity {
   description
     "This YANG module specifies a vendor-independent data model for
      In Situ Operations, Administration, and Maintenance (IOAM)
-     Integrity Protected Options.
+     Integrity-Protected Options.
 
      Copyright (c) 2026 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
@@ -56,20 +56,20 @@ module ietf-ioam-integrity {
 
       - This model does not treat as mutually exclusive an IOAM
         Option and its integrity protected equivalent (i.e., an IOAM
-        Integrity Protected Option). For example, an implementation
+        Integrity-Protected Option). For example, an implementation
         may support the simultaneous configuration of an
         IOAM-Namespace with the Pre-allocated Trace Option and
-        another IOAM-Namespace with the Integrity Protected
+        another IOAM-Namespace with the Integrity-Protected
         Pre-allocated Trace Option. Therefore, the model does not
         impose constraints that would prevent such use cases.";
 
-  revision 2026-01-12 {
+  revision 2026-04-15 {
     description
       "Initial version.";
     reference
       "RFC XXXX: A YANG Data Model for In Situ Operations,
                  Administration, and Maintenance (IOAM)
-                 Integrity Protected Options";
+                 Integrity-Protected Options";
   }
 
   /*
@@ -78,7 +78,7 @@ module ietf-ioam-integrity {
 
   feature int-incremental-trace {
     description
-      "This feature indicates that the Integrity Protected
+      "This feature indicates that the Integrity-Protected
        Incremental Trace-Option is supported.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
@@ -88,7 +88,7 @@ module ietf-ioam-integrity {
 
   feature int-preallocated-trace {
     description
-      "This feature indicates that the Integrity Protected
+      "This feature indicates that the Integrity-Protected
        Pre-allocated Trace-Option is supported.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
@@ -98,7 +98,7 @@ module ietf-ioam-integrity {
 
   feature int-proof-of-transit {
     description
-      "This feature indicates that the Integrity Protected Proof of
+      "This feature indicates that the Integrity-Protected Proof of
        Transit Option is supported.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
@@ -108,7 +108,7 @@ module ietf-ioam-integrity {
 
   feature int-edge-to-edge {
     description
-      "This feature indicates that the Integrity Protected
+      "This feature indicates that the Integrity-Protected
        Edge-to-Edge Option is supported.";
     reference
       "RFC YYYY: Integrity Protection of In Situ Operations,
@@ -140,35 +140,35 @@ module ietf-ioam-integrity {
 
   augment "/ioam:ioam/ioam:profiles/ioam:profile" {
     description
-      "This augmentation adds 4 profiles for the Integrity Protected
+      "This augmentation adds 4 profiles for the Integrity-Protected
        Options.";
     container int-incremental-tracing-profile {
       if-feature "int-incremental-trace";
-      presence "Enables the Integrity Protected
+      presence "Enables the Integrity-Protected
                 Incremental Trace-Option.";
       description
-        "This container describes the profile for the Integrity
-         Protected Incremental Trace-Option.";
+        "This container describes the profile for the
+         Integrity-Protected Incremental Trace-Option.";
       uses ioam:ioam-incremental-tracing-profile;
       uses int-method-grouping;
     }
     container int-preallocated-tracing-profile {
       if-feature "int-preallocated-trace";
-      presence "Enables the Integrity Protected
+      presence "Enables the Integrity-Protected
                 Pre-allocated Trace-Option.";
       description
-        "This container describes the profile for the Integrity
-         Protected Pre-allocated Trace-Option.";
+        "This container describes the profile for the
+         Integrity-Protected Pre-allocated Trace-Option.";
       uses ioam:ioam-preallocated-tracing-profile;
       uses int-method-grouping;
     }
     container int-pot-profile {
       if-feature "int-proof-of-transit";
-      presence "Enables the Integrity Protected
+      presence "Enables the Integrity-Protected
                 Proof of Transit Option.";
       description
-        "This container describes the profile for the Integrity
-         Protected Proof of Transit Option.";
+        "This container describes the profile for the
+         Integrity-Protected Proof of Transit Option.";
       leaf use-namespace {
         type ioam:ioam-namespace;
         default "ioam:default-namespace";
@@ -193,11 +193,11 @@ module ietf-ioam-integrity {
     }
     container int-e2e-profile {
       if-feature "int-edge-to-edge";
-      presence "Enables the Integrity Protected
+      presence "Enables the Integrity-Protected
                 Edge-to-Edge Option.";
       description
-        "This container describes the profile for the Integrity
-         Protected Edge-to-Edge Option.";
+        "This container describes the profile for the
+         Integrity-Protected Edge-to-Edge Option.";
       uses ioam:ioam-e2e-profile;
       uses int-method-grouping;
     }
