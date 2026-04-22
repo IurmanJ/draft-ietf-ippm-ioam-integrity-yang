@@ -12,6 +12,7 @@
 <!ENTITY RFC8341 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8341.xml">
 <!ENTITY RFC8446 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml">
 <!ENTITY RFC9000 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.9000.xml">
+<!ENTITY RFC9326 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.9326.xml">
 <!ENTITY RFC9617 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.9617.xml">
 <!ENTITY RFC9907 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.9907.xml">
 <!ENTITY I-D.ietf-ippm-ioam-data-integrity SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml-ids/reference.I-D.ietf-ippm-ioam-data-integrity.xml">
@@ -60,7 +61,7 @@
       </address>
     </author>
 
-    <date day="15" month="April" year="2026"/>
+    <date day="22" month="April" year="2026"/>
 
     <area>ops</area>
     <workgroup>ippm</workgroup>
@@ -94,8 +95,10 @@
       then be exported to systems that will use it to, e.g., monitor, measure,
       or (re)configure the network.
       <xref target="I-D.ietf-ippm-ioam-data-integrity"/> defines IOAM Options
-      with integrity protection, also called Integrity-Protected Options. This
-      document defines a YANG data model for the management of these
+      with integrity protection, also called Integrity-Protected Options.</t>
+
+      <t>This
+      document defines a data model for the management of these
       Integrity-Protected Options using the YANG data modeling language
       <xref target="RFC7950"/>. This YANG data model supports four IOAM
       Integrity-Protected Options, which are as follows:
@@ -110,7 +113,14 @@
               <xref target="I-D.ietf-ippm-ioam-data-integrity"/>)</li>
         </ul>
 
-      The document also defines an IANA-maintained YANG module for IOAM
+      <xref target="I-D.ietf-ippm-ioam-data-integrity"/>, Section 4, states
+      that Direct Export (DEX) <xref target="RFC9326"/> is outside the scope of
+      the Integrity Protection Method defined in that document, as DEX does not
+      carry IOAM-Data-Fields. Consequently, no Integrity-Protected Option is
+      defined for DEX, and it is not included in this YANG data model.
+      </t>
+
+      <t>The document also defines an IANA-maintained YANG module for IOAM
       Integrity Protection Methods.
       </t>
 
@@ -129,7 +139,7 @@
             <li>XXXX --> the assigned RFC number for this document</li>
             <li>YYYY --> the assigned RFC number for
                 <xref target="I-D.ietf-ippm-ioam-data-integrity"/></li>
-            <li>2026-04-15 --> the actual date of the publication of this
+            <li>2026-04-22 --> the actual date of the publication of this
                 document</li>
           </ul>
         </t>
@@ -348,7 +358,7 @@ module: ietf-ioam-integrity
       the "ietf-ioam" module defined in <xref target="RFC9617"/>. This document
       also references <xref target="I-D.ietf-ippm-ioam-data-integrity"/>.</t>
 
-      <sourcecode name="ietf-ioam-integrity@2026-04-15.yang"
+      <sourcecode name="ietf-ioam-integrity@2026-04-22.yang"
                   type="yang" markers="true">
 <![CDATA[
 module ietf-ioam-integrity {
@@ -416,7 +426,7 @@ module ietf-ioam-integrity {
         Pre-allocated Trace Option. Therefore, the model does not
         impose constraints that would prevent such use cases.";
 
-  revision 2026-04-15 {
+  revision 2026-04-22 {
     description
       "Initial version.";
     reference
@@ -741,6 +751,7 @@ module ietf-ioam-integrity {
       &RFC8340;
       &RFC8446;
       &RFC9000;
+      &RFC9326;
       &RFC9907;
 
       <reference anchor="IANA-YANG-PARAMETERS"
@@ -759,7 +770,7 @@ module ietf-ioam-integrity {
              anchor="appendix-iana-module">
       <t>RFC Ed.: please remove this section.</t>
 
-      <sourcecode name="iana-ioam-integrity-protection-methods@2026-04-15.yang"
+      <sourcecode name="iana-ioam-integrity-protection-methods@2026-04-22.yang"
                   type="yang" markers="true">
 <![CDATA[
 module iana-ioam-integrity-protection-methods {
@@ -811,7 +822,7 @@ module iana-ioam-integrity-protection-methods {
     "IOAM Integrity Protection Methods
      (https://www.iana.org/assignments/ioam/ioam.xhtml)";
 
-  revision 2026-04-15 {
+  revision 2026-04-22 {
     description
       "Initial version.";
     reference
