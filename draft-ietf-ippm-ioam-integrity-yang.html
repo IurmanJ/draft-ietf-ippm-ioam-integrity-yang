@@ -19,7 +19,7 @@
       management of these Integrity-Protected Options. The document also defines
       an IANA-maintained YANG module for IOAM Integrity Protection Methods. 
     " name="description">
-<meta content="xml2rfc 3.32.0" name="generator">
+<meta content="xml2rfc 3.33.0" name="generator">
 <meta content="OAM" name="keyword">
 <meta content="In Situ OAM" name="keyword">
 <meta content="IOAM" name="keyword">
@@ -28,14 +28,14 @@
 <meta content="YANG" name="keyword">
 <meta content="draft-ietf-ippm-ioam-integrity-yang-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.32.0
-    Python 3.12.12
+  xml2rfc 3.33.0
+    Python 3.12.13
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.0.2
-    platformdirs 4.9.4
+    platformdirs 4.9.6
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.32.5
@@ -1064,7 +1064,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Iurman &amp; Zhou</td>
-<td class="center">Expires 17 October 2026</td>
+<td class="center">Expires 24 October 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1077,12 +1077,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-ippm-ioam-integrity-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-04-15" class="published">15 April 2026</time>
+<time datetime="2026-04-22" class="published">22 April 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-10-17">17 October 2026</time></dd>
+<dd class="expires"><time datetime="2026-10-24">24 October 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1129,7 +1129,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 17 October 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 24 October 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1260,29 +1260,35 @@ svg :is([fill="white"], [fill^="#fff"]) {
       then be exported to systems that will use it to, e.g., monitor, measure,
       or (re)configure the network.
       <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span> defines IOAM Options
-      with integrity protection, also called Integrity-Protected Options. This
-      document defines a YANG data model for the management of these
+      with integrity protection, also called Integrity-Protected Options.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">This
+      document defines a data model for the management of these
       Integrity-Protected Options using the YANG data modeling language
       <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>. This YANG data model supports four IOAM
-      Integrity-Protected Options, which are as follows:<a href="#section-1-1" class="pilcrow">¶</a></p>
+      Integrity-Protected Options, which are as follows:<a href="#section-1-2" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="section-1-2.1">Integrity-Protected Incremental Trace-Option (Section 4.1 of
-              <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>)<a href="#section-1-2.1" class="pilcrow">¶</a>
+<li class="compact" id="section-1-3.1">Integrity-Protected Incremental Trace-Option (Section 4.1 of
+              <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>)<a href="#section-1-3.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="section-1-2.2">Integrity-Protected Pre-allocated Trace-Option (Section 4.1 of
-              <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>)<a href="#section-1-2.2" class="pilcrow">¶</a>
+        <li class="compact" id="section-1-3.2">Integrity-Protected Pre-allocated Trace-Option (Section 4.1 of
+              <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>)<a href="#section-1-3.2" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="section-1-2.3">Integrity-Protected Proof of Transit (POT) Option (Section 4.2 of
-              <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>)<a href="#section-1-2.3" class="pilcrow">¶</a>
+        <li class="compact" id="section-1-3.3">Integrity-Protected Proof of Transit (POT) Option (Section 4.2 of
+              <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>)<a href="#section-1-3.3" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="section-1-2.4">Integrity-Protected Edge-to-Edge (E2E) Option (Section 4.3 of
-              <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>)<a href="#section-1-2.4" class="pilcrow">¶</a>
+        <li class="compact" id="section-1-3.4">Integrity-Protected Edge-to-Edge (E2E) Option (Section 4.3 of
+              <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>)<a href="#section-1-3.4" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="section-1-3">
+<p id="section-1-4">
 
-      The document also defines an IANA-maintained YANG module for IOAM
-      Integrity Protection Methods.<a href="#section-1-3" class="pilcrow">¶</a></p>
+      <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>, Section 4, states
+      that Direct Export (DEX) <span>[<a href="#RFC9326" class="cite xref">RFC9326</a>]</span> is outside the scope of
+      the Integrity Protection Method defined in that document, as DEX does not
+      carry IOAM-Data-Fields. Consequently, no Integrity-Protected Option is
+      defined for DEX, and it is not included in this YANG data model.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">The document also defines an IANA-maintained YANG module for IOAM
+      Integrity Protection Methods.<a href="#section-1-5" class="pilcrow">¶</a></p>
 <section id="section-1.1">
         <h3 id="name-editorial-note-to-be-remove">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-editorial-note-to-be-remove" class="section-name selfRef">Editorial Note (to be removed by RFC Editor)</a>
@@ -1301,7 +1307,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
           <li class="compact" id="section-1.1-4.2">YYYY --&gt; the assigned RFC number for
                 <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span><a href="#section-1.1-4.2" class="pilcrow">¶</a>
 </li>
-          <li class="compact" id="section-1.1-4.3">2026-04-15 --&gt; the actual date of the publication of this
+          <li class="compact" id="section-1.1-4.3">2026-04-22 --&gt; the actual date of the publication of this
                 document<a href="#section-1.1-4.3" class="pilcrow">¶</a>
 </li>
         </ul>
@@ -1582,7 +1588,7 @@ module: ietf-ioam-integrity
       the "ietf-ioam" module defined in <span>[<a href="#RFC9617" class="cite xref">RFC9617</a>]</span>. This document
       also references <span>[<a href="#I-D.ietf-ippm-ioam-data-integrity" class="cite xref">I-D.ietf-ippm-ioam-data-integrity</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div class="breakable lang-yang sourcecode" id="section-4-2">
-<pre>&lt;CODE BEGINS&gt; file "ietf-ioam-integrity@2026-04-15.yang"
+<pre>&lt;CODE BEGINS&gt; file "ietf-ioam-integrity@2026-04-22.yang"
 
 
 module ietf-ioam-integrity {
@@ -1650,7 +1656,7 @@ module ietf-ioam-integrity {
         Pre-allocated Trace Option. Therefore, the model does not
         impose constraints that would prevent such use cases.";
 
-  revision 2026-04-15 {
+  revision 2026-04-22 {
     description
       "Initial version.";
     reference
@@ -2081,6 +2087,10 @@ module ietf-ioam-integrity {
         <dd>
 <span class="refAuthor">Iyengar, J., Ed.</span> and <span class="refAuthor">M. Thomson, Ed.</span>, <span class="refTitle">"QUIC: A UDP-Based Multiplexed and Secure Transport"</span>, <span class="seriesInfo">RFC 9000</span>, <span class="seriesInfo">DOI 10.17487/RFC9000</span>, <time datetime="2021-05" class="refDate">May 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9000">https://www.rfc-editor.org/info/rfc9000</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC9326">[RFC9326]</dt>
+        <dd>
+<span class="refAuthor">Song, H.</span>, <span class="refAuthor">Gafni, B.</span>, <span class="refAuthor">Brockners, F.</span>, <span class="refAuthor">Bhandari, S.</span>, and <span class="refAuthor">T. Mizrahi</span>, <span class="refTitle">"In Situ Operations, Administration, and Maintenance (IOAM) Direct Exporting"</span>, <span class="seriesInfo">RFC 9326</span>, <span class="seriesInfo">DOI 10.17487/RFC9326</span>, <time datetime="2022-11" class="refDate">November 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9326">https://www.rfc-editor.org/info/rfc9326</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC9907">[RFC9907]</dt>
       <dd>
 <span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M., Ed.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="seriesInfo">BCP 216</span>, <span class="seriesInfo">RFC 9907</span>, <span class="seriesInfo">DOI 10.17487/RFC9907</span>, <time datetime="2026-03" class="refDate">March 2026</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9907">https://www.rfc-editor.org/info/rfc9907</a>&gt;</span>. </dd>
@@ -2095,7 +2105,7 @@ module ietf-ioam-integrity {
       </h2>
 <p id="appendix-A-1">RFC Ed.: please remove this section.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <div class="breakable lang-yang sourcecode" id="appendix-A-2">
-<pre>&lt;CODE BEGINS&gt; file "iana-ioam-integrity-protection-methods@2026-04-15.yang"
+<pre>&lt;CODE BEGINS&gt; file "iana-ioam-integrity-protection-methods@2026-04-22.yang"
 
 
 module iana-ioam-integrity-protection-methods {
@@ -2147,7 +2157,7 @@ module iana-ioam-integrity-protection-methods {
     "IOAM Integrity Protection Methods
      (https://www.iana.org/assignments/ioam/ioam.xhtml)";
 
-  revision 2026-04-15 {
+  revision 2026-04-22 {
     description
       "Initial version.";
     reference

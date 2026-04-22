@@ -5,8 +5,8 @@
 ippm                                                           J. Iurman
 Internet-Draft                                       University of Liege
 Intended status: Standards Track                                 T. Zhou
-Expires: 17 October 2026                                          Huawei
-                                                           15 April 2026
+Expires: 24 October 2026                                          Huawei
+                                                           22 April 2026
 
 
      A YANG Data Model for In Situ Operations, Administration, and
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 October 2026.
+   This Internet-Draft will expire on 24 October 2026.
 
 Copyright Notice
 
@@ -100,10 +100,12 @@ Table of Contents
    be exported to systems that will use it to, e.g., monitor, measure,
    or (re)configure the network.  [I-D.ietf-ippm-ioam-data-integrity]
    defines IOAM Options with integrity protection, also called
-   Integrity-Protected Options.  This document defines a YANG data model
-   for the management of these Integrity-Protected Options using the
-   YANG data modeling language [RFC7950].  This YANG data model supports
-   four IOAM Integrity-Protected Options, which are as follows:
+   Integrity-Protected Options.
+
+   This document defines a data model for the management of these
+   Integrity-Protected Options using the YANG data modeling language
+   [RFC7950].  This YANG data model supports four IOAM Integrity-
+   Protected Options, which are as follows:
 
    *  Integrity-Protected Incremental Trace-Option (Section 4.1 of
       [I-D.ietf-ippm-ioam-data-integrity])
@@ -113,6 +115,12 @@ Table of Contents
       [I-D.ietf-ippm-ioam-data-integrity])
    *  Integrity-Protected Edge-to-Edge (E2E) Option (Section 4.3 of
       [I-D.ietf-ippm-ioam-data-integrity])
+
+   [I-D.ietf-ippm-ioam-data-integrity], Section 4, states that Direct
+   Export (DEX) [RFC9326] is outside the scope of the Integrity
+   Protection Method defined in that document, as DEX does not carry
+   IOAM-Data-Fields.  Consequently, no Integrity-Protected Option is
+   defined for DEX, and it is not included in this YANG data model.
 
    The document also defines an IANA-maintained YANG module for IOAM
    Integrity Protection Methods.
@@ -133,7 +141,7 @@ Table of Contents
    *  XXXX --> the assigned RFC number for this document
    *  YYYY --> the assigned RFC number for
       [I-D.ietf-ippm-ioam-data-integrity]
-   *  2026-04-15 --> the actual date of the publication of this document
+   *  2026-04-22 --> the actual date of the publication of this document
 
 2.  Conventions used in this document
 
@@ -306,7 +314,7 @@ Table of Contents
    "ietf-ioam" module defined in [RFC9617].  This document also
    references [I-D.ietf-ippm-ioam-data-integrity].
 
-   <CODE BEGINS> file "ietf-ioam-integrity@2026-04-15.yang"
+   <CODE BEGINS> file "ietf-ioam-integrity@2026-04-22.yang"
    module ietf-ioam-integrity {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-ioam-integrity";
@@ -372,7 +380,7 @@ Table of Contents
            Pre-allocated Trace Option. Therefore, the model does not
            impose constraints that would prevent such use cases.";
 
-     revision 2026-04-15 {
+     revision 2026-04-22 {
        description
          "Initial version.";
        reference
@@ -725,6 +733,12 @@ Table of Contents
               DOI 10.17487/RFC9000, May 2021,
               <https://www.rfc-editor.org/info/rfc9000>.
 
+   [RFC9326]  Song, H., Gafni, B., Brockners, F., Bhandari, S., and T.
+              Mizrahi, "In Situ Operations, Administration, and
+              Maintenance (IOAM) Direct Exporting", RFC 9326,
+              DOI 10.17487/RFC9326, November 2022,
+              <https://www.rfc-editor.org/info/rfc9326>.
+
    [RFC9907]  Bierman, A., Boucadair, M., Ed., and Q. Wu, "Guidelines
               for Authors and Reviewers of Documents Containing YANG
               Data Models", BCP 216, RFC 9907, DOI 10.17487/RFC9907,
@@ -736,7 +750,7 @@ Appendix A.  Initial Version of the IOAM Integrity Protection Methods
    RFC Ed.: please remove this section.
 
    <CODE BEGINS>
-     file "iana-ioam-integrity-protection-methods@2026-04-15.yang"
+     file "iana-ioam-integrity-protection-methods@2026-04-22.yang"
    module iana-ioam-integrity-protection-methods {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:iana-ioam-integrity-protection-methods";
@@ -786,7 +800,7 @@ Appendix A.  Initial Version of the IOAM Integrity Protection Methods
        "IOAM Integrity Protection Methods
         (https://www.iana.org/assignments/ioam/ioam.xhtml)";
 
-     revision 2026-04-15 {
+     revision 2026-04-22 {
        description
          "Initial version.";
        reference
